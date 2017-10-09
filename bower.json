@@ -1,0 +1,22 @@
+{
+  "name": "glpa-infodisplay",
+  "description": "GLPA Conference Information Display",
+  "main": "info-display.html",
+  "authors": [
+    "Steven Sumichrast"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "http://live.glpa.org",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gsap": "^1.20.3",
+    "skycons-html5": "*"
+  }
+}

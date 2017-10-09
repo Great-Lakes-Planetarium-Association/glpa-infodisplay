@@ -1,0 +1,124 @@
+/* Stylesheet for GLPA Info-Display graphic */
+
+/* Draw everything for the box within the box.  duh. */
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* Configure the body for use as a non-interactive display */
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma;
+    font-size: 12pt;
+}
+
+.container {
+    padding: 5px;
+}
+
+/* Specify configurations for different monitors */
+.container.hd1080 {
+    width: 1920px;
+    height: 1080px;
+}
+
+.container.xga {
+    width: 1024px;
+    height: 768px;
+}
+
+
+/* Set background image z-index to -1 */
+.background-images img {
+    z-index: -1;
+    position: absolute;
+    opacity: 0;
+}
+
+.header {
+    height: 100px;
+    border-bottom: thick white solid;
+}
+
+.conference-title {
+    font-size: 34pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.conference-subtitle {
+    font-size: 20pt;
+    font-weight: normal;
+    
+}
+
+.conference-location {
+    text-align: right;
+    float: right;
+}
+
+.main {
+    height: 500px;
+}
+
+div.sidebar { 
+    float: left;
+}
+
+.main .sidebar {
+    width: 250px;
+    background: rgba(56, 54, 54, 0.48);
+    height: 100%;
+    padding-top: 20px;
+}
+
+div.clock {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+div.weather { 
+    padding-left: 10px;
+    padding-top: 10px;
+    vertical-align: top;
+}
+div.weather span.day-title {
+    font-weight: bold;
+}
+div.weather-text {
+    width: 150px;
+    padding-bottom: 20px;
+    margin-right: 10px;
+}
+
+div.weather-text, div.weather-icon {
+    display: inline-block;
+}
+
+div.mainbody {
+    position: absolute;
+    width: 750px;
+    left: 275px;
+    height: 500px;
+    padding: 20px;
+    background: rgba(126, 45, 45, 0.5);
+}
+
+div.social {
+    height: 130px;
+    width: 100%;
+    margin-top: 20px;
+    display: inline-block;
+    background: rgba(38, 0, 255, 0.41);
+    vertical-align: middle;
+}
+
+.twitter-logo {
+    float: left;
+    vertical-align: middle;
+}

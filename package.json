@@ -1,0 +1,35 @@
+{
+  "name": "glpa-infodisplay",
+  "version": "0.0.1",
+  "description": "GLPA Conference Information Display",
+  "homepage": "http://live.glpa.org",
+  "author": {
+    "name": "Steven Sumichrast",
+    "email": "s.sumichrast@mcpstars.org",
+    "url": "http://www.mcpstars.org"
+  },
+  "nodecg": {
+    "compatibleRange": "~0.9.6",
+    "dashboardPanels": [
+      {
+        "name": "global-announcement",
+        "title": "Global Announcement",
+        "width": 2,
+        "file": "global-announcement.html",
+        "headerColor": "#9f9bbd"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "info-display.html",
+        "width": 1024,
+        "height": 768
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}

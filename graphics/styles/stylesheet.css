@@ -82,6 +82,13 @@ div.clock {
     font-weight: bold;
     padding-bottom: 20px;
 }
+div.clock div.clock-date {
+    /* style date */
+}
+div.clock div.clock-time {
+    /* style time */
+    font-size: 24pt;
+}
 div.weather { 
     padding-left: 10px;
     padding-top: 10px;

@@ -22,17 +22,17 @@
                 <div class="clock" id="clock"></div>
                 <div class="weather">
                     <div class="today">
-                        <span class="day-title">Today's Weather</span><br />
+                        <span class="day-title" id="weather-today-title">Today's Weather</span><br />
                         <div class="weather-text" id="weather-today"></div>
                         <div class="weather-icon"><canvas id="weather-today-icon" width="64" height="64"></canvas></div>
                     </div>
                     <div class="tomorrow">
-                        <span class="day-title">Tomorrow's Weather</span><br />
+                        <span class="day-title" id="weather-tomorrow-title">Tomorrow's Weather</span><br />
                         <div class="weather-text" id="weather-tomorrow"></div>
                         <div class="weather-icon"><canvas id="weather-tomorrow-icon" width="64" height="64"></canvas></div>
                     </div>
                     <div class="twodaysaway">
-                        <span class="day-title">Further Out</span><br />
+                        <span class="day-title" id="weather-twodaysaway-title">Further Out</span><br />
                         <div class="weather-text" id="weather-twodaysaway"></div>
                         <div class="weather-icon"><canvas id="weather-twodaysaway-icon" width="64" height="64"></canvas></div>
 
@@ -91,25 +91,28 @@
             console.log(`weather: update received from extension - ${current_time.toLocaleTimeString("en-us", timeformat)}`);
 
             // Update the current weather conditions
+	    document.getElementById('weather-today-title').innerHTML = "Today (" + current_time.toLocaleString("en-us", {"weekday": "long"}) + ")";
             document.getElementById('weather-today').innerHTML = 
-                "Currently " + Math.round(current.temperature) + String.fromCharCode(176) + " @ " + current_time.toLocaleTimeString("en-us", timeformat) + 
-                "<br />Currently " + current.summary + 
-                "<br />H: " + Math.round(today.temperatureMax) + String.fromCharCode(176) + ", L: " + Math.round(today.temperatureMin) + String.fromCharCode(176);;
+                Math.round(current.temperature) + String.fromCharCode(176) + "F @ " + current_time.toLocaleTimeString("en-us", shorttimeformat) + 
+                "<br />" + current.summary + 
+                "<br />H: " + Math.round(today.temperatureMax) + " " + String.fromCharCode(176) + "F, L: " + Math.round(today.temperatureMin) + " " + String.fromCharCode(176)+ "F";
             // Set the icon for today
             skycons.set("weather-today-icon", newval.currently.icon);
 
             // Update tomorrow's weather conditions
-            let tomorrowTime = new Date(tomorrow.time*1000)
+            let tomorrowTime = new Date(tomorrow.time*1000);
+            document.getElementById('weather-tomorrow-title').innerHTML = tomorrowTime.toLocaleString("en-us", {"weekday": "long"});
             document.getElementById('weather-tomorrow').innerHTML = 
-                tomorrowTime.toLocaleString("en-us", {"weekday": "long"}) + ", " + tomorrow.summary + "<br />H: " + 
+                tomorrow.summary + "<br />H: " + 
                 Math.round(tomorrow.temperatureMax) + String.fromCharCode(176) + ", L: " + Math.round(tomorrow.temperatureMin) + String.fromCharCode(176);
             // Set the icon for tomorrow
             skycons.set("weather-tomorrow-icon", tomorrow.icon);
             
             // Update day-after tomorrow's weather conditions
-            let twoDaysAwayTime = new Date(twoDaysAway.time*1000)
-            document.getElementById('weather-twodaysaway').innerHTML = 
-                twoDaysAwayTime.toLocaleString("en-us", {"weekday": "long"}) + ", " + twoDaysAway.summary + "<br />H: " + 
+            let twoDaysAwayTime = new Date(twoDaysAway.time*1000);
+            document.getElementById('weather-twodaysaway-title').innerHTML = twoDaysAwayTime.toLocaleString("en-us", {"weekday": "long"});
+	    document.getElementById('weather-twodaysaway').innerHTML = 
+                twoDaysAway.summary + "<br />H: " + 
                 Math.round(twoDaysAway.temperatureMax) + String.fromCharCode(176) + ", L: " + Math.round(twoDaysAway.temperatureMin) + String.fromCharCode(176);
             // Set the icon for tomorrow
             skycons.set("weather-twodaysaway-icon", twoDaysAway.icon);

@@ -40,7 +40,6 @@
                 </div>
             </div>
             <div class="mainbody">
-                <div class="weather-alert" id="weather-alert"></div>
                 <div>Coming up next:</div>
                 <div id="upnext">Nothing's coming up next because we ain't streamin yo!</div>
                 <div class="information" id="information">
@@ -51,11 +50,18 @@
         </div>
         <div class="social">
             <div class="twitter-logo">
-                <img src="img/twitter.png" /> #pleiades2017
+                <img src="img/twitter.png" />
             </div>
-            <div id="tweetheader">
-                    <img id="avatar" /><span id="screenname"></span> &mdash; <span id="tweettime"></span></div>
-                <div id="tweet"></div>
+            <div class="conference-hashtag">
+                #pleiades2017
+            </div>
+            <div class="avatar">
+                <img id="avatar" />
+            </div>
+            <div class="twitter-content">
+                <div class="tweet-text" id="tweet"></div>
+                <div class="tweet-metadata"><span id="screenname"></span> <span id="tweettime"></em></span>
+                </span></div>
             </div>
         </div>
     </div>
@@ -67,6 +73,8 @@
     <script src="../bower_components/gsap/src/minified/TweenMax.min.js"></script>
     <script src="../bower_components/gsap/src/minified/TimelineMax.min.js"></script>
     <script src="../bower_components/skycons-html5/skycons.js"></script>
+    <script src="../bower_components/textfit/textFit.min.js"></script>
+
 
     <script>
         // Load the clock once page is loaded

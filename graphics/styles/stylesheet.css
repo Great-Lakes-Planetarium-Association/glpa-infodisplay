@@ -140,12 +140,45 @@ div.social {
     height: 130px;
     width: 100%;
     margin-top: 20px;
-    display: inline-block;
-    background: rgba(38, 0, 255, 0.41);
-    vertical-align: middle;
+    display: flex;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff
 }
 
-.twitter-logo {
+img#avatar {
+    width: auto;
+    height: 125px;
+    padding-left: 25px;
+    padding-top: 5px;;
     float: left;
-    vertical-align: middle;
+}
+
+div.conference-hashtag {
+    padding-top: 50px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.twitter-content{
+    width: 100%;
+    padding-left: 25px;
+    height: 130px;
+    background: rgb(36, 36, 36);
+
+}
+
+.tweet-text {
+    /*padding-top: 15px;*/
+    /*font-size: 22px;*/
+    height: 100px;
+    width: 600px;
+}
+
+.tweet-metadata {
+    height: 30px;
+}
+
+.hashtag {
+    font-weight: bold;
 }

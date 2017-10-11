@@ -14,14 +14,14 @@
       {
         "name": "twitter",
         "title": "Tweets to review",
-        "width": 3,
+        "width": 4,
         "file": "twitter.html",
         "headerColor": "#9f9bbd"
       },
       {
         "name": "room-announcement",
         "title": "Room Announcement",
-        "width": 2,
+        "width": 4,
         "file": "room-announcement.html",
         "headerColor": "#9f9bbd"
       }

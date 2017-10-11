@@ -20,10 +20,10 @@
       },
       {
         "name": "twitter",
-        "title": "Tweets to Approve",
+        "title": "Tweets to review",
         "width": 3,
         "file": "twitter.html",
-        "headerColor": "#9f9bd"
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [

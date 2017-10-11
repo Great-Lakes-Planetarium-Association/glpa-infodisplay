@@ -23,7 +23,8 @@ const twitterKeys = {
 
 
 // Set up a replicant to track tweets in
-const tweets = nodecg.Replicant('tweets', {defaultValue: []});
+var tweets = nodecg.Replicant('tweets', {defaultValue: []});
+var acceptedTweets = nodecg.Replicant('acceptedTweets', {defaultValue: []});
 let userStream;
 
 buildUserStream();
@@ -36,11 +37,8 @@ setInterval(() => {
 }, 90 * 60 * 1000);
 
 nodecg.listenFor('acceptTweet', tweet => {
-	if (!nodecg.bundleConfig.twitter.debug) {
-		removeTweetById(tweet.id_str);
-	}
-
-	nodecg.sendMessage('showTweet', tweet);
+	acceptedTweets.value.push(tweet);
+	//nodecg.sendMessage('showTweet', tweet);
 });
 
 nodecg.listenFor('rejectTweet', removeTweetById);
@@ -147,11 +145,10 @@ function buildUserStream() {
  * @returns {undefined}
  */
 function addTweet(tweet) {
-    console.log(`Add tweet called: ${tweet}`);
 	// Reject tweets with media.
-	if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
-		return;
-	}
+	//if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
+	//	return;
+	//}
 
 	// Don't add the tweet if we already have it
 	const isDupe = tweets.value.find(t => t.id_str === tweet.id_str);
@@ -166,7 +163,8 @@ function addTweet(tweet) {
 	tweet.text = tweet.text.replace(/\n/ig, ' ');
 
 	// Highlight the conference hashtag.
-	tweet.text = tweet.text.replace(/confHashtag/ig, '<span class="hashtag">' + confHashtag +'</span>');
+	
+	tweet.text = tweet.text.replace(/#pleiades2017/ig, '<span class="hashtag">#pleiades2017</span>');
 
 	// Add the tweet to the list
 	tweets.value.push(tweet);

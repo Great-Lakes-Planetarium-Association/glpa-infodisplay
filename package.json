@@ -17,6 +17,13 @@
         "width": 2,
         "file": "global-announcement.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "room-announcement",
+        "title": "Room Announcement",
+        "width": 2,
+        "file": "room-announcement.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [

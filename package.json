@@ -17,6 +17,13 @@
         "width": 2,
         "file": "global-announcement.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "twitter",
+        "title": "Tweets to Approve",
+        "width": 3,
+        "file": "twitter.html",
+        "headerColor": "#9f9bd"
       }
     ],
     "graphics": [
@@ -30,6 +37,8 @@
   "repository": "https://github.com/nodecg/nodecg.git",
   "license": "Apache-2.0",
   "dependencies": {
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "twemoji": "^2.5.0",
+    "twitter-stream-api": "^0.5.1"
   }
 }

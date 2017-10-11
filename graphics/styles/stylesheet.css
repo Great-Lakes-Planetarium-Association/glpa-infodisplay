@@ -8,6 +8,16 @@ html {
     box-sizing: inherit;
 }
 
+@font-face {
+    font-family: 'OPTIBankGothic-Light';
+    src:url('OPTIBankGothic-Light.ttf.woff') format('woff'),
+        url('OPTIBankGothic-Light.ttf.svg#OPTIBankGothic-Light') format('svg'),
+        url('OPTIBankGothic-Light.ttf.eot'),
+        url('OPTIBankGothic-Light.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Configure the body for use as a non-interactive display */
 body {
     overflow: hidden;
@@ -43,16 +53,17 @@ body {
 .header {
     height: 100px;
     border-bottom: thick white solid;
+    font-family: OPTIBankGothic-Light;
 }
 
 .conference-title {
-    font-size: 34pt;
+    font-size: 26pt;
     font-weight: bold;
     text-align: center;
 }
 
 .conference-subtitle {
-    font-size: 20pt;
+    font-size: 16pt;
     font-weight: normal;
     
 }

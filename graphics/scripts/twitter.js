@@ -19,7 +19,7 @@ function tweetLoop() {
         textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
         textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
         tweetIndex = (tweetIndex+1) % arrayLength;
-    }, 1000);
+    }, 10000);
 }
 
 function showTweet(index) {

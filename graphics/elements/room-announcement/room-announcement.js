@@ -31,8 +31,8 @@
             announceRoom1.on('change', newVal => {
                 if (stream == 1){
                     if (newVal) {
+                        this.injectBoundHTML(newVal, this.$.roomAnnouncementDiv)
                         this.$.roomAnnouncementDiv.style.display="block";
-                        this.announcement = newVal;
                     } else {
                         this.$.roomAnnouncementDiv.style.display="none";
                     }

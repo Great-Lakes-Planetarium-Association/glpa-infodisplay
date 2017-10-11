@@ -132,9 +132,12 @@ div.mainbody {
     width: 750px;
     left: 275px;
     height: 500px;
-    padding: 20px;
-    background: rgba(126, 45, 45, 0.5);
+    padding-left: 20px;
+    font-size: 26pt;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
 }
+
 
 div.social {
     height: 130px;

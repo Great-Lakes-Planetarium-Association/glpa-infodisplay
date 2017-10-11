@@ -1,0 +1,32 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<dom-module id="room-announcement">
+    <template>
+        <style>
+            .box {
+                padding: 10px;
+                background-color: rgba(36, 36, 36, 0.8);
+                color: #fff;
+            }
+            .message.text {
+                padding-left: 10px;
+            }
+            
+            #globalAnnounceDiv {
+                background-color: rgba(43, 43, 43, 0.5)
+            }
+        </style>
+    
+        <div class="box announcement global" id="globalAnnounceDiv">
+            <div class="lead-in">Important Announcement:</div>
+            <div class="message text">[[globalAnnouncement]]</div>
+        </div>
+        <div class="box announcement room" id="roomAnnouncementDiv">
+            <div class="lead-in">Coming up next:</div>
+            <div class="message text">[[announcement]]</div>
+        </div>
+    </template>
+
+    <script src="room-announcement.js"></script>
+    
+</dom-module>

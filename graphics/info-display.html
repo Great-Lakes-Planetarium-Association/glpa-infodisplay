@@ -2,6 +2,7 @@
 <head>
     <title>Pleiades 2017 NPC Info Slate</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="import"  href="elements/room-announcement/room-announcement.html">
 </head>
 
 <body>
@@ -35,16 +36,11 @@
                         <span class="day-title" id="weather-twodaysaway-title">Further Out</span><br />
                         <div class="weather-text" id="weather-twodaysaway"></div>
                         <div class="weather-icon"><canvas id="weather-twodaysaway-icon" width="64" height="64"></canvas></div>
-
                     </div>
                 </div>
             </div>
             <div class="mainbody">
-                <div>Coming up next:</div>
-                <div id="upnext">Nothing's coming up next because we ain't streamin yo!</div>
-                <div class="information" id="information">
-                    {{Information goes here}}
-                </div>
+                <room-announcement></room-announcement>
             </div>
 
         </div>
@@ -60,8 +56,7 @@
             </div>
             <div class="twitter-content">
                 <div class="tweet-text" id="tweet"></div>
-                <div class="tweet-metadata"><span id="screenname"></span> <span id="tweettime"></em></span>
-                </span></div>
+                <div class="tweet-metadata"><span id="screenname"></span> <span id="tweettime"></em></span></div>
             </div>
         </div>
     </div>
@@ -137,7 +132,7 @@
             // TODO: Do something with this data!
         });
 
-        var searchParams = new URLSearchParams(window.location.search);
+        /*var searchParams = new URLSearchParams(window.location.search);
         var announce = false;
         switch (searchParams.get("stream")) {
             case "1":
@@ -156,7 +151,7 @@
                 console.log(`announce: update received from dashboard`);
                 document.getElementById("information").innerHTML = newval;
             });
-        }
+        }*/
 
         var cycleDelay = 5; // Specify, in seconds, how long to wait before cycling to the next image
         var fadeTime = 4; // Specify, in seconds, how long dissolve should take

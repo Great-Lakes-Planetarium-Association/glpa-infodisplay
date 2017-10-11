@@ -182,6 +182,7 @@ span.conference-hashtag {
     width: 699px;
     padding-left: 25px;
     height: 130px;
+    font-weight: bold;
 
 
 }
@@ -203,7 +204,7 @@ span.conference-hashtag {
 }
 
 .hashtag {
-    font-weight: bold;
+    font-size: bigger;
 }
 
 img#tweet-img {

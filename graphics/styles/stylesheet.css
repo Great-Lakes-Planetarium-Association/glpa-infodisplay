@@ -9,11 +9,11 @@ html {
 }
 
 @font-face {
-    font-family: 'OPTIBankGothic-Light';
-    src:url('OPTIBankGothic-Light.ttf.woff') format('woff'),
-        url('OPTIBankGothic-Light.ttf.svg#OPTIBankGothic-Light') format('svg'),
-        url('OPTIBankGothic-Light.ttf.eot'),
-        url('OPTIBankGothic-Light.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-family: 'OPTIBankGothic-Medium';
+    src:url('OPTIBankGothic-Medium.ttf.woff') format('woff'),
+        url('OPTIBankGothic-Medium.ttf.svg#OPTIBankGothic-Medium') format('svg'),
+        url('OPTIBankGothic-Medium.ttf.eot'),
+        url('OPTIBankGothic-Medium.ttf.eot?#iefix') format('embedded-opentype'); 
     font-weight: normal;
     font-style: normal;
 }
@@ -53,19 +53,26 @@ body {
 .header {
     height: 100px;
     border-bottom: thick white solid;
-    font-family: OPTIBankGothic-Light;
+    font-family: OPTIBankGothic-Medium;
 }
 
 .conference-title {
-    font-size: 26pt;
-    font-weight: bold;
+    font-size: 24.5pt;
+    font-weight: bolder;
     text-align: center;
+    background: -webkit-repeating-linear-gradient(#fff, #aaa 25%, #fff 50%);
+    -webkit-background-clip: text;
+
+    color: rgba(0, 0, 0, 0);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.5);
 }
 
 .conference-subtitle {
     font-size: 16pt;
     font-weight: normal;
-    
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
 }
 
 .conference-location {
@@ -83,12 +90,13 @@ div.sidebar {
 
 .main .sidebar {
     width: 250px;
-    background: rgba(56, 54, 54, 0.48);
+    background: rgba(0, 0, 0, 0.75);
     height: 100%;
     padding-top: 20px;
 }
 
 div.clock {
+    color: #fff;
     text-align: center;
     font-weight: bold;
     padding-bottom: 20px;
@@ -100,7 +108,8 @@ div.clock div.clock-time {
     /* style time */
     font-size: 24pt;
 }
-div.weather { 
+div.weather {
+    color: #fff;
     padding-left: 10px;
     padding-top: 10px;
     vertical-align: top;

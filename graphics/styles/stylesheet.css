@@ -148,6 +148,21 @@ div.social {
     color: #fff
 }
 
+div.twitter-logo {
+    width: 200px;
+    height: 130px;
+    text-align: center;
+}
+
+div.twitter-logo img {
+    width: auto;
+    height: 100px;
+}
+
+div.avatar {
+    width: 125px;
+    height: 125px;
+}
 img#avatar {
     width: auto;
     height: 125px;
@@ -156,18 +171,16 @@ img#avatar {
     float: left;
 }
 
-div.conference-hashtag {
-    padding-top: 50px;
+span.conference-hashtag {
     font-weight: bold;
     font-size: 18px;
 }
 
 
 .twitter-content{
-    width: 100%;
+    width: 699px;
     padding-left: 25px;
     height: 130px;
-    background: rgb(36, 36, 36);
 
 }
 

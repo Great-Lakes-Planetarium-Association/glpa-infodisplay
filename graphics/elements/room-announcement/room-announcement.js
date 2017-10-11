@@ -23,6 +23,10 @@
            
             // Get the room number from the URL
             var stream = Number(new URLSearchParams(window.location.search).get('stream'));
+            if (!stream) {
+                this.globalAnnouncement = "Please provide a ?stream= parameter.";
+                return;
+            }
 
             announceRoom1.on('change', newVal => {
                 if (stream == 1){

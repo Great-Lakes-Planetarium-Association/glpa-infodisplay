@@ -19,17 +19,17 @@
         "headerColor": "#9f9bbd"
       },
       {
-<<<<<<< .merge_file_a05772
         "name": "twitter",
         "title": "Tweets to review",
         "width": 3,
         "file": "twitter.html",
-=======
+        "headerColor": "#9f9bbd"
+      },
+      {
         "name": "room-announcement",
         "title": "Room Announcement",
         "width": 2,
         "file": "room-announcement.html",
->>>>>>> .merge_file_a07096
         "headerColor": "#9f9bbd"
       }
     ],

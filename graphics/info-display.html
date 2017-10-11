@@ -77,6 +77,9 @@
         // Register the NodeCG weather replicant
         weather = nodecg.Replicant('weather');
 
+	// Register the NodeCG conference replicant
+	conference = nodecg.Replicant('conference');
+
         // Watch for a change to the weather replicant
         weather.on('change', newval => {
             let current = newval.currently;
@@ -117,6 +120,12 @@
             // Set the icon for tomorrow
             skycons.set("weather-twodaysaway-icon", twoDaysAway.icon);
         });
+
+        // Watch for a change to the conference replicant
+        conference.on('change', newval => {
+            console.log(`conference: update received from extension`);
+            // TODO: Do something with this data!
+	});
 
         var cycleDelay = 5; // Specify, in seconds, how long to wait before cycling to the next image
         var fadeTime = 4; // Specify, in seconds, how long dissolve should take

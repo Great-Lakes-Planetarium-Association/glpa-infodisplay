@@ -43,7 +43,7 @@
                 <div class="weather-alert" id="weather-alert"></div>
                 <div>Coming up next:</div>
                 <div id="upnext">Nothing's coming up next because we ain't streamin yo!</div>
-                <div class="information">
+                <div class="information" id="information">
                     {{Information goes here}}
                 </div>
             </div>
@@ -77,8 +77,8 @@
         // Register the NodeCG weather replicant
         weather = nodecg.Replicant('weather');
 
-	// Register the NodeCG conference replicant
-	conference = nodecg.Replicant('conference');
+        // Register the NodeCG conference replicant
+        conference = nodecg.Replicant('conference');
 
         // Watch for a change to the weather replicant
         weather.on('change', newval => {
@@ -94,7 +94,7 @@
             console.log(`weather: update received from extension - ${current_time.toLocaleTimeString("en-us", timeformat)}`);
 
             // Update the current weather conditions
-	    document.getElementById('weather-today-title').innerHTML = "Today (" + current_time.toLocaleString("en-us", {"weekday": "long"}) + ")";
+            document.getElementById('weather-today-title').innerHTML = "Today (" + current_time.toLocaleString("en-us", {"weekday": "long"}) + ")";
             document.getElementById('weather-today').innerHTML = 
                 Math.round(current.temperature) + String.fromCharCode(176) + "F @ " + current_time.toLocaleTimeString("en-us", shorttimeformat) + 
                 "<br />" + current.summary + 
@@ -114,7 +114,7 @@
             // Update day-after tomorrow's weather conditions
             let twoDaysAwayTime = new Date(twoDaysAway.time*1000);
             document.getElementById('weather-twodaysaway-title').innerHTML = twoDaysAwayTime.toLocaleString("en-us", {"weekday": "long"});
-	    document.getElementById('weather-twodaysaway').innerHTML = 
+            document.getElementById('weather-twodaysaway').innerHTML = 
                 twoDaysAway.summary + "<br />H: " + 
                 Math.round(twoDaysAway.temperatureMax) + String.fromCharCode(176) + ", L: " + Math.round(twoDaysAway.temperatureMin) + String.fromCharCode(176);
             // Set the icon for tomorrow
@@ -125,7 +125,20 @@
         conference.on('change', newval => {
             console.log(`conference: update received from extension`);
             // TODO: Do something with this data!
-	});
+        });
+
+        var searchParams = new URLSearchParams(window.location.search);
+        switch (searchParams.get("stream")) {
+            case "1":
+                document.getElementById("information").innerHTML = "Room 1";
+                break;
+            case "2":
+                document.getElementById("information").innerHTML = "Room 2";
+                break;
+            case "3":
+                document.getElementById("information").innerHTML = "Room 2";
+                break;
+        }
 
         var cycleDelay = 5; // Specify, in seconds, how long to wait before cycling to the next image
         var fadeTime = 4; // Specify, in seconds, how long dissolve should take

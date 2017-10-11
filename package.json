@@ -12,13 +12,6 @@
     "compatibleRange": "~0.9.6",
     "dashboardPanels": [
       {
-        "name": "global-announcement",
-        "title": "Global Announcement",
-        "width": 2,
-        "file": "global-announcement.html",
-        "headerColor": "#9f9bbd"
-      },
-      {
         "name": "twitter",
         "title": "Tweets to review",
         "width": 3,

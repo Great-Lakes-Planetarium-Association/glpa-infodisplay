@@ -14,12 +14,14 @@ function tweetLoop() {
     clearInterval(tweetTimer);
     var arrayLength = acceptedTweets.value.length;
     showTweet(tweetIndex);
+    textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
+    textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
     tweetTimer = setInterval(function() {
         showTweet(tweetIndex);
         textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
         textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
         tweetIndex = (tweetIndex+1) % arrayLength;
-    }, 10000);
+    }, 5000);
 }
 
 function showTweet(index) {
@@ -27,7 +29,14 @@ function showTweet(index) {
     var tweetTime = new Date(Date.parse(newVal.created_at.replace(/( \+)/, ' UTC$1')));  
     document.getElementById('screenname').innerHTML = "@" + newVal.user.screen_name + ' &mdash; ';
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
-    document.getElementById('tweet').innerHTML = newVal.text;
-    document.getElementById('avatar').src = newVal.user.profile_image_url.replace('_normal',"");
+    document.getElementById('tweet').innerHTML = newVal.text.replace(/https:\/\/t.co\/\S+/,'');
+    document.getElementById('avatar').src = newVal.user.profile_image_url.replace('_normal',"_bigger");
+    if (newVal.entities.media) {
+        document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + newVal.entities.media[0].media_url + ') no-repeat top left';
+        document.getElementsByClassName('twitter-content')[0].style.backgroundSize = '100% auto';
+    } else {
+        document.getElementsByClassName('twitter-content')[0].style.background = "";
+    }
+    
 
 }

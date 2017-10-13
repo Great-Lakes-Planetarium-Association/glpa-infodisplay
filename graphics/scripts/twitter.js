@@ -33,7 +33,7 @@ function showTweet(index) {
     document.getElementById('avatar').src = newVal.user.profile_image_url.replace('_normal',"_bigger");
     if (newVal.entities.media) {
         document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + newVal.entities.media[0].media_url + ') no-repeat top left';
-        document.getElementsByClassName('twitter-content')[0].style.backgroundSize = '100% auto';
+        document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';
     } else {
         document.getElementsByClassName('twitter-content')[0].style.background = "";
     }

@@ -34,6 +34,7 @@ function showTweet(index) {
     if (newVal.entities.media) {
         document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + newVal.entities.media[0].media_url + ') no-repeat top left';
         document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';
+        document.getElementsByClassName('twitter-content')[0].style.backgroundPosition = 'center';
     } else {
         document.getElementsByClassName('twitter-content')[0].style.background = "";
     }

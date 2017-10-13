@@ -211,3 +211,8 @@ img#tweet-img {
     height: 130px;
     width: auto;
 }
+
+.emoji {
+    width: auto;
+    height: 30%;
+}

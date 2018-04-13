@@ -8,17 +8,15 @@ const TwitterStream = require('twitter-stream-api');
 // Load NodeCG API
 const nodecg = require('./util/nodecg-api-context').get();
 
-// Specify the Conference Twitter user ID and application IDs.
-// These should move to "<nodecg install dir>/cfg/glpa-infodisplay.json" someday
-const confTwitterID = 862533287679451136;
-const confHashtag = "#pleiades2017";
-const confSearchTags = confHashtag + "pleiades2017,pleiades-2017";
-
+// Setup necessary twitter components
+const confTwitterID = nodecg.bundleConfig.twitter.confTwitterID
+const confHashtag = nodecg.bundleConfig.twitter.confHashtag
+const confSearchTags = confHashtag + nodecg.bundleConfig.twitter.confSearchTags
 const twitterKeys = {
-    consumer_key : "6yH0WErvDikOZIvCDoa5K1lzH",
-    consumer_secret : "t81eBtkAGMJ63rhpYzXA1ozmczFm7g3CuXdReIdbmkJqGWIjvv",
-    token : "131306601-HuoKpvXc8vy76kqmYRBr6ajmJWWMEBxAfR4KKX2t",
-    token_secret : "oSsnqafP75eWvvs0OPFasUM9XBJDRypZPmjIKkcGqO3Z0"
+    consumer_key : nodecg.bundleConfig.twitter.consumerKey,
+    consumer_secret : nodecg.bundleConfig.twitter.consumerSecret,
+    token : nodecg.bundleConfig.twitter.token,
+    token_secret : nodecg.bundleConfig.twitter.tokenSecret
 };
 
 
@@ -163,8 +161,11 @@ function addTweet(tweet) {
 	tweet.text = tweet.text.replace(/\n/ig, ' ');
 
 	// Highlight the conference hashtag.
+	var oldWordRegEx = new RegExp(oldWord, "g");
+
+	myString.replace(oldWordRegEx, "");
 	
-	tweet.text = tweet.text.replace(/#pleiades2017/ig, '<span class="hashtag">#pleiades2017</span>');
+	tweet.text = tweet.text.replace(/${confHashtag}/ig, '<span class="hashtag">confHashtag</span>');
 
 	// Add the tweet to the list
 	tweets.value.push(tweet);

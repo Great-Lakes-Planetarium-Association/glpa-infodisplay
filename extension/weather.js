@@ -1,5 +1,4 @@
 // Load the NodeCG API
-// Load NodeCG API
 const nodecg = require('./util/nodecg-api-context').get();
 
 // Load the Darksky API

@@ -4,11 +4,12 @@ const nodecg = require('./util/nodecg-api-context').get();
 
 // Load the Darksky API
 // The API key should move to "<nodecg install dir>/cfg/glpa-infodisplay.json" someday
-const darkskyAPI = 'https://api.darksky.net/forecast/9d26d3ddce5a78c393685673a21102b0/38.6273,-90.1979'; // URL to access the DarkSky API
+const darkskyAPI = 'https://api.darksky.net/forecast/' +
+	nodecg.bundleConfig.weather.APIKey + '/' +
+	nodecg.bundleConfig.weather.latitude + ',' + nodecg.bundleConfig.weather.longitude;
 
 // Specify how often to obtain weather data
-// Note that DarkSky has a limit of 1000 requests per day before they bill you.
-let pollInterval = "5"; // How often to poll API in minutes
+let pollInterval = nodecg.bundleConfig.weather.interval;
 
 // Obtain the weather replicant
 const weather = nodecg.Replicant('weather');

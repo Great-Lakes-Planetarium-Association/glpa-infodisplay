@@ -160,12 +160,8 @@ function addTweet(tweet) {
 	// Replace newlines with spaces
 	tweet.text = tweet.text.replace(/\n/ig, ' ');
 
-	// Highlight the conference hashtag.
-	var oldWordRegEx = new RegExp(oldWord, "g");
-
-	myString.replace(oldWordRegEx, "");
-	
-	tweet.text = tweet.text.replace(/${confHashtag}/ig, '<span class="hashtag">confHashtag</span>');
+	// Look for the conference hashtag in the text and replace it with a CSS class so we can style it
+	tweet.text = tweet.text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 
 	// Add the tweet to the list
 	tweets.value.push(tweet);

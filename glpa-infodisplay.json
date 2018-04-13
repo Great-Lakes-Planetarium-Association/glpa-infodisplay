@@ -1,4 +1,11 @@
  {
+     "conference": {
+         "tite":    "2018 GLPA Conference",
+         "city":    "East Lansing",
+         "state":   "MI",
+         "startdate":   "10/10/2018",
+         "enddate": "10/13/2018"
+     },
      "twitter": {
          "confHashtag": "#glpa2018",
          "confTwitterID": 862533287679451136,

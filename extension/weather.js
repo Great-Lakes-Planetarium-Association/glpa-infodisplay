@@ -2,7 +2,6 @@
 const nodecg = require('./util/nodecg-api-context').get();
 
 // Load the Darksky API
-// The API key should move to "<nodecg install dir>/cfg/glpa-infodisplay.json" someday
 const darkskyAPI = 'https://api.darksky.net/forecast/' +
 	nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location;
 
@@ -16,6 +15,7 @@ if (pollInterval < 5) {
 
 // Obtain the weather replicant
 const weather = nodecg.Replicant('weather');
+
 // Load the request module
 var request = require('request');
 

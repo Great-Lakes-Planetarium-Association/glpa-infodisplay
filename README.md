@@ -62,8 +62,10 @@ nodecg install bitbucket:username/glpa-infodisplay
 
 This completes the installation.  You will now need to configure the bundle.
 
-# Configuration Manifest
-The `glpa-infodisplay` bundle requires a .json configuration file which includes things such as the conference name, Twitter API keys, and other authentication strings.  Since these are unique/private, this file is not stored in the repository.  However, a sample file, `glpa-infodisplay.json.sample`, has been provided.  Make a local copy of this file named `glpa-infodisplay.json` and edit it as necessary.  For a complete description of the config file, review the [Configuration](Documentation/CONFIGURATION.md) document.
+# Bundle Configuration
+This bundle uses the NodeCG `configschema.json` to define the configuration required.  Upon initialization of the bundle using `nodecg defaultconfig` a configuration file will be automatically generated using this schema.  Bundle configurations are stored at `C:\NodeCG\cfg\glpa-infodisplay.json` and can be modified manually afterward.
+
+**Note:** NodeCG will compare the bundle's configuration against the `configschema.json` at startup.  If there are extra parameters or missing parameters the bundle will not be loaded.
 
 Additionally, you can review the NodeCG documentation on a [package.json manifest](https://nodecg.com/tutorial-5_manifest.html).
 

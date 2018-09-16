@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+
+    "properties": {
+        "conference": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Header for page, typically <YYYY> GLPA Conference.",
+                    "default": "YYYY GLPA Conference"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City of conference host main facility.",
+                    "default": "Merrillville"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "State of the conference host main facility.",
+                    "default": "IN"
+                },
+                "startdate": {
+                    "type": "string",
+                    "description": "Start date of the conference in MM/DD/YYYY format.",
+                    "default": "10/01/2018" 
+                },
+                "enddate": {
+                    "type": "string",
+                    "description": "End date of the conference in MM/DD/YYYY format.",
+                    "default": "10/05/2018"
+                }
+            }
+            
+        },
+        "twitter": {
+            "type": "object",
+            "properties": {
+                "confHashtag": {
+                    "type": "string",
+                    "description": "The official conference Twitter hashtag.  Example: #glpa2018",
+                    "default": null
+                }
+            }
+            
+        },
+        "weather": {
+            "type": "object",
+            "properties": {
+                "APIKey": {
+                    "type": "string",
+                    "description": "API key from Darksky.net.",
+                    "default": null
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The latitude and longitude (<latitude>,<longitude>) of the conference host's city.",
+                    "default": null
+                },
+                "interval": {
+                    "type": "number",
+                    "description": "How often, in minutes, to refresh data from DarkSky.  Minimum is every 5 minutes.",
+                    "default": 5
+            }
+            
+        }
+    }
+
+}

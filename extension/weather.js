@@ -4,11 +4,15 @@ const nodecg = require('./util/nodecg-api-context').get();
 // Load the Darksky API
 // The API key should move to "<nodecg install dir>/cfg/glpa-infodisplay.json" someday
 const darkskyAPI = 'https://api.darksky.net/forecast/' +
-	nodecg.bundleConfig.weather.APIKey + '/' +
-	nodecg.bundleConfig.weather.latitude + ',' + nodecg.bundleConfig.weather.longitude;
+	nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location;
 
 // Specify how often to obtain weather data
 let pollInterval = nodecg.bundleConfig.weather.interval;
+
+// Check we're not refreshing faster than every 5 minutes; free API won't allow it.
+if (pollInterval < 5) {
+	pollInterval = 5;
+}
 
 // Obtain the weather replicant
 const weather = nodecg.Replicant('weather');

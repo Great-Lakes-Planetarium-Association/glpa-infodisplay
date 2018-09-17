@@ -3,7 +3,7 @@
 
 // Load node packages
 const twemoji = require('twemoji');
-const TwitterStream = require('twitter-stream-api');
+//const TwitterStream = require('twitter-stream-api');
 
 // Load NodeCG API
 const nodecg = require('./util/nodecg-api-context').get();
@@ -46,7 +46,7 @@ nodecg.listenFor('rejectTweet', removeTweetById);
  * @returns {undefined}
  */
 function buildUserStream() {
-	userStream = new TwitterStream(twitterKeys);
+/*	userStream = new TwitterStream(twitterKeys);
 
 	userStream.on('data', data => {
 		// We discard quoted statuses because we can't show them.
@@ -134,7 +134,8 @@ function buildUserStream() {
 
     userStream.stream('statuses/filter', 
         {follow: confTwitterID,
-        track: confHashtag});
+		track: confHashtag});
+		*/
 }
 
 /**

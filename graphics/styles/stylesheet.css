@@ -40,12 +40,29 @@ body {
     opacity: 0;
 }
 
+/* Blocking configuration */
 .header {
-    height: 100px;
+    height: 150px;
     border-bottom: thick white solid;
 }
 
-.conference-title {
+.main {
+    background: rgba(0, 0, 0, 0.75);
+    height: 100%;
+    padding-top: 10px;
+    height: 450px;
+}
+
+.twitter {
+    height: 130px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff
+}
+
+#header-title {
     font-size: 24.5pt;
     font-weight: bolder;
     text-align: center;
@@ -57,119 +74,68 @@ body {
     -webkit-text-stroke-color: rgba(0, 0, 0, 0.5);
 }
 
-.conference-subtitle {
-    font-size: 16pt;
-    font-weight: normal;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
-}
-
-.conference-location {
-    text-align: right;
-    float: right;
-}
-
-.main {
-    height: 500px;
-}
-
-div.sidebar { 
-    float: left;
-}
-
-.main .sidebar {
-    width: 250px;
-    background: rgba(0, 0, 0, 0.75);
-    height: 100%;
-    padding-top: 20px;
-}
-
-div.clock {
-    color: #fff;
+/* Time/Date/Forecast Table */
+.time-date-forecast {
+    width: 100%;
     text-align: center;
-    font-weight: bold;
-    padding-bottom: 20px;
+    font-size: 14pt;
 }
-div.clock div.clock-date {
-    /* style date */
+td {
+    padding: 10px;
 }
-div.clock div.clock-time {
-    /* style time */
-    font-size: 24pt;
-}
-div.weather {
-    color: #fff;
-    padding-left: 10px;
-    padding-top: 10px;
-    vertical-align: top;
-}
-div.weather span.day-title {
-    font-weight: bold;
-}
-div.weather-text {
-    width: 150px;
-    padding-bottom: 50px;
-    margin-right: 10px;
+.weather-temps {
+    line-height: 57px;
 }
 
-div.weather-text, div.weather-icon {
-    display: inline-block;
+canvas.weather-icon {
+    display: block;
+    float: left;
 }
 
 div.mainbody {
     position: absolute;
     width: 750px;
-    left: 275px;
-    height: 500px;
-    padding-left: 20px;
+    padding: 10px;
     font-size: 26pt;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
 }
 
-
-div.social {
+.twitter-box-1 {
+    margin-left: 10px;
+    width: 100px;
     height: 130px;
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    background: rgba(0, 0, 0, 0.75);
-    color: #fff
-}
-
-div.twitter-logo {
-    width: 200px;
-    height: 120px;
     text-align: center;
 }
 
-div.twitter-logo img {
+#twitter-logo {
     width: auto;
     height: 100px;
+    float: left;
+}
+
+#twitter-hashtag {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 div.avatar {
     width: 125px;
-    height: 125px;
+    height: 130px;
     float: left;
+    margin-left: 10px;
 }
 img#avatar {
     width: auto;
-    height: 125px;
+    height: 130px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-span.conference-hashtag {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-
 .twitter-content{
-    width: 699px;
-    padding-left: 25px;
+    width: 100%;
+    margin-left: 10px;
     height: 130px;
     font-weight: bold;
 
@@ -204,4 +170,8 @@ img#tweet-img {
 .emoji {
     width: auto;
     height: 30%;
+}
+
+.attribution {
+    font-size: 6pt;
 }

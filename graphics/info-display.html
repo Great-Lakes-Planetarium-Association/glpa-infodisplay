@@ -15,13 +15,23 @@
     </div>
     <div class="container xga">
         <div class="header">
-            <div id="conference-title"></div>
-            <div class="time-date-forecast">
-                <div class="time-and-temp"><span id="current-time"></span> &mdash; <span id="current-temp"></span></div>
-                <div class="weather-today"><img id="weather-today-icon"><span id="weather-today-temps"></span></div>
-                <div class="weather-tomorrow"><img id="weather-tomorrow-icon"><span id="weather-tomorrow-temps"></span></div>
-                <div class="weather-further"><img id="weather-further-icon"><span id="weather-further-temps"></span></div>
-            </div>
+            <div id="header-title"></div>
+            <table class="time-date-forecast">
+                <tr>
+                    <th></th>
+                    <th>Currently</th>
+                    <th><span id="weather-today-title"></span></th>
+                    <th><span id="weather-tomorrow-title"></span></th>
+                    <th><span id="weather-future-title"></span></th>
+                </tr>
+                <tr>
+                    <td><span id="current-time"></span></td>
+                    <td><canvas class="weather-icon" id="weather-current" width="64" height="64"></canvas><span class="weather-temps" id="current-temp"></span><br /><span id="current-time"></span></td>
+                    <td><canvas class="weather-icon" id="weather-today-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-today-temps"></span></td>
+                    <td><canvas class="weather-icon" id="weather-tomorrow-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-tomorrow-temps"></span></td>
+                    <td><canvas class="weather-icon" id="weather-future-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-future-temps"></span></td>
+                </tr>
+            </table>
         </div>
         <div class="main">
             <div class="mainbody">
@@ -29,9 +39,9 @@
             </div>
 
         </div>
-        <div class="social">
-            <div id="twitter">
-                <img src="img/twitter.png" /><br />
+        <div class="twitter">
+            <div class="twitter-box-1">
+                <img id="twitter-logo" src="img/twitter.png" /><br />
                 <span id="twitter-hashtag"></span>
             </div>
             <div class="avatar">
@@ -42,19 +52,21 @@
                 <div class="tweet-metadata"><span id="screenname"></span> <span id="tweettime"></em></span></div>
             </div>
         </div>
+        <div class="attribution">Weather data Powered by Dark Sky</div>
     </div>
 
-    <!-- Import JS scripts -->
+    <!-- Load JS stuff -->
+    <!-- Need to load components before our modules since we'll be calling them! -->
+    <script src="../bower_components/gsap/src/minified/TweenMax.min.js"></script>
+    <script src="../bower_components/gsap/src/minified/TimelineMax.min.js"></script>
+    <script src="../bower_components/skycons-html5/skycons.js"></script>
+    <script src="../bower_components/textfit/textFit.min.js"></script>
     <!-- Internal script packages -->
     <script src="scripts/background.js"></script>
     <script src="scripts/clock.js"></script>
     <script src="scripts/conference.js"></script>
     <script src="scripts/twitter.js"></script>
     <script src="scripts/weather.js"></script>
-    <!-- Package script... packages.-->
-    <script src="../bower_components/gsap/src/minified/TweenMax.min.js"></script>
-    <script src="../bower_components/gsap/src/minified/TimelineMax.min.js"></script>
-    <script src="../bower_components/skycons-html5/skycons.js"></script>
-    <script src="../bower_components/textfit/textFit.min.js"></script>
+   
 </body>
 </html>

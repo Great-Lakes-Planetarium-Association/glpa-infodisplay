@@ -8,22 +8,12 @@ html {
     box-sizing: inherit;
 }
 
-@font-face {
-    font-family: 'OPTIBankGothic-Medium';
-    src:url('OPTIBankGothic-Medium.ttf.woff') format('woff'),
-        url('OPTIBankGothic-Medium.ttf.svg#OPTIBankGothic-Medium') format('svg'),
-        url('OPTIBankGothic-Medium.ttf.eot'),
-        url('OPTIBankGothic-Medium.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
-
 /* Configure the body for use as a non-interactive display */
 body {
     overflow: hidden;
     margin: 0;
     padding: 0;
-    font-family: Tahoma;
+    font-family: Arial, Verdana, sans-serif;
     font-size: 12pt;
 }
 
@@ -53,7 +43,6 @@ body {
 .header {
     height: 100px;
     border-bottom: thick white solid;
-    font-family: OPTIBankGothic-Medium;
 }
 
 .conference-title {

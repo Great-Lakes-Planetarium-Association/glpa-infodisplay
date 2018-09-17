@@ -3,18 +3,6 @@
     <title>GLPA-Infodisplay Slate</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
     <link rel="import"  href="elements/room-announcement/room-announcement.html">
-
-    <!-- Do some more javascripty things -->
-    <script>
-        // Register the NodeCG conference replicant
-        conference = nodecg.Replicant('conference');
-
-        // Watch for a change to the conference replicant
-        conference.on('change', newval => {
-            console.log(`conference: update received from extension`);
-            // TODO: Do something with this data!
-        });
-    </script>
 </head>
 
 <body>
@@ -27,11 +15,7 @@
     </div>
     <div class="container xga">
         <div class="header">
-            <div class="conference-title"></div>
-            <div class="conference-subtitle">
-                <div id="conference-dates"></div>
-                <div id="conference-location"></div>
-            </div>
+            <div id="conference-title"></div>
             <div class="time-date-forecast">
                 <div class="time-and-temp"><span id="current-time"></span> &mdash; <span id="current-temp"></span></div>
                 <div class="weather-today"><img id="weather-today-icon"><span id="weather-today-temps"></span></div>
@@ -64,6 +48,7 @@
     <!-- Internal script packages -->
     <script src="scripts/background.js"></script>
     <script src="scripts/clock.js"></script>
+    <script src="scripts/conference.js"></script>
     <script src="scripts/twitter.js"></script>
     <script src="scripts/weather.js"></script>
     <!-- Package script... packages.-->

@@ -7,33 +7,18 @@
         "conference": {
             "type": "object",
             "properties": {
-                "title": {
+                "jsonUrl": {
                     "type": "string",
-                    "description": "Header for page, typically <YYYY> GLPA Conference.",
-                    "default": "YYYY GLPA Conference"
+                    "description": "URL of the conference.json file containing conference data and schedules.",
+                    "default": "http://live.glpa.org/conference.json"
                 },
-                "city": {
-                    "type": "string",
-                    "description": "City of conference host main facility.",
-                    "default": "Merrillville"
-                },
-                "state": {
-                    "type": "string",
-                    "description": "State of the conference host main facility.",
-                    "default": "IN"
-                },
-                "startdate": {
-                    "type": "string",
-                    "description": "Start date of the conference in MM/DD/YYYY format.",
-                    "default": "10/01/2018" 
-                },
-                "enddate": {
-                    "type": "string",
-                    "description": "End date of the conference in MM/DD/YYYY format.",
-                    "default": "10/05/2018"
+                "pollInterval": {
+                    "type": "number",
+                    "description": "How often to poll the conference JSON file for updated session data in seconds.",
+                    "default": 30
                 }
             }
-            
+
         },
         "twitter": {
             "type": "object",

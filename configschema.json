@@ -48,8 +48,8 @@
                     "type": "number",
                     "description": "How often, in minutes, to refresh data from DarkSky.  Minimum is every 5 minutes.",
                     "default": 5
+                }
             }
-            
         }
     }
 

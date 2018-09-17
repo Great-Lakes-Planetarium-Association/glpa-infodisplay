@@ -26,7 +26,7 @@
                 "confHashtag": {
                     "type": "string",
                     "description": "The official conference Twitter hashtag.  Example: #glpa2018",
-                    "default": null
+                    "default": "#glpa2018"
                 }
             }
             
@@ -34,6 +34,11 @@
         "weather": {
             "type": "object",
             "properties": {
+                "APIURL": {
+                    "type": "string",
+                    "description": "Base URL of the DarkSky API.",
+                    "default": "https://api.darksky.net/forecast/"
+                },
                 "APIKey": {
                     "type": "string",
                     "description": "API key from Darksky.net.",

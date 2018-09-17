@@ -47,7 +47,7 @@ choco install NodeJS git -y
 
 ### Install NodeCG
 ```
-npm install -g bower pm2
+npm install -g bower pm2 nodecg-cli
 mkdir C:\NodeCG\
 cd C:\NodeCG
 git clone https://github.com/nodecg/nodecg.git .
@@ -57,13 +57,21 @@ bower install
 
 ### Install the `glpa-infodisplay` bundle
 ```
-nodecg install bitbucket:username/glpa-infodisplay
+nodecg install bitbucket:glpa_av/glpa-infodisplay
+cd C:\NodeCG\bundles\glpa-infodisplay
+bower install
 ```
 
 This completes the installation.  You will now need to configure the bundle.
 
 # Bundle Configuration
 This bundle uses the NodeCG `configschema.json` to define the configuration required.  Upon initialization of the bundle using `nodecg defaultconfig` a configuration file will be automatically generated using this schema.  Bundle configurations are stored at `C:\NodeCG\cfg\glpa-infodisplay.json` and can be modified manually afterward.
+
+```
+nodecg defaultconfig
+```
+
+This will create the appropriate configuration file `C:\NodeCG\cfg\glpa-infodisplay.json`.  You will need to edit the contents of this file as appropriate.  Since authentication keys will be present this file should not be committed into the repository.
 
 **Note:** NodeCG will compare the bundle's configuration against the `configschema.json` at startup.  If there are extra parameters or missing parameters the bundle will not be loaded.
 

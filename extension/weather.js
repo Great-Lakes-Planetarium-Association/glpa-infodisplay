@@ -2,8 +2,7 @@
 const nodecg = require('./util/nodecg-api-context').get();
 
 // Load the Darksky API
-const darkskyAPI = 'https://api.darksky.net/forecast/' +
-	nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location;
+const darkskyAPI = nodecg.bundleConfig.weather.APIURL + nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location + '/?exclude=flags,alerts,hourly,minutely';
 
 // Specify how often to obtain weather data
 let pollInterval = nodecg.bundleConfig.weather.interval;
@@ -19,6 +18,8 @@ const weather = nodecg.Replicant('weather');
 // Load the request module
 var request = require('request');
 
+console.log(`weather: Will update weather data every ${pollInterval} minutes (${pollInterval * 60 * 1000} milliseconds)`);
+
 // function updateWeather
 // Function obtains the weather data from DarkSky and populates it into a replicant for display on the graphics pages
 function updateWeather() {
@@ -28,13 +29,15 @@ function updateWeather() {
 		if (!error && response.statusCode === 200) {
 			try {
 				weather.value = JSON.parse(body);
+				console.log('weather: New weather data received.');
 			} catch (e) {
+				console.log('weather: failed to retrieve weather data');
 				nodecg.log.error("Unable to load weather: ", e.stack);
 			}
 		}
 	});
 	// Request new data periodically
-	console.log(`weather: Will update weather data every ${pollInterval} minutes (${pollInterval * 60 *1000} milliseconds)`);
+
 	setTimeout(updateWeather,pollInterval * 60 * 1000);
 }
 

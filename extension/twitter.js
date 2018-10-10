@@ -11,7 +11,7 @@ var Twitter = require('twitter');
 var client = new Twitter({
 	consumer_key: nodecg.bundleConfig.twitter.APIKey,
 	consumer_secret: nodecg.bundleConfig.twitter.APISecret,
-	access_token_key: nodecg.bundleCoonfig.twitter.AccessToken,
+	access_token_key: nodecg.bundleConfig.twitter.AccessToken,
 	access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
   });
 

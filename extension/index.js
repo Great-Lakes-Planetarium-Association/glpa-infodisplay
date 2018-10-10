@@ -7,6 +7,6 @@ module.exports = function (nodecg) {
 
     nodecgApiContext.set(nodecg);
     require('./weather');
-    require('./twitter');
+    require('./twitter')(nodecg);
     require('./conference')(nodecg);
 };

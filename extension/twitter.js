@@ -1,142 +1,48 @@
 // This extension handles pulling in Tweets for display on the info page
 'use strict';
 
-// Load node packages
+// Load twemoji module to convert emoji strings to images
 const twemoji = require('twemoji');
-//const TwitterStream = require('twitter-stream-api');
-
-// Load NodeCG API
+// Connect to the NodeCG API because we all love replicants.
 const nodecg = require('./util/nodecg-api-context').get();
 
-// Setup necessary twitter components
-const confTwitterID = nodecg.bundleConfig.twitter.confTwitterID
-const confHashtag = nodecg.bundleConfig.twitter.confHashtag
-const confSearchTags = confHashtag + nodecg.bundleConfig.twitter.confSearchTags
-const twitterKeys = {
-    consumer_key : nodecg.bundleConfig.twitter.consumerKey,
-    consumer_secret : nodecg.bundleConfig.twitter.consumerSecret,
-    token : nodecg.bundleConfig.twitter.token,
-    token_secret : nodecg.bundleConfig.twitter.tokenSecret
-};
-
+// Configure a Twitter object
+var Twitter = require('twitter');
+var client = new Twitter({
+	consumer_key: nodecg.bundleConfig.twitter.APIKey,
+	consumer_secret: nodecg.bundleConfig.twitter.APISecret,
+	access_token_key: nodecg.bundleCoonfig.twitter.AccessToken,
+	access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
+  });
 
 // Set up a replicant to track tweets in
 var tweets = nodecg.Replicant('tweets', {defaultValue: []});
-var acceptedTweets = nodecg.Replicant('acceptedTweets', {defaultValue: []});
-let userStream;
 
-buildUserStream();
-
-// Close and re-open the twitter connection every 90 minutes
-setInterval(() => {
-	nodecg.log.info('[twitter] Restarting Twitter connection (done every 90 minutes).');
-	userStream.close();
-	buildUserStream();
-}, 90 * 60 * 1000);
-
-nodecg.listenFor('acceptTweet', tweet => {
-	acceptedTweets.value.push(tweet);
-	//nodecg.sendMessage('showTweet', tweet);
-});
-
-nodecg.listenFor('rejectTweet', removeTweetById);
-
-/**
- * Builds the stream. Called once every 90 minutes because sometimes the stream just dies silently.
- * @returns {undefined}
- */
-function buildUserStream() {
-/*	userStream = new TwitterStream(twitterKeys);
-
-	userStream.on('data', data => {
-		// We discard quoted statuses because we can't show them.
-		if (data.quoted_status) {
-            return;
-        }
-		
-
-		if (data.event) {
-			switch (data.event) {
-				case 'favorite':
-					if (data.source.id_str !== confTwitterID) {
-                        return;
-                    }
-
-					addTweet(data.target_object);
-					break;
-				case 'unfavorite':
-					if (data.source.id_str !== confTwitterID) {
-						return;
-					}
-
-					removeTweetById(data.target_object.id_str);
-					break;
-				default:
-				// do nothing
-			}
-		} else if (data.delete) {
-			removeTweetById(data.delete.status.id_str);
-		} else if (data.retweeted_status) {
-			if (data.user.id_str !== confTwitterID) {
-				return;
-			}
-
-			const retweetedStatus = data.retweeted_status;
-			retweetedStatus.gdqRetweetId = data.id_str;
-			addTweet(retweetedStatus);
-		} else if (data.text) {
-
-			// Filter out @ replies
-			if (data.text.charAt(0) === '@') {
-				return;
-			}
-
-			addTweet(data);
-		}
+// getTweetCollection
+// Returns a JSON object containing tweet entries in the Twitter collection
+function getTweetCollection(ColID)
+{
+	var params = {id: "custom-" + ColID};
+	client.get('collections/entries', params, function(error, tweets, response) {
+	  if (!error) {
+			nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
+			console.log(tweets);
+			return tweets;
+	  }
 	});
-
-	userStream.on('error', error => {
-		nodecg.log.error('[twitter]', error.stack);
-	});
-
-	userStream.on('connection success', () => {
-		nodecg.log.info('[twitter] Connection success.');
-	});
-
-	userStream.on('connection aborted', () => {
-		nodecg.log.warn('[twitter] Connection aborted!');
-	});
-
-	userStream.on('connection error network', error => {
-		nodecg.log.error('[twitter] Connection error network:', error.stack);
-	});
-
-	userStream.on('connection error stall', () => {
-		nodecg.log.error('[twitter] Connection error stall!');
-	});
-
-	userStream.on('connection error http', httpStatusCode => {
-		nodecg.log.error('[twitter] Connection error HTTP:', httpStatusCode);
-	});
-
-	userStream.on('connection rate limit', httpStatusCode => {
-		nodecg.log.error('[twitter] Connection rate limit:', httpStatusCode);
-	});
-
-	userStream.on('connection error unknown', error => {
-		nodecg.log.error('[twitter] Connection error unknown:', error.stack);
-		userStream.close();
-		userStream = new TwitterStream(twitterKeys);
-        userStream.stream('statuses/filter', 
-            {follow: confTwitterID,
-            track: confHashtag});
-	});
-
-    userStream.stream('statuses/filter', 
-        {follow: confTwitterID,
-		track: confHashtag});
-		*/
 }
+
+// updateTwitterReplicant
+// This function will obtain a list of tweets from Twitter, format them, and then replace the contents of the replicant.
+function updateTwitterReplicant()
+{
+	tweets = getTweetCollection(nodecg.bundleConfig.twitter.collectionID);
+	/* Need a foreach loop here */
+
+}
+
+updateTwitterReplicant();
+
 
 /**
  * Adds a Tweet to the queue.
@@ -144,10 +50,6 @@ function buildUserStream() {
  * @returns {undefined}
  */
 function addTweet(tweet) {
-	// Reject tweets with media.
-	//if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
-	//	return;
-	//}
 
 	// Don't add the tweet if we already have it
 	const isDupe = tweets.value.find(t => t.id_str === tweet.id_str);

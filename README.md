@@ -57,8 +57,9 @@ bower install
 
 ### Install the `glpa-infodisplay` bundle
 ```
-nodecg install bitbucket:glpa_av/glpa-infodisplay
+git clone https://bitbucket.org/glpa_av/glpa-infodisplay.git
 cd C:\NodeCG\bundles\glpa-infodisplay
+npm install
 bower install
 ```
 

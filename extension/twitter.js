@@ -16,7 +16,7 @@ modules.exports = function(NodeCG) {
 	});
 
 	// Set up a replicant to track tweets in
-	var tweets = nodecg.Replicant('tweets', {defaultValue: []});
+	var tweets = nodecg.Replicant('acceptedTweets', {defaultValue: []});
 
 	// getTweetCollection
 	// Returns a JSON object containing tweet entries in the Twitter collection
@@ -38,13 +38,16 @@ modules.exports = function(NodeCG) {
 	{
 		tweets = getTweetCollection(nodecg.bundleConfig.twitter.collectionID);
 		/* Need a foreach loop here */
-
 	}
 
 	updateTwitterReplicant();
 
 	/* Listen for a request to update Twitter */
-
+	nodecg.ListenFor('UpdateTwitter', () => 
+	{
+		console.log('received an Update Twitter message... so time to update!');
+		updateTwitterReplicant();
+	});
 
 
 	/**

@@ -1,4 +1,4 @@
-modules.exports = function(NodeCG) {
+module.exports = function(NodeCG) {
 
 	// This extension handles pulling in Tweets for display on the info page
 	'use strict';

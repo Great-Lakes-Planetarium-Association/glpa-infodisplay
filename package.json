@@ -35,5 +35,9 @@
     ]
   },
   "repository": "https://bitbucket.org/glpa_av/glpa-infodisplay",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "twemoji": "^11.0.1",
+    "twitter": "^1.7.1"
+  }
 }

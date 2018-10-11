@@ -16,31 +16,21 @@ module.exports = function(nodecg) {
 	});
 
 	// Set up a replicant to track tweets in
-	var tweets = nodecg.Replicant('acceptedTweets', {defaultValue: []});
+	var tweetsReplicant = nodecg.Replicant('tweetsReplicant', {defaultValue: []});
 
-	// getTweetCollection
-	// Returns a JSON object containing tweet entries in the Twitter collection
-	function getTweetCollection(ColID)
+	// updateTwitter
+	// Get the twitter feed and stuff into the replicant
+	function getTweetCollection()
 	{
-		var params = {id: "custom-" + ColID};
-		client.get('collections/entries', params, function(error, tweets, response) {
+		var params = {id: "custom-" + nodecg.bundleConfig.twitter.collectionID};
+		client.get('collections/entries', params, function(error, data, response) {
 		if (!error) {
 				nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
-				console.log(tweets);
-				return tweets;
+				tweetsReplicant.value = JSON.parse(data)
+				nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
 		});
 	}
-
-	// updateTwitterReplicant
-	// This function will obtain a list of tweets from Twitter, format them, and then replace the contents of the replicant.
-	function updateTwitterReplicant()
-	{
-		tweets = getTweetCollection(nodecg.bundleConfig.twitter.collectionID);
-		/* Need a foreach loop here */
-	}
-
-	updateTwitterReplicant();
 
 	/* Listen for a request to update Twitter */
 	nodecg.listenFor('UpdateTwitter', () => 
@@ -99,3 +89,5 @@ module.exports = function(nodecg) {
 		return didRemoveTweet;
 	}
 }
+
+nodecg.sendMessage('UpdateTwitter');

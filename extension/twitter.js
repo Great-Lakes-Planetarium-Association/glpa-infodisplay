@@ -23,10 +23,10 @@ module.exports = function (nodecg)
 			id: "custom-" + nodecg.bundleConfig.twitter.collectionID,
 			tweet_mode: 'extended'
 		};
-		client.get('collections/entries', params, function(error, data, response) {
+		client.get('collections/entries', params, function(error, twitterData, response) {
 		if (!error) {
-				nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
-				var tweets = data.objects.tweets;
+				/*nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
+				var tweets = twitterData.objects.tweets;
 				for (tweet in tweets)
 				{
 					tweet.full_text = twemoji.parse(tweet.full_text);
@@ -34,7 +34,7 @@ module.exports = function (nodecg)
 					tweet.full_text = tweet.full_text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 				}
 				tweetsReplicant.value = tweets;
-				nodecg.log.info('[twitter]: Posted JSON data into replicant');
+				nodecg.log.info('[twitter]: Posted JSON data into replicant');*/
 		}
 		});
 	}

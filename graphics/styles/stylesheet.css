@@ -82,9 +82,6 @@ body {
 td {
     padding: 10px;
 }
-.weather-temps {
-    line-height: 57px;
-}
 
 canvas.weather-icon {
     display: block;

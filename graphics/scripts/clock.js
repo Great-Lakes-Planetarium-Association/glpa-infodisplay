@@ -1,6 +1,6 @@
 // Get conference replicant
 conference = nodecg.Replicant("conference");
-nodecg.waitForReplicants(conference).then(() => {
+NodeCG.waitForReplicants(conference).then(() => {
     confTimezone = conference.value.timezone;
 
     // Function calculates the current date time information and sets the appropriate div.

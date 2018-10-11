@@ -13,7 +13,7 @@ module.exports = function (nodecg)
 	});
 
 	// Set up a replicant to track tweets in
-	var tweetsReplicant = nodecg.Replicant('tweetsReplicant', {defaultValue: []});
+	var tweetsReplicant = nodecg.Replicant('acceptedTweets', {defaultValue: []});
 
 	// updateTwitter
 	// Get the twitter feed and stuff into the replicant
@@ -23,11 +23,11 @@ module.exports = function (nodecg)
 		client.get('collections/entries', params, function(error, tweets, response) {
 		if (!error) {
 				nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
-				for (tweet of tweets.objects.tweets )
+				for (tweet of Iterate(tweets.objects.tweets) )
 				{
-					tweet.text = twemoji.parse(tweet.text);
-					tweet.text = tweet.text.replace(/\n/ig, ' ');
-					tweet.text = tweet.text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
+					tweet.full_text = twemoji.parse(tweet.full_text);
+					tweet.full_text = tweet.full_text.replace(/\n/ig, ' ');
+					tweet.full_text = tweet.full_text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 				}
 				tweetsReplicant.value = tweets.objects.tweets;
 				nodecg.log.info('[twitter]: Posted JSON data into replicant');

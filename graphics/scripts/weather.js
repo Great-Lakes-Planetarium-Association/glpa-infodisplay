@@ -3,7 +3,7 @@ weather = nodecg.Replicant('weather');
 conference = nodecg.Replicant('conference');
 
 // Create a new Skycons object
-var skycons = new Skycons({ "color": "white" });
+var skycons = new Skycons({ "color": "black" });
 skycons.play();
 
 // Watch for a change to the weather replicant

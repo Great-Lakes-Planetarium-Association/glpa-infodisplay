@@ -38,59 +38,10 @@ module.exports = function (nodecg)
 	/* Listen for a request to update Twitter */
 	nodecg.listenFor('UpdateTwitter', () => 
 	{
-		console.log('received an Update Twitter message... so time to update!');
+		nodecg.log.info('[twitter]: received an Update Twitter message... so time to update!');
 		updateTwitterFeed();
 	});
 
 
-	/**
-	 * Adds a Tweet to the queue.
-	 * @param {Object} tweet - The tweet to add.
-	 * @returns {undefined}
-	 */
-	function addTweet(tweet) {
-
-		// Don't add the tweet if we already have it
-		const isDupe = tweets.value.find(t => t.id_str === tweet.id_str);
-		if (isDupe) {
-			return;
-		}
-
-		// Parse emoji.
-		tweet.text = twemoji.parse(tweet.text);
-
-		// Replace newlines with spaces
-		tweet.text = tweet.text.replace(/\n/ig, ' ');
-
-		// Look for the conference hashtag in the text and replace it with a CSS class so we can style it
-		tweet.text = tweet.text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
-
-		// Add the tweet to the list
-		tweets.value.push(tweet);
-	}
-
-	/**
-	 * Removes a Tweet (by id) from the queue.
-	 * @param {String} idToRemove - The ID string of the Tweet to remove.
-	 * @returns {Object} - The removed tweet. "Undefined" if tweet not found.
-	 */
-	function removeTweetById(idToRemove) {
-		if (typeof idToRemove !== 'string') {
-			throw new Error(`[twitter] Must provide a string ID when removing a tweet. ID provided was: ${idToRemove}`);
-		}
-
-		let didRemoveTweet = false;
-		tweets.value.some((tweet, index) => {
-			if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
-				tweets.value.splice(index, 1);
-				didRemoveTweet = true;
-				return true;
-			}
-
-			return false;
-		});
-		return didRemoveTweet;
-	}
-
-	nodecg.sendMessage('UpdateTwitter');
+	updateTwitterFeed;
 }

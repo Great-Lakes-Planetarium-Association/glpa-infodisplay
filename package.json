@@ -12,13 +12,6 @@
     "compatibleRange": "~1.1.3",
     "dashboardPanels": [
       {
-        "name": "twitter",
-        "title": "Tweets to review",
-        "width": 4,
-        "file": "twitter.html",
-        "headerColor": "#9f9bbd"
-      },
-      {
         "name": "room-announcement",
         "title": "Room Announcement",
         "width": 4,

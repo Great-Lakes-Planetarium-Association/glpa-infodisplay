@@ -1,5 +1,5 @@
-module.exports = function(nodecg) {
-
+module.exports = function (nodecg)
+{
 	// Load twemoji module to convert emoji strings to images
 	const twemoji = require('twemoji');
 

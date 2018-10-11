@@ -29,7 +29,7 @@ module.exports = function (nodecg)
 					tweet.full_text = tweet.full_text.replace(/\n/ig, ' ');
 					tweet.full_text = tweet.full_text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 				}
-				tweetsReplicant.value = tweets.objects.tweets;
+				tweetsReplicant.value = tweets.objects.value;
 				nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
 		});

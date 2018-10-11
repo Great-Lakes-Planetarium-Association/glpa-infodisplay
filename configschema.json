@@ -52,6 +52,11 @@
                     "type": "string",
                     "description": "Access Token Secret -- Get this from https://developer.twitter.com -> Apps -> <app> -> Keys",
                     "default": null
+                },
+                "pollInterval": {
+                    "type": "string",
+                    "description": "How often to poll Twitter for updates to the collection list in seconds.",
+                    "default": "30"
                 }
             }
         },

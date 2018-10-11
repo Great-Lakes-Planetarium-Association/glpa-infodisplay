@@ -25,7 +25,7 @@ function tweetLoop() {
 }
 
 function showTweet(index) {
-    var newVal = acceptedTweets.value[index];
+    var newVal = acceptedTweets.value.index;
     var tweetTime = new Date(Date.parse(newVal.created_at.replace(/( \+)/, ' UTC$1')));  
     document.getElementById('screenname').innerHTML = "@" + newVal.user.screen_name + ' &mdash; ';
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});

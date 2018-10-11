@@ -3,6 +3,9 @@ module.exports = function (nodecg)
 	// Load twemoji module to convert emoji strings to images
 	const twemoji = require('twemoji');
 
+	// Load variables from bundle
+	const confHashtag = nodecg.bundleConfig.twitter.confHashtag;
+
 	// Configure a Twitter object
 	var Twitter = require('twitter');
 	var client = new Twitter({
@@ -13,39 +16,49 @@ module.exports = function (nodecg)
 	});
 
 	// Set up a replicant to track tweets in
-	var tweetsReplicant = nodecg.Replicant('acceptedTweets', {defaultValue: []});
+	var tweetsReplicant = nodecg.Replicant('tweets', {defaultValue: []});
 
 	// updateTwitter
 	// Get the twitter feed and stuff into the replicant
 	function updateTwitterFeed()
 	{
+		// Create a list of paramaters for the query
 		var params = {
 			id: "custom-" + nodecg.bundleConfig.twitter.collectionID,
 			tweet_mode: 'extended'
 		};
+		// Request data from Twitter
 		client.get('collections/entries', params, function(error, twitterData, response) {
-		if (!error) {
-				/*nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
-				var tweets = twitterData.objects.tweets;
-				for (tweet in tweets)
-				{
-					tweet.full_text = twemoji.parse(tweet.full_text);
-					tweet.full_text = tweet.full_text.replace(/\n/ig, ' ');
-					tweet.full_text = tweet.full_text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
-				}
-				tweetsReplicant.value = tweets;
-				nodecg.log.info('[twitter]: Posted JSON data into replicant');*/
+			if (!error) {
+				nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
+				Object.entries(twitterData.objects.tweets).forEach(([key, val]) => {
+					val.full_text = twemoji.parse(val.full_text);
+					val.full_text = val.full_text.replace(/\n/ig, ' ');
+					val.full_text = val.full_text.replace(RegExp(confHashtag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
+			});
+			// Send fixed up Twitter data to replicant
+			tweetsReplicant.value = twitterData.objects.tweets;
+			nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
 		});
 	}
 
+	// Loop to query Twitter
+	// This is separate from the main function incase we get an out-of-band request.
+	function twitterUpdateLoop()
+	{
+		updateTwitterFeed();
+		twitterUpdateLoop();
+		setTimeout(twitterUpdateLoop,nodecg.bundleConfig.twitter.pollInterval * 1000);
+	}
+
 	/* Listen for a request to update Twitter */
-	nodecg.listenFor('UpdateTwitter', () => 
+	nodecg.listenFor('UpdateTwitter', () =>
 	{
 		nodecg.log.info('[twitter]: received an Update Twitter message... so time to update!');
 		updateTwitterFeed();
 	});
 
-
-	updateTwitterFeed();
+	// Start the Twitter loop
+	twitterUpdateLoop;
 }

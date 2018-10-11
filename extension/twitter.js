@@ -86,5 +86,3 @@ module.exports = function (nodecg)
 		return didRemoveTweet;
 	}
 }
-
-nodecg.sendMessage('UpdateTwitter');

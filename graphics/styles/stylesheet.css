@@ -76,6 +76,7 @@ body {
     text-align: center;
     font-size: 14pt;
     color: #000000;
+    text-shadow: 0px 0px 10px white; /* outer glow */
 }
 td {
     padding: 10px;

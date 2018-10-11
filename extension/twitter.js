@@ -43,7 +43,7 @@ module.exports = function(nodecg) {
 	updateTwitterReplicant();
 
 	/* Listen for a request to update Twitter */
-	nodecg.ListenFor('UpdateTwitter', () => 
+	nodecg.listenFor('UpdateTwitter', () => 
 	{
 		console.log('received an Update Twitter message... so time to update!');
 		updateTwitterReplicant();

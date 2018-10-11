@@ -17,13 +17,19 @@ module.exports = function (nodecg)
 
 	// updateTwitter
 	// Get the twitter feed and stuff into the replicant
-	function getTweetCollection()
+	function updateTwitterFeed()
 	{
 		var params = {id: "custom-" + nodecg.bundleConfig.twitter.collectionID};
-		client.get('collections/entries', params, function(error, data, response) {
+		client.get('collections/entries', params, function(error, tweets, response) {
 		if (!error) {
 				nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
-				tweetsReplicant.value = JSON.parse(data)
+				for (tweet of tweets.objects.tweets )
+				{
+					tweet.text = twemoji.parse(tweet.text);
+					tweet.text = tweet.text.replace(/\n/ig, ' ');
+					tweet.text = tweet.text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
+				}
+				tweetsReplicant.value = tweets.objects.tweets;
 				nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
 		});
@@ -33,7 +39,7 @@ module.exports = function (nodecg)
 	nodecg.listenFor('UpdateTwitter', () => 
 	{
 		console.log('received an Update Twitter message... so time to update!');
-		updateTwitterReplicant();
+		updateTwitterFeed();
 	});
 
 
@@ -85,4 +91,6 @@ module.exports = function (nodecg)
 		});
 		return didRemoveTweet;
 	}
+
+	nodecg.sendMessage('UpdateTwitter');
 }

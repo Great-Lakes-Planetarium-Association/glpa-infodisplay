@@ -19,17 +19,21 @@ module.exports = function (nodecg)
 	// Get the twitter feed and stuff into the replicant
 	function updateTwitterFeed()
 	{
-		var params = {id: "custom-" + nodecg.bundleConfig.twitter.collectionID};
-		client.get('collections/entries', params, function(error, tweets, response) {
+		var params = {
+			id: "custom-" + nodecg.bundleConfig.twitter.collectionID,
+			tweet_mode: 'extended'
+		};
+		client.get('collections/entries', params, function(error, data, response) {
 		if (!error) {
 				nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
-				for (tweet of Iterate(tweets.objects.tweets) )
+				var tweets = data.objects.tweets;
+				for (tweet in tweets)
 				{
 					tweet.full_text = twemoji.parse(tweet.full_text);
 					tweet.full_text = tweet.full_text.replace(/\n/ig, ' ');
 					tweet.full_text = tweet.full_text.replace(RegExp(confHashTag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 				}
-				tweetsReplicant.value = tweets.objects.value;
+				tweetsReplicant.value = tweets;
 				nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
 		});
@@ -43,5 +47,5 @@ module.exports = function (nodecg)
 	});
 
 
-	updateTwitterFeed;
+	updateTwitterFeed();
 }

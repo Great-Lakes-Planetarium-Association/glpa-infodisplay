@@ -22,14 +22,14 @@
         ready() {
            
             // Get the room number from the URL
-            var stream = Number(new URLSearchParams(window.location.search).get('stream'));
-            if (!stream) {
-                this.globalAnnouncement = "Please provide a ?stream= parameter.";
+            var cartID = Number(new URLSearchParams(window.location.search).get('cartID'));
+            if (!cartID) {
+                this.globalAnnouncement = "Please provide a ?cartID= parameter.";
                 return;
             }
 
             announceRoom1.on('change', newVal => {
-                if (stream == 1){
+                if (cartID == 1){
                     if (newVal) {
                         this.$.announcement = newVal;
                         this.$.roomAnnouncementDiv.style.display="block";
@@ -39,7 +39,7 @@
                 }
             });
             announceRoom2.on('change', newVal => {
-                if (stream == 2){
+                if (cartID == 2){
                     if (newVal) {
                         this.$.roomAnnouncementDiv.style.display="block";
                         this.announcement = newVal;
@@ -49,7 +49,7 @@
                 }
             })
             announceRoom3.on('change', newVal => {
-                if (stream == 3){
+                if (cartID == 3){
                     if (newVal) {
                         this.$.roomAnnouncementDiv.style.display="block";
                         this.announcement = newVal;

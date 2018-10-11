@@ -47,11 +47,10 @@ body {
 }
 
 .main {
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.5);
     height: 100%;
     padding-top: 10px;
     height: 450px;
-    visibility: hidden;
 }
 
 .twitter {
@@ -59,9 +58,8 @@ body {
     width: 100%;
     margin-top: 20px;
     display: flex;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.5);
     color: #fff;
-    visibility: hidden;
 }
 
 #header-title {

@@ -1,8 +1,5 @@
 module.exports = function(nodecg) {
 
-	// This extension handles pulling in Tweets for display on the info page
-	'use strict';
-
 	// Load twemoji module to convert emoji strings to images
 	const twemoji = require('twemoji');
 

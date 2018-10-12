@@ -25,8 +25,9 @@ function setClock()
 {
     let timezone = conference.value.timezone;
     let now = new Date();
-    document.getElementById("current-time").innerHTML = `
-    <div class="clock-date">${now.toLocaleString("en-us", { "timeZone": timezone, "weekday": "long", "year": "numeric", "month": "numeric", "day": "numeric" })}</div>
-    <div class="clock-time">${now.toLocaleString("en-us", { "timeZone": timezone, "hour": "numeric", "minute": "2-digit","second": "2-digit"})}</div>`;
-    setTimeout(setClock(), 500);
+    console.log('timezone in setClock is now ' . timezone)
+    //document.getElementById("current-time").innerHTML = `
+    //<div class="clock-date">${now.toLocaleString("en-us", { "timeZone": timezone, "weekday": "long", "year": "numeric", "month": "numeric", "day": "numeric" })}</div>
+    //<div class="clock-time">${now.toLocaleString("en-us", { "timeZone": timezone, "hour": "numeric", "minute": "2-digit","second": "2-digit"})}</div>`;
+    setTimeout(setClock(), 5000);
 }

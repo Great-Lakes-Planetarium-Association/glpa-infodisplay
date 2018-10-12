@@ -63,7 +63,7 @@ function showTweet()
     if (tweet.entities.media) {
         document.getElementById('tweet-media').src = tweet.entities.media[0].media_url;
     } else {
-        document.getElementById('tweet-media').src = null;
+        document.getElementById('tweet-media').src = "";
     }
     textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
     textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});

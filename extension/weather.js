@@ -11,7 +11,7 @@ module.exports = function (nodecg)
 		pollInterval = 5;
 	}
 
-	nodecg.log.info(`weather: Will update weather data every ${pollInterval} minutes (${pollInterval * 60 * 1000} milliseconds)`);
+	nodecg.log.info(`[weather] Will update weather data every ${pollInterval} minutes (${pollInterval * 60 * 1000} milliseconds)`);
 
 	// Obtain the weather replicant
 	var weather = nodecg.Replicant('weather');
@@ -29,9 +29,9 @@ module.exports = function (nodecg)
 			{
 				try {
 					weather.value = JSON.parse(body);
-					nodecg.log.info('weather: New weather data received.');
+					nodecg.log.info('[weather] New weather data received.');
 				} catch (e) {
-					nodecg.log.error("Unable to load weather: ", e.stack);
+					nodecg.log.error("[weather] Unable to load weather: ", e.stack);
 				}
 			}
 		});
@@ -39,13 +39,13 @@ module.exports = function (nodecg)
 
 	nodecg.listenFor('UpdateWeather', () =>
 	{
-		nodecg.log.info('Manual weather update request triggered.');
+		nodecg.log.info('[weather] Manual weather update request triggered.');
 		updateWeather();
 	});
 
 	// Create a loop to check weather periodically
 	function weatherUpdateLoop() {
-		nodecg.log.info('Beginning weather update loop.');
+		nodecg.log.info('[weather] Beginning weather update loop.');
 		updateWeather();
 		setTimeout(weatherUpdateLoop,pollInterval * 10000);
 

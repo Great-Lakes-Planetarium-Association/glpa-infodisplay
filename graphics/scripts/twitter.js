@@ -1,18 +1,50 @@
 // Script handles updating the appropriate twitter divs and shows tweets in the queue
 
-var acceptedTweets = nodecg.Replicant('acceptedTweets');
+var tweets = nodecg.Replicant('tweets');
+// Tweet ID list is the list tweet IDs (object keys) we currently know of
+var tweetIDList = [];
+var currentTweetID = null;
+var nextTweetID = null;
+var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
+
+// Wait for tweet object to load
+NodeCG.waitForReplicants(tweets).then(() =>
+{
+    /*
+    let totalKeys = Object.keys(tweets.value).length;
+
+    if (totalKeys == 0) 
+    {
+        console.log('twitter: Replicant loaded; no tweets to display.');
+    }
+    else
+    {
+        console.log('twitter: Replicant loaded; tweets to display.');
+        currentTweetID = Object.keys(tweets.value)[0];
+        showTweet()
+    }*/
+});
+
 var tweetTimer;
 var tweetIndex = 0;
-// Only start looping when we're loaded -- if we reload, then start the loop again.
-acceptedTweets.on('change', function() {
-    if(acceptedTweets.value.length > 0) {
-        tweetLoop();
-    }
+
+tweets.on('change', newval =>
+{
+    // When we get a replicant update, need to determine the nextTweetID incase of a change.
+    console.log('twitter: received an update to the tweet replicant');
+    console.log(newval);
+    
 })
 
+/*function showTweet()
+{
+    let tweet = tweets.value[Object.key]
+}*/
+
+/*
 function tweetLoop() {
     clearInterval(tweetTimer);
-    var arrayLength = acceptedTweets.value.length;
+    newvaluesength = tweets.value.length;
     showTweet(tweetIndex);
     textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
     textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
@@ -25,7 +57,7 @@ function tweetLoop() {
 }
 
 function showTweet(index) {
-    var newVal = acceptedTweets.value.index;
+  newvaluesal = tweets.value[index];
     var tweetTime = new Date(Date.parse(newVal.created_at.replace(/( \+)/, ' UTC$1')));  
     document.getElementById('screenname').innerHTML = "@" + newVal.user.screen_name + ' &mdash; ';
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
@@ -40,4 +72,4 @@ function showTweet(index) {
     }
     
 
-}
+}*/

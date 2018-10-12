@@ -15,8 +15,6 @@ module.exports = function (nodecg)
 		access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
 	});
 
-	// Create a variable to store our tweet timeline in
-	var tweetTimeline = [];
 	// Set up a replicant to track tweets in
 	var tweetsReplicant = nodecg.Replicant('tweets');
 	var tweetTimelineReplicant = nodecg.Replicant('tweetTimeline');
@@ -25,6 +23,8 @@ module.exports = function (nodecg)
 	// Get the twitter feed and stuff into the replicant
 	function updateTwitterFeed()
 	{
+		// Clear out our local timeline
+		let tweetTimeLine = [];
 		// Create a list of paramaters for the query
 		var params = {
 			id: "custom-" + nodecg.bundleConfig.twitter.collectionID,

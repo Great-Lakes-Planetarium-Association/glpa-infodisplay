@@ -35,11 +35,22 @@ module.exports = function (nodecg)
 				}
 			}
 		});
-		// Request new data periodically
+	}
 
-		setTimeout(updateWeather(),pollInterval * 60 * 1000);
+	nodecg.listenFor('UpdateWeather', () =>
+	{
+		nodecg.log.info('Manual weather update request triggered.');
+		updateWeather();
+	});
+
+	// Create a loop to check weather periodically
+	function weatherUpdateLoop() {
+		nodecg.log.info('Beginning weather update loop.');
+		updateWeather();
+		setTimeout(weatherUpdateLoop,pollInterval * 10000);
+
 	}
 
 	// Start the loop
-	updateWeather();
+	weatherUpdateLoop();
 }

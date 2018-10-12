@@ -61,7 +61,7 @@
                 "displayTime": {
                     "type": "string",
                     "description": "How long to display a tweet on the screen in seconds.",
-                    "default": "10",
+                    "default": "10"
                 }
             }
         },

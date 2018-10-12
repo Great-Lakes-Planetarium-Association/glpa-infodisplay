@@ -2,7 +2,7 @@
 
 var tweetReplicant = nodecg.Replicant('tweets');
 // Tweet ID list is the list tweet IDs (object keys) we currently know of
-var tweetTimeline = [];
+var tweetTimeline = nodecg.Replicant('tweetTimeline');
 var currentTimelineID;
 var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
 
@@ -33,10 +33,6 @@ tweetReplicant.on('change', newval =>
 {
     // When we get a replicant update, need to determine the nextTweetID incase of a change.
     console.log('twitter: received an update to the tweet replicant');
-    
-    // Get the current timeline order
-    tweetTimeline = Object.keys(tweetReplicant.values.response);
-    
 })
 
 function showTweet()

@@ -16,7 +16,8 @@ module.exports = function (nodecg)
 	});
 
 	// Set up a replicant to track tweets in
-	var tweetsReplicant = nodecg.Replicant('tweets', {defaultValue: []});
+	var tweetsReplicant = nodecg.Replicant('tweets');
+	var tweetTimelineReplicant = nodecg.replicant('tweetTimeline');
 
 	// updateTwitter
 	// Get the twitter feed and stuff into the replicant
@@ -36,8 +37,10 @@ module.exports = function (nodecg)
 					val.full_text = val.full_text.replace(/\n/ig, ' ');
 					val.full_text = val.full_text.replace(RegExp(confHashtag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 			});
+			// Create an array of all the tweet IDs in order
+			tweetTimelineReplicant = Object.keys(twitterData.response);
 			// Send fixed up Twitter data to replicant
-			tweetsReplicant.value = twitterData.objects;
+			tweetsReplicant.value = twitterData.objects.tweets;
 			nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
 		});

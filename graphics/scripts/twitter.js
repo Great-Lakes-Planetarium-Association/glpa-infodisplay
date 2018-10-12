@@ -51,8 +51,8 @@ function showTweet()
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
     document.getElementById('tweet-text').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
     document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
-    textFit(document.getElementById('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
-    textFit(document.getElementById('tweet-metadata'), {maxFontSize: 18});
+    textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
+    textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
     if (tweet.entities.media) {
         document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + tweet.entities.media[0].media_url + ') no-repeat top left';
         document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';

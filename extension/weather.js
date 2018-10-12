@@ -36,7 +36,7 @@ module.exports = function (nodecg)
 		});
 		// Request new data periodically
 
-		setTimeout(updateWeather,pollInterval * 60 * 1000);
+		setTimeout(updateWeather(),pollInterval * 60 * 1000);
 	}
 
 	// Start the loop

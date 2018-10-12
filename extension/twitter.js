@@ -47,7 +47,7 @@ module.exports = function (nodecg)
 	// This is separate from the main function incase we get an out-of-band request.
 	function twitterUpdateLoop()
 	{
-		updateTwitterFeed;
+		updateTwitterFeed();
 		setTimeout(twitterUpdateLoop,nodecg.bundleConfig.twitter.pollInterval * 1000);
 	}
 
@@ -59,5 +59,5 @@ module.exports = function (nodecg)
 	});
 
 	// Start the Twitter loop
-	twitterUpdateLoop;
+	twitterUpdateLoop();
 }

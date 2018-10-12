@@ -29,7 +29,7 @@ function showTweet()
 {
     let nextTimelineID = 0
     // If we're at the end of the timeline, go to first element
-    if ((currentTimelineID+1) >= tweetTimeline.length) {
+    if ((currentTimelineID+1) >= tweetOrder.length) {
         nextTimelineID = 0;
     }
     else

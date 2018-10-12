@@ -11,7 +11,7 @@ NodeCG.waitForReplicants(tweetReplicant).then(() =>
 {
     // Build our tweet order
     tweetOrder = [];
-    Object.entries(tweetReplicant.response.timeline).forEach(([key,val]) =>
+    Object.entries(tweetReplicant.value.response.timeline).forEach(([key,val]) =>
     {
         tweetOrder.push(val.tweet.id);
     });

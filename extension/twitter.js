@@ -40,7 +40,7 @@ module.exports = function (nodecg)
 					val.full_text = val.full_text.replace(RegExp(confHashtag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 			});
 			// Create an array of all the tweet IDs in order
-			let timeline = twitterdata.response.timeline;
+			let timeline = twitterData.response.timeline;
 			for (tweetID in timeline.tweet.id)
 			{
 				tweetTimeline.push(tweetId)

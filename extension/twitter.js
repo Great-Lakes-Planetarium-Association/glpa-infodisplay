@@ -15,6 +15,8 @@ module.exports = function (nodecg)
 		access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
 	});
 
+	// Create a variable to store our tweet timeline in
+	var tweetTimeline = [];
 	// Set up a replicant to track tweets in
 	var tweetsReplicant = nodecg.Replicant('tweets');
 	var tweetTimelineReplicant = nodecg.Replicant('tweetTimeline');
@@ -38,7 +40,11 @@ module.exports = function (nodecg)
 					val.full_text = val.full_text.replace(RegExp(confHashtag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 			});
 			// Create an array of all the tweet IDs in order
-			tweetTimelineReplicant = Object.keys(twitterData.response);
+			for (tweetID in twitterData.response.timeline.tweet.id)
+			{
+				tweetTimeline.push(tweetId)
+			}
+			tweetTimelineReplicant = tweetTimeline;
 			// Send fixed up Twitter data to replicant
 			tweetsReplicant.value = twitterData.objects.tweets;
 			nodecg.log.info('[twitter]: Posted JSON data into replicant');

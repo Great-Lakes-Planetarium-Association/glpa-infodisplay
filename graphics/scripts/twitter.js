@@ -39,11 +39,8 @@ function showTweet()
     // Using the index position, look in the tweet time line for the tweet id.
     // Pass the tweet ID from the timeline into the tweets list to get the tweet
     let tweetID = tweetOrder[nextTimelineID];
-    console.log("tweetID is: " + tweetID);
     let tweet = tweetReplicant.value.objects.tweets[tweetID];
-    console.log("tweet is: " + tweet);
     let user = tweetReplicant.value.objects.users[tweet.user.id];
-    console.log("user is: " + user);
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
 
 

@@ -1,6 +1,6 @@
 // Create document replicants
 const conference = nodecg.Replicant('conference');
-var timezone;
+
 // Listen for a broadcast requesting a page reload.  If so, reload the page.
 nodecg.listenFor("ReloadBrowser", message => {
     // Force a reload of the page from the server
@@ -17,7 +17,6 @@ conference.on('change', newval => {
 // Call the setClock functio after conference replicant is loaded
 NodeCG.waitForReplicants(conference).then(() =>
 {
-    timezone = conference.value.timezone;
     setClock();
 });
 
@@ -25,7 +24,7 @@ NodeCG.waitForReplicants(conference).then(() =>
 function setClock()
 {
     let now = new Date();
-    console.log('timezone in setClock is now ' . timezone)
+    console.log('timezone in setClock is now ' . conference.value.timezone)
     //document.getElementById("current-time").innerHTML = `
     //<div class="clock-date">${now.toLocaleString("en-us", { "timeZone": timezone, "weekday": "long", "year": "numeric", "month": "numeric", "day": "numeric" })}</div>
     //<div class="clock-time">${now.toLocaleString("en-us", { "timeZone": timezone, "hour": "numeric", "minute": "2-digit","second": "2-digit"})}</div>`;

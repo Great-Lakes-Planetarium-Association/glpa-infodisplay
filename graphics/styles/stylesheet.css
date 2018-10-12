@@ -164,6 +164,8 @@ div.tweet-media {
 img#tweet-media {
     height: 130px;
     width: auto;
+    float: right;
+    display: block;
 }
 
 #hashtag {

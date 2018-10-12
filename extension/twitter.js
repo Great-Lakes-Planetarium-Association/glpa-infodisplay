@@ -17,7 +17,7 @@ module.exports = function (nodecg)
 
 	// Set up a replicant to track tweets in
 	var tweetsReplicant = nodecg.Replicant('tweets');
-	var tweetTimelineReplicant = nodecg.replicant('tweetTimeline');
+	var tweetTimelineReplicant = nodecg.Replicant('tweetTimeline');
 
 	// updateTwitter
 	// Get the twitter feed and stuff into the replicant

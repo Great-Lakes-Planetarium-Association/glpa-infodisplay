@@ -37,7 +37,7 @@ module.exports = function (nodecg)
 					val.full_text = val.full_text.replace(RegExp(confHashtag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 			});
 			// Send fixed up Twitter data to replicant
-			tweetsReplicant.value = twitterData.objects.tweets;
+			tweetsReplicant.value = twitterData.objects;
 			nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
 		});

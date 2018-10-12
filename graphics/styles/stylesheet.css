@@ -122,10 +122,11 @@ div.avatar {
 }
 img#avatar {
     width: auto;
-    height: 80px;
+    height: 100px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 10px;
 }
 
 .twitter-content{

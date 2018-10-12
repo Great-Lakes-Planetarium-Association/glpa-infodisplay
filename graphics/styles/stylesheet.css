@@ -137,7 +137,10 @@ img#avatar {
 
 
 }
-
+.tweet {
+    width: 600px;
+    
+}
 .tweet-text {
     /*padding-top: 15px;*/
     /*font-size: 22px;*/

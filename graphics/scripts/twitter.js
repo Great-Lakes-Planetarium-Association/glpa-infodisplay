@@ -61,10 +61,8 @@ function showTweet()
         document.getElementsByClassName('twitter-content')[0].style.background = "";
     }*/
     if (tweet.entities.media) {
-        document.getElementsByClassName('tweet')[0].style.width='550px';
         document.getElementById('tweet-media').src = tweet.entities.media[0].media_url;
     } else {
-        document.getElementsByClassName('tweet')[0].style.width='750px';
         document.getElementById('tweet-media').src = "";
     }
     textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});

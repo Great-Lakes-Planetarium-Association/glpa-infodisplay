@@ -157,13 +157,13 @@ img#avatar {
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 1);
 }
 div.tweet-media {
-    width: auto;
+    width: 200px;
     height: 100%;
     float: right;
 }
 img#tweet-media {
-    height: 130px;
-    width: auto;
+    max-width:100%;
+    max-height:100%;
     float: right;
     display: block;
 }

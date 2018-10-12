@@ -42,9 +42,6 @@ function showTweet()
     let tweet = tweetReplicant.value.objects.tweets[tweetID];
     let user = tweetReplicant.value.objects.users[tweet.user.id_str];
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
-    console.log("Loading up tweet " + tweetID);
-    console.log("user is: " + user);
-
 
     document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
     // Need to add a timezone parameter -- look at weather.

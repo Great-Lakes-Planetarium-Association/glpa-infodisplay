@@ -40,8 +40,10 @@ function showTweet()
     // Pass the tweet ID from the timeline into the tweets list to get the tweet
     let tweetID = tweetOrder[nextTimelineID];
     let tweet = tweetReplicant.value.objects.tweets[tweetID];
-    let user = tweetReplicant.value.objects.users[tweet.user.id];
+    let user = tweetReplicant.value.objects.users[tweet.user.id_str];
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
+    console.log("Loading up tweet " + tweetID);
+    console.log("user is: " + user);
 
 
     document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
@@ -50,13 +52,6 @@ function showTweet()
     document.getElementById('tweet-text').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
     document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
 
-    /*if (tweet.entities.media) {
-        document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + tweet.entities.media[0].media_url + ') no-repeat top left';
-        document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';
-        document.getElementsByClassName('twitter-content')[0].style.backgroundPosition = 'center';
-    } else {
-        document.getElementsByClassName('twitter-content')[0].style.background = "";
-    }*/
     if (tweet.entities.media) {
         document.getElementById('tweet-media').src = tweet.entities.media[0].media_url;
     } else {

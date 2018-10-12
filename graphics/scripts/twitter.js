@@ -50,12 +50,17 @@ function showTweet()
     document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
     textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
     textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
-    if (tweet.entities.media) {
+    /*if (tweet.entities.media) {
         document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + tweet.entities.media[0].media_url + ') no-repeat top left';
         document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';
         document.getElementsByClassName('twitter-content')[0].style.backgroundPosition = 'center';
     } else {
         document.getElementsByClassName('twitter-content')[0].style.background = "";
+    }*/
+    if (tweet.entities.media) {
+        document.getElementById('tweet-media').src = tweet.entities.media[0].media_url;
+    } else {
+        document.getElementById('tweet-media').src = null;
     }
 
     // Set the nextTimeLineID to the currentTimelineID

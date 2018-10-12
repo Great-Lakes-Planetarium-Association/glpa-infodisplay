@@ -44,7 +44,7 @@ module.exports = function (nodecg)
 			{
 				tweetTimeline.push(val.tweet.id);
 			})
-			tweetTimelineReplicant = tweetTimeline;
+			tweetTimelineReplicant.value = tweetTimeline;
 			
 			// Send fixed up Twitter data to replicant
 			tweetsReplicant.value = twitterData.objects.tweets;

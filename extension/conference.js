@@ -4,7 +4,7 @@ module.exports = function (nodecg) {
 	// Load the request module
 	var request = require('request');
 
-	console.log(`conference: Will update conference data every ${nodecg.bundleConfig.conference.pollInterval} seconds.`);
+	nodecg.log.info(`[conference] Will update conference data every ${nodecg.bundleConfig.conference.pollInterval} seconds.`);
 
 	// Function obtains the conference data and populates it into a replicant for display on the graphics pages
 	function updateConference() {
@@ -14,10 +14,10 @@ module.exports = function (nodecg) {
 			if (!error && response.statusCode === 200) {
 				try {
 					conference.value = JSON.parse(body);
-					console.log('conference: Conference data updated successfully.');
+					nodecg.log.info('[conference] Conference data updated successfully.');
 				} catch (e) {
-					console.log('conference: Conference data failed to update.');
-					nodecg.log.error("Unable to load conference data: ", e.stack);
+					nodecg.log.info('[conference] Conference data failed to update.');
+					nodecg.log.error("[conference] Unable to load conference data: ", e.stack);
 				}
 			}
 		});

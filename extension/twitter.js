@@ -24,7 +24,7 @@ module.exports = function (nodecg)
 	function updateTwitterFeed()
 	{
 		// Clear out our local timeline
-		let tweetTimeLine = [];
+		let tweetTimeline = [];
 		// Create a list of paramaters for the query
 		var params = {
 			id: "custom-" + nodecg.bundleConfig.twitter.collectionID,
@@ -40,12 +40,12 @@ module.exports = function (nodecg)
 					val.full_text = val.full_text.replace(RegExp(confHashtag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
 			});
 			// Create an array of all the tweet IDs in order
-			let timeline = twitterData.response.timeline;
-			for (tweetID in timeline.tweet.id)
+			Object.entries(twitterData.response.timeline).forEach(([key,val]) =>
 			{
-				tweetTimeline.push(tweetId)
-			}
+				tweetTimeline.push(val.tweet.id);
+			})
 			tweetTimelineReplicant = tweetTimeline;
+			
 			// Send fixed up Twitter data to replicant
 			tweetsReplicant.value = twitterData.objects.tweets;
 			nodecg.log.info('[twitter]: Posted JSON data into replicant');

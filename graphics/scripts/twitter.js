@@ -43,7 +43,7 @@ function showTweet()
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
 
     // fade out current tweet
-    document.getElementById('tweet').style.opacity = '0';
+    //document.getElementById('tweet').style.opacity = '0';
     document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
     // Need to add a timezone parameter -- look at weather.
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
@@ -58,7 +58,7 @@ function showTweet()
     } else {
         document.getElementsByClassName('twitter-content')[0].style.background = "";
     }
-    document.getElementById('tweet').opacity = '1';
+    //document.getElementById('tweet').opacity = '1';
 
     // Set the nextTimeLineID to the currentTimelineID
     currentTimelineID = nextTimelineID;

@@ -4,7 +4,7 @@ module.exports = function (nodecg)
 	var darkskyAPI = nodecg.bundleConfig.weather.APIURL + nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location + '/?exclude=flags,alerts,hourly,minutely';
 
 	// Specify how often to obtain weather data
-	let weatherPoll = nodecg.bundleConfig.weather.interval;
+	var weatherPoll = nodecg.bundleConfig.weather.interval;
 
 	// Check we're not refreshing faster than every 5 minutes; free API won't allow it.
 	if (weatherPoll < 5) {

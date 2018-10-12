@@ -28,9 +28,8 @@ module.exports = function (nodecg)
 			if (!error) {
 				try {
 					weather.value = JSON.parse(body);
-					console.log('weather: New weather data received.');
+					nodecg.log.info('weather: New weather data received.');
 				} catch (e) {
-					console.log('weather: failed to retrieve weather data');
 					nodecg.log.error("Unable to load weather: ", e.stack);
 				}
 			}

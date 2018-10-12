@@ -43,6 +43,8 @@ function showTweet()
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
 
     // fade out current tweet
+    // fade up is for development work.
+    document.getElementById('tweet').style.opacity = '1';
     //document.getElementById('tweet').style.opacity = '0';
     document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
     // Need to add a timezone parameter -- look at weather.

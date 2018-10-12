@@ -29,7 +29,7 @@ NodeCG.waitForReplicants(tweetReplicant).then(() =>
 var tweetTimer;
 var tweetIndex = 0;
 
-tweets.on('change', newval =>
+tweetReplicant.on('change', newval =>
 {
     // When we get a replicant update, need to determine the nextTweetID incase of a change.
     console.log('twitter: received an update to the tweet replicant');

@@ -168,8 +168,8 @@ img#tweet-media {
     display: block;
 }
 
-#hashtag {
-    font-size: bigger;
+.hashtag {
+    font-size: larger;
 }
 
 img#tweet-img {

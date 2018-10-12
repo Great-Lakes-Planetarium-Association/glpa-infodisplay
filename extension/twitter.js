@@ -36,7 +36,7 @@ module.exports = function (nodecg)
 				Object.entries(twitterData.objects.tweets).forEach(([key, val]) => {
 					val.full_text = twemoji.parse(val.full_text);
 					val.full_text = val.full_text.replace(/\n/ig, ' ');
-					val.full_text = val.full_text.replace(RegExp(confHashtag,"g"), '<span class="hashtag">'+confHashtag+'</span>');
+					val.full_text = val.full_text.replace(RegExp(confHashtag,"ig"), '<span class="hashtag">'+confHashtag+'</span>');
 			});
 			
 			// Send fixed up Twitter data to replicant

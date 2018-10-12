@@ -23,13 +23,14 @@ tweetReplicant.on('change', newval =>
 
 function showTweet()
 {
+    let nextTimelineID = 0
     // If we're at the end of the timeline, go to first element
     if ((currentTimelineID+1) >= tweetTimeline.length) {
-        let nextTimelineID = 0;
+        nextTimelineID = 0;
     }
     else
     {
-        let nextTimelineID = currentTimelineID + 1;
+        nextTimelineID = currentTimelineID + 1;
     }
     // Using the index position, look in the tweet time line for the tweet id.
     // Pass the tweet ID from the timeline into the tweets list to get the tweet

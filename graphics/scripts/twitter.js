@@ -1,6 +1,6 @@
 // Script handles updating the appropriate twitter divs and shows tweets in the queue
 
-var tweets = nodecg.Replicant('tweets');
+var tweetReplicant = nodecg.Replicant('tweets');
 // Tweet ID list is the list tweet IDs (object keys) we currently know of
 var tweetIDList = [];
 var currentTweetID = null;
@@ -10,6 +10,7 @@ var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
 // Wait for tweet object to load
 NodeCG.waitForReplicants(tweets).then(() =>
 {
+    // G
     /*
     let totalKeys = Object.keys(tweets.value).length;
 
@@ -32,7 +33,9 @@ tweets.on('change', newval =>
 {
     // When we get a replicant update, need to determine the nextTweetID incase of a change.
     console.log('twitter: received an update to the tweet replicant');
-    console.log(newval);
+    
+    // Get the current timeline order
+    var tweetTimeline = Objects.keys(tweetReplicant.values.response);
     
 })
 

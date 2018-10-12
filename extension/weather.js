@@ -1,10 +1,10 @@
 module.exports = function (nodecg)
 {
 	// Load the Darksky API
-	const darkskyAPI = nodecg.bundleConfig.weather.APIURL + nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location + '/?exclude=flags,alerts,hourly,minutely';
+	var darkskyAPI = nodecg.bundleConfig.weather.APIURL + nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location + '/?exclude=flags,alerts,hourly,minutely';
 
 	// Specify how often to obtain weather data
-	let pollInterval = nodecg.bundleConfig.weather.interval;
+	var pollInterval = nodecg.bundleConfig.weather.interval;
 
 	// Check we're not refreshing faster than every 5 minutes; free API won't allow it.
 	if (pollInterval < 5) {
@@ -14,7 +14,7 @@ module.exports = function (nodecg)
 	nodecg.log.info(`weather: Will update weather data every ${pollInterval} minutes (${pollInterval * 60 * 1000} milliseconds)`);
 
 	// Obtain the weather replicant
-	const weather = nodecg.Replicant('weather');
+	var weather = nodecg.Replicant('weather');
 
 	// Load the request module
 	var request = require('request');

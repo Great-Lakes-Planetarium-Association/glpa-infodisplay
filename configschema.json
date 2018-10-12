@@ -57,6 +57,11 @@
                     "type": "string",
                     "description": "How often to poll Twitter for updates to the collection list in seconds.",
                     "default": "30"
+                },
+                "displayTime": {
+                    "type": "string",
+                    "description": "How long to display a tweet on the screen in seconds.",
+                    "default": "10",
                 }
             }
         },

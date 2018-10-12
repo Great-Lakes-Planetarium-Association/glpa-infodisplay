@@ -34,7 +34,7 @@ function showTweet()
     }
     // Using the index position, look in the tweet time line for the tweet id.
     // Pass the tweet ID from the timeline into the tweets list to get the tweet
-    let tweet = tweetReplicant.value.tweets[tweetTimeline[nextTimelineID]];
+    let tweet = tweetReplicant.value[tweetTimeline[nextTimelineID]];
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
     document.getElementById('screenname').innerHTML = "@" + tweet.user.screen_name + ' &mdash; ';
     // Need to add a timezone parameter -- look at weather.

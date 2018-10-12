@@ -11,8 +11,10 @@ module.exports = function (nodecg)
 		weatherPoll = 5;
 	}
 
-	nodecg.log.info(`[weather] Will update weather data every ${weatherPoll} minutes (${weatherPoll * 60 * 1000} milliseconds)`);
-	console.log(`[weather] Will update weather data every ${weatherPoll} minutes (${weatherPoll * 60 * 1000} milliseconds)`);
+	let weatherpollms = weatherPoll * 60 * 1000;
+
+	nodecg.log.info(`[weather] Will update weather data every ${weatherPoll} minutes (${weatherpollms} milliseconds)`);
+	console.log(`[weather] Will update weather data every ${weatherPoll} minutes (${weatherpollms} milliseconds)`);
 
 	// Obtain the weather replicant
 	var weather = nodecg.Replicant('weather');
@@ -48,7 +50,8 @@ module.exports = function (nodecg)
 	function weatherUpdateLoop() {
 		nodecg.log.info('[weather] Beginning weather update loop.');
 		updateWeather();
-		setTimeout(weatherUpdateLoop,weatherPoll * 60 * 1000);
+		nodecg.log.info('[weather] Sleeping for ' + weatherpollms + 'ms.  Nap time!');
+		setTimeout(weatherUpdateLoop,weatherpollms);
 
 	}
 

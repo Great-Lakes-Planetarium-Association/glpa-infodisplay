@@ -2,18 +2,22 @@
 
 var tweetReplicant = nodecg.Replicant('tweets');
 // Tweet ID list is the list tweet IDs (object keys) we currently know of
-var tweetTimeline = nodecg.Replicant('tweetTimeline');
+var tweetOrder = [];
 var currentTimelineID;
 var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
 
 // Wait for tweet object to load
 NodeCG.waitForReplicants(tweetReplicant).then(() =>
 {
+    // Build our tweet order
+    tweetOrder = [];
+    Object.entries(tweetReplicant.response.timeline).forEach(([key,val]) =>
+    {
+        tweetOrder.push(val.tweet.id);
+    });
+    
     tweetLoop();
 });
-
-var tweetTimer;
-var tweetIndex = 0;
 
 tweetReplicant.on('change', newval =>
 {
@@ -34,13 +38,15 @@ function showTweet()
     }
     // Using the index position, look in the tweet time line for the tweet id.
     // Pass the tweet ID from the timeline into the tweets list to get the tweet
-    let tweet = tweetReplicant.value[tweetTimeline[nextTimelineID]];
+    let tweet = tweetReplicant.value.objects.tweets[1050099542941667328];
+    let user = tweetReplicant.value.objects.users[tweet.user.id];
+    console.log(tweet);
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
-    document.getElementById('screenname').innerHTML = "@" + tweet.user.screen_name + ' &mdash; ';
+    document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
     // Need to add a timezone parameter -- look at weather.
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
-    document.getElementById('tweet').innerHTML = tweet.text.replace(/https:\/\/t.co\/\S+/,'');
-    document.getElementById('avatar').src = tweet.user.profile_image_url.replace('_normal',"_bigger");
+    document.getElementById('tweet').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
+    document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
     if (newVal.entities.media) {
         document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + tweet.entities.media[0].media_url + ') no-repeat top left';
         document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';

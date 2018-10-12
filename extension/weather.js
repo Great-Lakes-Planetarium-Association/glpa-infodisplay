@@ -24,6 +24,7 @@ module.exports = function (nodecg)
 	function updateWeather() {
 		// Make a request to grab the current weather data
 		request(darkskyAPI, function (error, response, body) {
+			console.log('body');
 			// If response is okay load data into the replicant
 			if (!error) {
 				try {

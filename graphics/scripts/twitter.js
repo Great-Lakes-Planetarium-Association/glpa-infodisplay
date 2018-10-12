@@ -9,6 +9,7 @@ var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
 // Wait for tweet object to load
 NodeCG.waitForReplicants(tweets).then(() =>
 {
+    tweetLoop();
     // G
     /*
     let totalKeys = Object.keys(tweets.value).length;
@@ -74,8 +75,6 @@ function tweetLoop()
     showTweet();
     setTimeout(tweetLoop,tweetTimer * 1000);
 }
-
-tweetLoop();
 
 /*
 function tweetLoop() {

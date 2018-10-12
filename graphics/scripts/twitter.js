@@ -35,7 +35,7 @@ tweetReplicant.on('change', newval =>
     console.log('twitter: received an update to the tweet replicant');
     
     // Get the current timeline order
-    tweetTimeline = Objects.keys(tweetReplicant.values.response);
+    tweetTimeline = Object.keys(tweetReplicant.values.response);
     
 })
 

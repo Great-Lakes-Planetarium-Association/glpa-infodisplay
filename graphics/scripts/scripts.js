@@ -1,12 +1,6 @@
 // Create document replicants
 const conference = nodecg.Replicant('conference');
 
-// Listen for a broadcast requesting a page reload.  If so, reload the page.
-nodecg.listenFor("ReloadBrowser", message => {
-    // Force a reload of the page from the server
-    location.reload(true)
-});
-
 // General things to trigger when conference data is updated
 conference.on('change', newval => {
     console.log(`conference: Received new conference.json from live.glpa.org.  Updating content.`);

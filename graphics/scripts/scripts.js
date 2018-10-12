@@ -14,7 +14,6 @@ conference.on('change', newval => {
     document.getElementById("twitter-hashtag").innerText = newval.twitter.hashtag;
 });
 
-
 // Set the clock on the page
 function setClock()
 {
@@ -29,3 +28,4 @@ function setClock()
         setTimeout(setClock(), 500);
     });
 }
+setClock();

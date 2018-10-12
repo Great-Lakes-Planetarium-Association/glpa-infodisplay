@@ -41,11 +41,16 @@ function showTweet()
     let tweet = tweetReplicant.value.objects.tweets["1050099542941667328"];
     let user = tweetReplicant.value.objects.users[tweet.user.id];
     let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
+
+    // fade out current tweet
+    document.getElementById('tweet').style.opacity = '0';
     document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
     // Need to add a timezone parameter -- look at weather.
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
-    document.getElementById('tweet').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
+    document.getElementById('tweet-text').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
     document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
+    textFit(document.getElementById('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
+    textFit(document.getElementById('tweet-metadata'), {maxFontSize: 18});
     if (tweet.entities.media) {
         document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + tweet.entities.media[0].media_url + ') no-repeat top left';
         document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';
@@ -53,6 +58,7 @@ function showTweet()
     } else {
         document.getElementsByClassName('twitter-content')[0].style.background = "";
     }
+    document.getElementById('tweet').opacity = '1';
 
     // Set the nextTimeLineID to the currentTimelineID
     currentTimelineID = nextTimelineID;
@@ -73,8 +79,7 @@ function tweetLoop() {
     textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
     tweetTimer = setInterval(function() {
         showTweet(tweetIndex);
-        textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
-        textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
+
         tweetIndex = (tweetIndex+1) % arrayLength;
     }, 10000);
 }

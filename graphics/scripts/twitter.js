@@ -7,7 +7,7 @@ var currentTimelineID;
 var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
 
 // Wait for tweet object to load
-NodeCG.waitForReplicants(tweets).then(() =>
+NodeCG.waitForReplicants(tweetReplicant).then(() =>
 {
     tweetLoop();
     // G

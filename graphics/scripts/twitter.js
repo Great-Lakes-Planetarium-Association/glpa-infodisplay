@@ -3,7 +3,7 @@
 var tweetReplicant = nodecg.Replicant('tweets');
 // Tweet ID list is the list tweet IDs (object keys) we currently know of
 var tweetOrder;
-var currentTimelineID;
+var currentTimelineID = 0;
 var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
 
 // Wait for tweet object to load

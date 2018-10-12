@@ -51,7 +51,7 @@ module.exports = function (nodecg)
 	function twitterUpdateLoop()
 	{
 		updateTwitterFeed();
-		setTimeout(twitterUpdateLoop,nodecg.bundleConfig.twitter.pollInterval * 1000);
+		setTimeout(twitterUpdateLoop,nodecg.bundleConfig.twitter.pollInterval * 60 * 1000);
 	}
 
 	/* Listen for a request to update Twitter */

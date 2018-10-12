@@ -48,7 +48,7 @@ module.exports = function (nodecg)
 	function weatherUpdateLoop() {
 		nodecg.log.info('[weather] Beginning weather update loop.');
 		updateWeather();
-		setTimeout(weatherUpdateLoop,weatherPoll * 10000);
+		setTimeout(weatherUpdateLoop,weatherPoll * 60 * 1000);
 
 	}
 

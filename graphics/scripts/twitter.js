@@ -1,31 +1,88 @@
 // Script handles updating the appropriate twitter divs and shows tweets in the queue
 
-var acceptedTweets = nodecg.Replicant('acceptedTweets');
-var tweetTimer;
-var tweetIndex = 0;
-// Only start looping when we're loaded -- if we reload, then start the loop again.
-acceptedTweets.on('change', function() {
-    if(acceptedTweets.value.length > 0) {
-        tweetLoop();
-    }
+var tweetReplicant = nodecg.Replicant('tweets');
+// Tweet ID list is the list tweet IDs (object keys) we currently know of
+var tweetOrder;
+var currentTimelineID = 0;
+var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
+
+// Wait for tweet object to load
+NodeCG.waitForReplicants(tweetReplicant).then(() =>
+{
+    // Build our tweet order
+    tweetOrder = [];
+    Object.entries(tweetReplicant.value.response.timeline).forEach(([key,val]) =>
+    {
+        tweetOrder.push(val.tweet.id);
+    });
+    
+    tweetLoop();
+});
+
+tweetReplicant.on('change', newval =>
+{
+    // When we get a replicant update, need to determine the nextTweetID incase of a change.
+    console.log('twitter: received an update to the tweet replicant');
 })
 
+function showTweet()
+{
+    let nextTimelineID = 0
+    // If we're at the end of the timeline, go to first element
+    if ((currentTimelineID+1) >= tweetOrder.length) {
+        nextTimelineID = 0;
+    }
+    else
+    {
+        nextTimelineID = currentTimelineID + 1;
+    }
+    // Using the index position, look in the tweet time line for the tweet id.
+    // Pass the tweet ID from the timeline into the tweets list to get the tweet
+    let tweetID = tweetOrder[nextTimelineID];
+    let tweet = tweetReplicant.value.objects.tweets[tweetID];
+    let user = tweetReplicant.value.objects.users[tweet.user.id_str];
+    let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
+
+    document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
+    // Need to add a timezone parameter -- look at weather.
+    document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
+    document.getElementById('tweet-text').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
+    document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
+
+    if (tweet.entities.media) {
+        document.getElementById('tweet-media').src = tweet.entities.media[0].media_url;
+    } else {
+        document.getElementById('tweet-media').src = "";
+    }
+    textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
+    textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
+
+    // Set the nextTimeLineID to the currentTimelineID
+    currentTimelineID = nextTimelineID;
+}
+
+function tweetLoop()
+{
+    showTweet();
+    setTimeout(tweetLoop,tweetTimer * 1000);
+}
+
+/*
 function tweetLoop() {
     clearInterval(tweetTimer);
-    var arrayLength = acceptedTweets.value.length;
+    newvaluesength = tweets.value.length;
     showTweet(tweetIndex);
     textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
     textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
     tweetTimer = setInterval(function() {
         showTweet(tweetIndex);
-        textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
-        textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
+
         tweetIndex = (tweetIndex+1) % arrayLength;
     }, 10000);
 }
 
 function showTweet(index) {
-    var newVal = acceptedTweets.value[index];
+  newvaluesal = tweets.value[index];
     var tweetTime = new Date(Date.parse(newVal.created_at.replace(/( \+)/, ' UTC$1')));  
     document.getElementById('screenname').innerHTML = "@" + newVal.user.screen_name + ' &mdash; ';
     document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
@@ -40,4 +97,4 @@ function showTweet(index) {
     }
     
 
-}
+}*/

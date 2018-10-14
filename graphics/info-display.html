@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Pleiades 2017 NPC Info Slate</title>
+    <title>GLPA-Infodisplay Slate</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
     <link rel="import"  href="elements/room-announcement/room-announcement.html">
 </head>
@@ -15,152 +15,62 @@
     </div>
     <div class="container xga">
         <div class="header">
-            <div class="conference-title">Pleiades National Planetarium Conference</div>
-            <div class="conference-subtitle">October 10 &mdash; 14, 2017 <div class="conference-location">St. Louis, MO</div></div>
+            <div id="header-title"></div>
+            <table class="time-date-forecast">
+                <tr>
+                    <th></th>
+                    <th>Currently</th>
+                    <th><span id="weather-today-title"></span></th>
+                    <th><span id="weather-tomorrow-title"></span></th>
+                    <th><span id="weather-future-title"></span></th>
+                </tr>
+                <tr>
+                    <td><span id="current-time"></span></td>
+                    <td><canvas class="weather-icon" id="weather-current" width="64" height="64"></canvas><span class="weather-temps" id="current-temp"></span><br /><span id="current-time"></span></td>
+                    <td><canvas class="weather-icon" id="weather-today-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-today-temps"></span></td>
+                    <td><canvas class="weather-icon" id="weather-tomorrow-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-tomorrow-temps"></span></td>
+                    <td><canvas class="weather-icon" id="weather-future-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-future-temps"></span></td>
+                </tr>
+            </table>
         </div>
         <div class="main">
-            <div class="sidebar">
-                <div class="clock" id="clock"></div>
-                <div class="weather">
-                    <div class="today">
-                        <span class="day-title" id="weather-today-title">Today's Weather</span><br />
-                        <div class="weather-text" id="weather-today"></div>
-                        <div class="weather-icon"><canvas id="weather-today-icon" width="64" height="64"></canvas></div>
-                    </div>
-                    <div class="tomorrow">
-                        <span class="day-title" id="weather-tomorrow-title">Tomorrow's Weather</span><br />
-                        <div class="weather-text" id="weather-tomorrow"></div>
-                        <div class="weather-icon"><canvas id="weather-tomorrow-icon" width="64" height="64"></canvas></div>
-                    </div>
-                    <div class="twodaysaway">
-                        <span class="day-title" id="weather-twodaysaway-title">Further Out</span><br />
-                        <div class="weather-text" id="weather-twodaysaway"></div>
-                        <div class="weather-icon"><canvas id="weather-twodaysaway-icon" width="64" height="64"></canvas></div>
-                    </div>
-                </div>
-            </div>
             <div class="mainbody">
                 <room-announcement></room-announcement>
             </div>
 
         </div>
-        <div class="social">
+        <div class="twitter">
             <div class="twitter-logo">
-                <img src="img/twitter.png" /><br />
-                <span class="conference-hashtag">#pleiades2017</span>
+                <img id="twitter-logo" src="img/twitter.png" /><br />
+                <span id="twitter-hashtag"></span>
             </div>
             <div class="avatar">
                 <img id="avatar" />
             </div>
             <div class="twitter-content">
-                <div class="tweet-text" id="tweet"></div>
-                <div class="tweet-metadata"><span id="screenname"></span> <span id="tweettime"></em></span></div>
+                <div class="tweet-media"><img id="tweet-media" /></div>
+                <div class="tweet">
+                    <div class="tweet-text" id="tweet-text"></div>
+                    <div class="tweet-metadata" id="tweet-metadata">
+                        <span id="screenname"></span> <span id="tweettime"></em></span>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="attribution">Weather data Powered by Dark Sky</div>
     </div>
 
-
-    <script src="scripts/clock.js"></script>
-    <script src="scripts/twitter.js"></script>
-  
+    <!-- Load JS stuff -->
+    <!-- Need to load components before our modules since we'll be calling them! -->
     <script src="../bower_components/gsap/src/minified/TweenMax.min.js"></script>
     <script src="../bower_components/gsap/src/minified/TimelineMax.min.js"></script>
     <script src="../bower_components/skycons-html5/skycons.js"></script>
     <script src="../bower_components/textfit/textFit.min.js"></script>
-
-
-    <script>
-        // Load the clock once page is loaded
-        document.addEventListener('DOMContentLoaded', getDateTime(),false);
-        
-        // Create a new Skycons object
-        var skycons = new Skycons({"color": "white"});
-        skycons.play();
-
-        // Register the NodeCG weather replicant
-        weather = nodecg.Replicant('weather');
-
-        // Register the NodeCG conference replicant
-        conference = nodecg.Replicant('conference');
-
-        // Watch for a change to the weather replicant
-        weather.on('change', newval => {
-            let current = newval.currently;
-            let today = newval.daily.data[0];
-            let tomorrow = newval.daily.data[1];
-            let twoDaysAway = newval.daily.data[2];
-
-            // Calculate the current weather timestamp
-            let current_time = new Date(current.time*1000);
-
-            // So Steve doesn't go crazy let's print some stuff to the console
-            console.log(`weather: update received from extension - ${current_time.toLocaleTimeString("en-us", timeformat)}`);
-
-            // Update the current weather conditions
-            document.getElementById('weather-today-title').innerHTML = "Today (" + current_time.toLocaleString("en-us", {"weekday": "long"}) + ")";
-            document.getElementById('weather-today').innerHTML = 
-                Math.round(current.temperature) + String.fromCharCode(176) + "F @ " + current_time.toLocaleTimeString("en-us", shorttimeformat) + 
-                "<br />" + current.summary + 
-                "<br />H: " + Math.round(today.temperatureMax) + " " + String.fromCharCode(176) + "F, L: " + Math.round(today.temperatureMin) + " " + String.fromCharCode(176)+ "F";
-            // Set the icon for today
-            skycons.set("weather-today-icon", newval.currently.icon);
-
-            // Update tomorrow's weather conditions
-            let tomorrowTime = new Date(tomorrow.time*1000);
-            document.getElementById('weather-tomorrow-title').innerHTML = tomorrowTime.toLocaleString("en-us", {"weekday": "long"});
-            document.getElementById('weather-tomorrow').innerHTML = 
-                tomorrow.summary + "<br />H: " + 
-                Math.round(tomorrow.temperatureMax) + String.fromCharCode(176) + ", L: " + Math.round(tomorrow.temperatureMin) + String.fromCharCode(176);
-            // Set the icon for tomorrow
-            skycons.set("weather-tomorrow-icon", tomorrow.icon);
-            
-            // Update day-after tomorrow's weather conditions
-            let twoDaysAwayTime = new Date(twoDaysAway.time*1000);
-            document.getElementById('weather-twodaysaway-title').innerHTML = twoDaysAwayTime.toLocaleString("en-us", {"weekday": "long"});
-            document.getElementById('weather-twodaysaway').innerHTML = 
-                twoDaysAway.summary + "<br />H: " + 
-                Math.round(twoDaysAway.temperatureMax) + String.fromCharCode(176) + ", L: " + Math.round(twoDaysAway.temperatureMin) + String.fromCharCode(176);
-            // Set the icon for tomorrow
-            skycons.set("weather-twodaysaway-icon", twoDaysAway.icon);
-        });
-
-        // Watch for a change to the conference replicant
-        conference.on('change', newval => {
-            console.log(`conference: update received from extension`);
-            // TODO: Do something with this data!
-        });
-
-        /*var searchParams = new URLSearchParams(window.location.search);
-        var announce = false;
-        switch (searchParams.get("stream")) {
-            case "1":
-                announce = nodecg.Replicant('announce1');
-                break;
-            case "2":
-                announce = nodecg.Replicant('announce2');
-                break;
-            case "3":
-                announce = nodecg.Replicant('announce3');
-                break;
-        }
-
-        if (announce) {
-            announce.on('change', newval => {
-                console.log(`announce: update received from dashboard`);
-                document.getElementById("information").innerHTML = newval;
-            });
-        }*/
-
-        var cycleDelay = 5; // Specify, in seconds, how long to wait before cycling to the next image
-        var fadeTime = 4; // Specify, in seconds, how long dissolve should take
-
-        var tl = new TimelineMax({repeat: -1});
-        tl.append(TweenMax.to("#bg-img1", fadeTime, {css:{autoAlpha: 1}, yoyo:true, repeat:1, repeatDelay:cycleDelay}));
-        tl.append(TweenMax.to("#bg-img2", fadeTime, {css:{autoAlpha: 1}, yoyo:true, repeat:1, repeatDelay:cycleDelay}), -fadeTime);
-        tl.append(TweenMax.to("#bg-img3", fadeTime, {css:{autoAlpha: 1}, yoyo:true, repeat:1, repeatDelay:cycleDelay}), -fadeTime);
-        tl.append(TweenMax.to("#bg-img4", fadeTime, {css:{autoAlpha: 1}, yoyo:true, repeat:1, repeatDelay:cycleDelay}), -fadeTime);
-        tl.append(TweenMax.to("#bg-img5", fadeTime, {css:{autoAlpha: 1}, yoyo:true, repeat:1, repeatDelay:cycleDelay}), -fadeTime);
-
-    </script>
+    <!-- Internal script packages -->
+    <!--<script src="scripts/background.js"></script>-->
+    <script src="scripts/scripts.js"></script>
+    <script src="scripts/twitter.js"></script>
+    <script src="scripts/weather.js"></script>
+   
 </body>
 </html>

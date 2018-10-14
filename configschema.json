@@ -1,0 +1,95 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+
+    "properties": {
+        "conference": {
+            "type": "object",
+            "properties": {
+                "jsonUrl": {
+                    "type": "string",
+                    "description": "URL of the conference.json file containing conference data and schedules.",
+                    "default": "http://live.glpa.org/conference.json"
+                },
+                "pollInterval": {
+                    "type": "number",
+                    "description": "How often to poll the conference JSON file for updated session data in seconds.",
+                    "default": 30
+                }
+            }
+
+        },
+        "twitter": {
+            "type": "object",
+            "properties": {
+                "confHashtag": {
+                    "type": "string",
+                    "description": "The official conference Twitter hashtag.  Example: #glpa2018",
+                    "default": "#glpa2018"
+                },
+                "collectionID": {
+                    "type": "string",
+                    "description": "The ID of the curated collection.  Get this from TweetDeck's list -> View on Twitter.",
+                    "default": "1049107901023965184"
+                },
+                "APIKey": {
+                    "type": "string",
+                    "description": "Consumer API Key -- Get this from https://developer.twitter.com -> Apps -> <app> -> Keys",
+                    "default": null
+                },
+                "APISecret": {
+                    "type": "string",
+                    "description": "Consumer API Secret Key -- Get this from https://developer.twitter.com -> Apps -> <app> -> Keys",
+                    "default": null
+                },
+                "AccessToken": {
+                    "type": "string",
+                    "description": "Access Token -- Get this from https://developer.twitter.com -> Apps -> <app> -> Keys",
+                    "default": null
+                },
+                "AccessSecret": {
+                    "type": "string",
+                    "description": "Access Token Secret -- Get this from https://developer.twitter.com -> Apps -> <app> -> Keys",
+                    "default": null
+                },
+                "pollInterval": {
+                    "type": "string",
+                    "description": "How often to poll Twitter for updates to the collection list in seconds.",
+                    "default": "30"
+                },
+                "displayTime": {
+                    "type": "string",
+                    "description": "How long to display a tweet on the screen in seconds.",
+                    "default": "10"
+                }
+            }
+        },
+        "weather": {
+            "type": "object",
+            "properties": {
+                "APIURL": {
+                    "type": "string",
+                    "description": "Base URL of the DarkSky API.",
+                    "default": "https://api.darksky.net/forecast/"
+                },
+                "APIKey": {
+                    "type": "string",
+                    "description": "API key from Darksky.net.",
+                    "default": null
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The latitude and longitude (<latitude>,<longitude>) of the conference host's city.",
+                    "default": null
+                },
+                "interval": {
+                    "type": "number",
+                    "description": "How often, in minutes, to refresh data from DarkSky.  Minimum is every 5 minutes.",
+                    "default": 5
+                }
+            }
+        }
+    }
+
+}

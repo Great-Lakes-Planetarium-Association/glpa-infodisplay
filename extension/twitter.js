@@ -1,194 +1,66 @@
-// This extension handles pulling in Tweets for display on the info page
-'use strict';
+module.exports = function (nodecg)
+{
+	// Load twemoji module to convert emoji strings to images
+	const twemoji = require('twemoji');
 
-// Load node packages
-const twemoji = require('twemoji');
-const TwitterStream = require('twitter-stream-api');
+	// Load variables from bundle
+	const confHashtag = nodecg.bundleConfig.twitter.confHashtag;
 
-// Load NodeCG API
-const nodecg = require('./util/nodecg-api-context').get();
+	// Configure a Twitter object
+	var Twitter = require('twitter');
+	var client = new Twitter({
+		consumer_key: nodecg.bundleConfig.twitter.APIKey,
+		consumer_secret: nodecg.bundleConfig.twitter.APISecret,
+		access_token_key: nodecg.bundleConfig.twitter.AccessToken,
+		access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
+	});
 
-// Specify the Conference Twitter user ID and application IDs.
-// These should move to "<nodecg install dir>/cfg/glpa-infodisplay.json" someday
-const confTwitterID = 862533287679451136;
-const confHashtag = "#pleiades2017";
-const confSearchTags = confHashtag + "pleiades2017,pleiades-2017";
+	// Set up a replicant to track tweets in
+	var tweetsReplicant = nodecg.Replicant('tweets');
 
-const twitterKeys = {
-    consumer_key : "6yH0WErvDikOZIvCDoa5K1lzH",
-    consumer_secret : "t81eBtkAGMJ63rhpYzXA1ozmczFm7g3CuXdReIdbmkJqGWIjvv",
-    token : "131306601-HuoKpvXc8vy76kqmYRBr6ajmJWWMEBxAfR4KKX2t",
-    token_secret : "oSsnqafP75eWvvs0OPFasUM9XBJDRypZPmjIKkcGqO3Z0"
-};
-
-
-// Set up a replicant to track tweets in
-var tweets = nodecg.Replicant('tweets', {defaultValue: []});
-var acceptedTweets = nodecg.Replicant('acceptedTweets', {defaultValue: []});
-let userStream;
-
-buildUserStream();
-
-// Close and re-open the twitter connection every 90 minutes
-setInterval(() => {
-	nodecg.log.info('[twitter] Restarting Twitter connection (done every 90 minutes).');
-	userStream.close();
-	buildUserStream();
-}, 90 * 60 * 1000);
-
-nodecg.listenFor('acceptTweet', tweet => {
-	acceptedTweets.value.push(tweet);
-	//nodecg.sendMessage('showTweet', tweet);
-});
-
-nodecg.listenFor('rejectTweet', removeTweetById);
-
-/**
- * Builds the stream. Called once every 90 minutes because sometimes the stream just dies silently.
- * @returns {undefined}
- */
-function buildUserStream() {
-	userStream = new TwitterStream(twitterKeys);
-
-	userStream.on('data', data => {
-		// We discard quoted statuses because we can't show them.
-		if (data.quoted_status) {
-            return;
-        }
-		
-
-		if (data.event) {
-			switch (data.event) {
-				case 'favorite':
-					if (data.source.id_str !== confTwitterID) {
-                        return;
-                    }
-
-					addTweet(data.target_object);
-					break;
-				case 'unfavorite':
-					if (data.source.id_str !== confTwitterID) {
-						return;
-					}
-
-					removeTweetById(data.target_object.id_str);
-					break;
-				default:
-				// do nothing
-			}
-		} else if (data.delete) {
-			removeTweetById(data.delete.status.id_str);
-		} else if (data.retweeted_status) {
-			if (data.user.id_str !== confTwitterID) {
-				return;
-			}
-
-			const retweetedStatus = data.retweeted_status;
-			retweetedStatus.gdqRetweetId = data.id_str;
-			addTweet(retweetedStatus);
-		} else if (data.text) {
-
-			// Filter out @ replies
-			if (data.text.charAt(0) === '@') {
-				return;
-			}
-
-			addTweet(data);
+	// updateTwitter
+	// Get the twitter feed and stuff into the replicant
+	function updateTwitterFeed()
+	{
+		// Clear out our local timeline
+		let tweetTimeline = [];
+		// Create a list of paramaters for the query
+		var params = {
+			id: "custom-" + nodecg.bundleConfig.twitter.collectionID,
+			tweet_mode: 'extended'
+		};
+		// Request data from Twitter
+		client.get('collections/entries', params, function(error, twitterData, response) {
+			if (!error) {
+				nodecg.log.info('[twitter]: Obtained updated JSON of collection from Twitter"');
+				Object.entries(twitterData.objects.tweets).forEach(([key, val]) => {
+					val.full_text = twemoji.parse(val.full_text);
+					val.full_text = val.full_text.replace(/\n/ig, ' ');
+					val.full_text = val.full_text.replace(RegExp(confHashtag,"ig"), '<span class="hashtag">'+confHashtag+'</span>');
+			});
+			
+			// Send fixed up Twitter data to replicant
+			tweetsReplicant.value = twitterData;
+			nodecg.log.info('[twitter]: Posted JSON data into replicant');
 		}
-	});
-
-	userStream.on('error', error => {
-		nodecg.log.error('[twitter]', error.stack);
-	});
-
-	userStream.on('connection success', () => {
-		nodecg.log.info('[twitter] Connection success.');
-	});
-
-	userStream.on('connection aborted', () => {
-		nodecg.log.warn('[twitter] Connection aborted!');
-	});
-
-	userStream.on('connection error network', error => {
-		nodecg.log.error('[twitter] Connection error network:', error.stack);
-	});
-
-	userStream.on('connection error stall', () => {
-		nodecg.log.error('[twitter] Connection error stall!');
-	});
-
-	userStream.on('connection error http', httpStatusCode => {
-		nodecg.log.error('[twitter] Connection error HTTP:', httpStatusCode);
-	});
-
-	userStream.on('connection rate limit', httpStatusCode => {
-		nodecg.log.error('[twitter] Connection rate limit:', httpStatusCode);
-	});
-
-	userStream.on('connection error unknown', error => {
-		nodecg.log.error('[twitter] Connection error unknown:', error.stack);
-		userStream.close();
-		userStream = new TwitterStream(twitterKeys);
-        userStream.stream('statuses/filter', 
-            {follow: confTwitterID,
-            track: confHashtag});
-	});
-
-    userStream.stream('statuses/filter', 
-        {follow: confTwitterID,
-        track: confHashtag});
-}
-
-/**
- * Adds a Tweet to the queue.
- * @param {Object} tweet - The tweet to add.
- * @returns {undefined}
- */
-function addTweet(tweet) {
-	// Reject tweets with media.
-	//if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
-	//	return;
-	//}
-
-	// Don't add the tweet if we already have it
-	const isDupe = tweets.value.find(t => t.id_str === tweet.id_str);
-	if (isDupe) {
-		return;
+		});
 	}
 
-	// Parse emoji.
-	tweet.text = twemoji.parse(tweet.text);
-
-	// Replace newlines with spaces
-	tweet.text = tweet.text.replace(/\n/ig, ' ');
-
-	// Highlight the conference hashtag.
-	
-	tweet.text = tweet.text.replace(/#pleiades2017/ig, '<span class="hashtag">#pleiades2017</span>');
-
-	// Add the tweet to the list
-	tweets.value.push(tweet);
-}
-
-/**
- * Removes a Tweet (by id) from the queue.
- * @param {String} idToRemove - The ID string of the Tweet to remove.
- * @returns {Object} - The removed tweet. "Undefined" if tweet not found.
- */
-function removeTweetById(idToRemove) {
-	if (typeof idToRemove !== 'string') {
-		throw new Error(`[twitter] Must provide a string ID when removing a tweet. ID provided was: ${idToRemove}`);
+	// Loop to query Twitter
+	// This is separate from the main function incase we get an out-of-band request.
+	function twitterUpdateLoop()
+	{
+		updateTwitterFeed();
+		setTimeout(twitterUpdateLoop,nodecg.bundleConfig.twitter.pollInterval * 60 * 1000);
 	}
 
-	let didRemoveTweet = false;
-	tweets.value.some((tweet, index) => {
-		if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
-			tweets.value.splice(index, 1);
-			didRemoveTweet = true;
-			return true;
-		}
-
-		return false;
+	/* Listen for a request to update Twitter */
+	nodecg.listenFor('UpdateTwitter', () =>
+	{
+		nodecg.log.info('[twitter]: received an Update Twitter message... so time to update!');
+		updateTwitterFeed();
 	});
-	return didRemoveTweet;
+
+	// Start the Twitter loop
+	twitterUpdateLoop();
 }

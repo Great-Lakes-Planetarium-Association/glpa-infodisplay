@@ -20,7 +20,7 @@ module.exports = function (nodecg)
 	});
 
 	// Replicant to store the last known good copy of Twitter collection data
-	var twitter_collection_data = nodecg.Replicant('twitter_collection_data')
+	var twitter_collection_data = nodecg.Replicant('twitter_collection_data');
 
 	// Replicant to store current tweet in
 	var current_tweet = nodecg.Replicant('current_tweet');

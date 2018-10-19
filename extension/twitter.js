@@ -89,7 +89,7 @@ module.exports = function (nodecg)
 
 			// Send data to the replicant
 			nodecg.log.info('[twitter]: Sending tweet ' + tweet.id + ' to display');
-			current_tweet = tweet_data;
+			current_tweet.value = tweet_data;
 		}
 
 		setTimeout(tweet_cycle,tweet_display_time);

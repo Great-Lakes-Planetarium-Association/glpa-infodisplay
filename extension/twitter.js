@@ -88,6 +88,9 @@ module.exports = function (nodecg)
 			// Remove the link to the tweet
 			tweet_data.full_text = tweet_data.full_text.replace(/https:\/\/t.co\/\S+/,'');
 
+			// Remove '_normal' and '_bigger' from profile URL so we don't have nasty tiny resolution sizes
+			tweet_data.avatar = tweet_data.avatar.replace(/_bigger|_normal/g,'');
+
 			// Send data to the replicant
 			nodecg.log.info('[twitter]: Sending tweet ' + tweet.id + ' to display');
 			current_tweet.value = tweet_data;

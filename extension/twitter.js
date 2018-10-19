@@ -38,7 +38,8 @@ module.exports = function (nodecg)
 			tweet_mode: 'extended'
 		};
 
-		client.get('collections/entries', params, function(error, collection_data, response) {
+		client.get('collections/entries', params, function(error, collection_data, response)
+		{
 			if (!error) 
 			{
 				twitter_collection_data = collection_data;

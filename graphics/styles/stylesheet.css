@@ -129,6 +129,10 @@ img#avatar {
     padding-top: 10px;
 }
 
+#tweet-container {
+    transition-duration: 1s;
+}
+
 .twitter-content{
     width: 100%;
     margin-left: 10px;

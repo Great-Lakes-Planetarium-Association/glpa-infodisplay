@@ -1,100 +1,58 @@
-// Script handles updating the appropriate twitter divs and shows tweets in the queue
+// Listen for updates to the twitter_current_tweet replicant.
+// When change is found, display it on the page.
 
-var tweetReplicant = nodecg.Replicant('tweets');
-// Tweet ID list is the list tweet IDs (object keys) we currently know of
-var tweetOrder;
-var currentTimelineID = 0;
-var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
-
-// Wait for tweet object to load
-NodeCG.waitForReplicants(tweetReplicant).then(() =>
-{
-    // Build our tweet order
-    tweetOrder = [];
-    Object.entries(tweetReplicant.value.response.timeline).forEach(([key,val]) =>
+var current_tweet = nodecg.Replicant('current_tweet');
+current_tweet.on('Change', tweet =>
     {
-        tweetOrder.push(val.tweet.id);
-    });
-    
-    tweetLoop();
-});
+        console.log('[twitter]: current_tweet updated; beginning update process.');
+        // Fade out the tweet container, wait 1 second for fade, then set tweet
+        tweet_visibility(false);
+        setTimeout(set_tweet,1000);
 
-tweetReplicant.on('change', newval =>
-{
-    // When we get a replicant update, need to determine the nextTweetID incase of a change.
-    console.log('twitter: received an update to the tweet replicant');
-})
-
-function showTweet()
-{
-    let nextTimelineID = 0
-    // If we're at the end of the timeline, go to first element
-    if ((currentTimelineID+1) >= tweetOrder.length) {
-        nextTimelineID = 0;
+        // Wait one second for tweet data to load, then fade up container.
+        setTimeout(tweet_visibility(true), 1000);
+        console.log('[twitter]: update to tweet complete.');
     }
-    else
-    {
-        nextTimelineID = currentTimelineID + 1;
-    }
-    // Using the index position, look in the tweet time line for the tweet id.
-    // Pass the tweet ID from the timeline into the tweets list to get the tweet
-    let tweetID = tweetOrder[nextTimelineID];
-    let tweet = tweetReplicant.value.objects.tweets[tweetID];
-    let user = tweetReplicant.value.objects.users[tweet.user.id_str];
-    let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
+)
 
-    document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
-    // Need to add a timezone parameter -- look at weather.
-    document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
-    document.getElementById('tweet-text').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
-    document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
+/**
+ * Set tweet on page.
+ * Sets the tweet HTML elements to the appropriate values according to the current tweet data.
+ */
+function set_tweet()
+{
+    console.log('[twitter]: Setting tweet data on page.');
+    document.getElementById('screenname').innerHTML = tweet.screen_name + ' &mdash; ';
+    document.getElementById('tweettime').innerText = tweet.created_at;
+    document.getElementById('tweet-text').innerHTML = tweet.full_text;
+    document.getElementById('avatar').src = tweet.avatar;
 
-    if (tweet.entities.media) {
-        document.getElementById('tweet-media').src = tweet.entities.media[0].media_url;
+    if (tweet.image) {
+        document.getElementById('tweet-media').src = tweet.image.media_url;
     } else {
         document.getElementById('tweet-media').src = "";
     }
     textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
     textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
-
-    // Set the nextTimeLineID to the currentTimelineID
-    currentTimelineID = nextTimelineID;
+    console.log('[twitter]: Completed setting tweet data on page.');
 }
 
-function tweetLoop()
+/**
+ * Control visibility of tweet content.
+ * Controls the visibility of the tweet content container.
+ *
+ * @param {boolean} visibile
+ */
+function tweet_visibility(visibile)
 {
-    showTweet();
-    setTimeout(tweetLoop,tweetTimer * 1000);
-}
-
-/*
-function tweetLoop() {
-    clearInterval(tweetTimer);
-    newvaluesength = tweets.value.length;
-    showTweet(tweetIndex);
-    textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
-    textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
-    tweetTimer = setInterval(function() {
-        showTweet(tweetIndex);
-
-        tweetIndex = (tweetIndex+1) % arrayLength;
-    }, 10000);
-}
-
-function showTweet(index) {
-  newvaluesal = tweets.value[index];
-    var tweetTime = new Date(Date.parse(newVal.created_at.replace(/( \+)/, ' UTC$1')));  
-    document.getElementById('screenname').innerHTML = "@" + newVal.user.screen_name + ' &mdash; ';
-    document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
-    document.getElementById('tweet').innerHTML = newVal.text.replace(/https:\/\/t.co\/\S+/,'');
-    document.getElementById('avatar').src = newVal.user.profile_image_url.replace('_normal',"_bigger");
-    if (newVal.entities.media) {
-        document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + newVal.entities.media[0].media_url + ') no-repeat top left';
-        document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';
-        document.getElementsByClassName('twitter-content')[0].style.backgroundPosition = 'center';
-    } else {
-        document.getElementsByClassName('twitter-content')[0].style.background = "";
+    if (visible)
+    {
+        console.log('[twitter]: Showing tweet container.');
+        document.getElementById('tweet-container').style.opacity = '1';
     }
-    
-
-}*/
+    else
+    {
+        console.log('[twitter]: Hiding tweet container.');
+        document.getElementById('tweet-container').style.opacity = '0';
+    }
+}

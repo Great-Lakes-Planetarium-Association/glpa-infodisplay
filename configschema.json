@@ -7,6 +7,13 @@
         "conference": {
             "type": "object",
             "properties": {
+                "timezone":
+                {
+                    "type": "string",
+                    "description": "Timezone the conference is in.  Use TZ name located here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
+                    "default": "America/Chicago"
+                },
+                
                 "jsonUrl": {
                     "type": "string",
                     "description": "URL of the conference.json file containing conference data and schedules.",
@@ -28,7 +35,8 @@
                     "description": "The official conference Twitter hashtag.  Example: #glpa2018",
                     "default": "#glpa2018"
                 },
-                "collectionID": {
+                "collection_id":
+                {
                     "type": "string",
                     "description": "The ID of the curated collection.  Get this from TweetDeck's list -> View on Twitter.",
                     "default": "1049107901023965184"
@@ -53,12 +61,13 @@
                     "description": "Access Token Secret -- Get this from https://developer.twitter.com -> Apps -> <app> -> Keys",
                     "default": null
                 },
-                "pollInterval": {
+                "poll_interval": {
                     "type": "string",
                     "description": "How often to poll Twitter for updates to the collection list in seconds.",
                     "default": "30"
                 },
-                "displayTime": {
+                "tweet_display_time":
+                {
                     "type": "string",
                     "description": "How long to display a tweet on the screen in seconds.",
                     "default": "10"

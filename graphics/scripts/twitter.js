@@ -41,9 +41,9 @@ function set_tweet(tweet)
  * Control visibility of tweet content.
  * Controls the visibility of the tweet content container.
  *
- * @param {boolean} visibile
+ * @param {boolean} visible
  */
-function tweet_visibility(visibile)
+function tweet_visibility(visible)
 {
     if (visible)
     {

@@ -64,15 +64,15 @@ module.exports = function (nodecg)
 			let user = twitter_collection_data.objects.users[tweet.user.id_str];
 			let tweet_data = 
 			{
-				full_text = tweet.full_text,
-				created_at = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))).toLocaleString("en-us", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit', "timeZone": timezone}),
-				name = user.name,
-				screen_name = "@" + user.screen_name,
-				avatar = user.profile_image_url,
-				image = 
+				full_text: tweet.full_text,
+				created_at: new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))).toLocaleString("en-us", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit', "timeZone": timezone}),
+				name: user.name,
+				screen_name: "@" + user.screen_name,
+				avatar: user.profile_image_url,
+				image: 
 				{
-					media_url = tweet.entities.media[0].media_url,
-					sizes = tweet.entities.media[0].sizes
+					media_url: tweet.entities.media[0].media_url,
+					sizes: tweet.entities.media[0].sizes
 				}
 			}
 

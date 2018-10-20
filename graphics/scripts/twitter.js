@@ -27,9 +27,12 @@ function set_tweet(tweet)
     document.getElementById('tweet-text').innerHTML = tweet.full_text;
     document.getElementById('avatar').src = tweet.avatar;
 
-    if (tweet.image) {
+    if (tweet.image)
+    {
         document.getElementById('tweet-media').src = tweet.image.media_url;
-    } else {
+    }
+    else
+    {
         document.getElementById('tweet-media').src = "";
     }
     textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});

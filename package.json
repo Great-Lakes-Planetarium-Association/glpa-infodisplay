@@ -30,6 +30,8 @@
   "repository": "https://bitbucket.org/glpa_av/glpa-infodisplay",
   "license": "Apache-2.0",
   "dependencies": {
+    "gsap": "^2.1.3",
+    "skycons": "^1.0.0",
     "twemoji": "^11.0.1",
     "twitter": "^1.7.1"
   }

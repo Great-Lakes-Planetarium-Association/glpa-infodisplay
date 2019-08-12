@@ -46,31 +46,31 @@ module.exports = function (nodecg)
 
 					let formatted_weather_data =
 					{
-						current = 
+						current: 
 						{
-							temperature = Math.round(weather_data.currently.tempature) + String.fromCharCode(176) + "F",
-							icon = weather_data.currently.icon
+							temperature: Math.round(weather_data.currently.tempature) + String.fromCharCode(176) + "F",
+							icon: weather_data.currently.icon
 						},
-						today =
+						today:
 						{
-							day_name = new Date(weather_data.daily.data[0].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low = Math.round(weather_data.daily.data[0].temperature_min) + String(fromCharCode(176)) + "F",
-							temp_high = Math.round(weather_data.daily.data[0].temperature_max) + String(fromCharCode(176)) + "F",
-							icon = weather_data.daily.data[0].icon
+							day_name: new Date(weather_data.daily.data[0].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
+							temp_low: Math.round(weather_data.daily.data[0].temperature_min) + String.fromCharCode(176) + "F",
+							temp_high: Math.round(weather_data.daily.data[0].temperature_max) + String.fromCharCode(176) + "F",
+							icon: weather_data.daily.data[0].icon
 						},
-						tomorrow = 
+						tomorrow: 
 						{
-							day_name = new Date(weather_data.daily.data[1].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low = Math.round(weather_data.daily.data[1].temperature_min) + String(fromCharCode(176)) + "F",
-							temp_high = Math.round(weather_data.daily.data[1].temperature_max) + String(fromCharCode(176)) + "F",
-							icon = weather_data.daily.data[1].icon
+							day_name: new Date(weather_data.daily.data[1].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
+							temp_low: Math.round(weather_data.daily.data[1].temperature_min) + String.fromCharCode(176) + "F",
+							temp_high: Math.round(weather_data.daily.data[1].temperature_max) + String.fromCharCode(176) + "F",
+							icon: weather_data.daily.data[1].icon
 						},
-						future = 
+						future:
 						{
-							day_name = new Date(weather_data.daily.data[2].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low = Math.round(weather_data.daily.data[2].temperature_min) + String(fromCharCode(176)) + "F",
-							temp_high = Math.round(weather_data.daily.data[2].temperature_max) + String(fromCharCode(176)) + "F",
-							icon = weather_data.daily.data[2].icon
+							day_name: new Date(weather_data.daily.data[2].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
+							temp_low: Math.round(weather_data.daily.data[2].temperature_min) + String.fromCharCode(176) + "F",
+							temp_high: Math.round(weather_data.daily.data[2].temperature_max) + String.fromCharCode(176) + "F",
+							icon: weather_data.daily.data[2].icon
 						}
 					}
 

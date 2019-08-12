@@ -6,37 +6,29 @@ var skycons = new Skycons({ "color": "black" });
 skycons.play();
 
 // Do a weather update when data is available
-weather.on('change', newval => 
+weather.on('change', weather_data => 
 {
-    NodeCG.waitForReplicants(conference,weather).then(() => 
-    {
-        let timezone = conference.value.timezone;
-        let current = newval.currently;
-        let today = newval.daily.data[0];
-        let tomorrow = newval.daily.data[1];
-        let future = newval.daily.data[2];
+    console.log('[weather]: Updated weather data received.');        
     
-        // So Steve doesn't go crazy let's print some stuff to the console
-        console.log(`weather: update received from extension - ${new Date()}`);
-    
-        // Handle current weather data stuff //
-        // Set current temp
-        document.getElementById('current-temp').innerText = `${ Math.round(current.temperature) + String.fromCharCode(176) }F`;
-        skycons.set('weather-current', current.icon);
-    
-        // Today's forecast
-        document.getElementById("weather-today-title").innerText = new Date(today.time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone });
-        document.getElementById('weather-today-temps').innerText = `H: ${Math.round(today.temperatureMax) + String.fromCharCode(176)}F\nL: ${Math.round(today.temperatureMin) + String.fromCharCode(176)}F`;
-        skycons.set("weather-today-icon", today.icon);
-    
-        // Update tomorrow's weather conditions
-        document.getElementById("weather-tomorrow-title").innerText = new Date(tomorrow.time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone }    );
-        document.getElementById('weather-tomorrow-temps').innerText = `H: ${Math.round(tomorrow.temperatureMax) +String.fromCharCode(176)}F\nL: ${Math.round(tomorrow.temperatureMin) + String.fromCharCode(176)}F`;
-        skycons.set("weather-tomorrow-icon", tomorrow.icon);
-    
-        // Update future date
-        document.getElementById("weather-future-title").innerText = new Date(future.time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone });
-        document.getElementById('weather-future-temps').innerText = `H: ${Math.round(future.temperatureMax) + String.fromCharCode(176)}F\nL: ${Math.round(future.temperatureMin) + String.fromCharCode(176)}F`;
-        skycons.set("weather-future-icon", future.icon);
-    })
+    // Handle current weather data stuff //
+    // Set current temp
+    document.getElementById('current-temp').innerText = weather_data.current.temperature;
+    skycons.set('weather-current', weather_data.current.icon);
+
+    // Today's forecast
+    document.getElementById("weather-today-title").innerText = weather_data.today.day_name;
+    document.getElementById('weather-today-temps').innerText = `H: ${weather_data.today.temperature_max}\nL: ${weather_data.today.temperature_min}`;
+    skycons.set("weather-today-icon", weather_data.today.icon);
+
+    // Update tomorrow's weather conditions
+    document.getElementById("weather-tomorrow-title").innerText = weather_data.tomorrow.day_name;
+    document.getElementById('weather-tomorrow-temps').innerText = `H: ${weather_data.tomorrow.temperature_max}\nL: ${weather_data.tomorrow.temperature_min}`;
+    skycons.set("weather-tomorrow-icon", weather_data.tomorrow.icon);
+
+    // Update future date
+    document.getElementById("weather-future-title").innerText = weather_data.future.day_name;
+    document.getElementById('weather-future-temps').innerText = `H: ${weather_data.future.temperature_max}\nL: ${weather_data.future.temperature_min}`;
+    skycons.set("weather-future-icon", weather_data.future.icon);
+
+    console.log('[weather]: Completed weather update.');
 });

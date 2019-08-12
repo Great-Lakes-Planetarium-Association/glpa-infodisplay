@@ -7,13 +7,12 @@
         "conference": {
             "type": "object",
             "properties": {
-                "timezone":
+                "timezone": 
                 {
                     "type": "string",
                     "description": "Timezone the conference is in.  Use TZ name located here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
                     "default": "America/Chicago"
                 },
-                
                 "jsonUrl": {
                     "type": "string",
                     "description": "URL of the conference.json file containing conference data and schedules.",
@@ -92,7 +91,7 @@
                     "description": "The latitude and longitude (<latitude>,<longitude>) of the conference host's city.",
                     "default": null
                 },
-                "interval": {
+                "poll_interval": {
                     "type": "number",
                     "description": "How often, in minutes, to refresh data from DarkSky.  Minimum is every 5 minutes.",
                     "default": 5

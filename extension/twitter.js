@@ -1,7 +1,9 @@
 
-module.exports = function (nodecg)
-{
-	// Load twemoji module to convert emoji strings to images
+module.exports = function (nodecg) {
+	/**
+	 * Twemoji object
+	 * @const
+	 */
 	const twemoji = require('twemoji');
 
 	// Load variables from bundle
@@ -12,94 +14,126 @@ module.exports = function (nodecg)
 	// Configure a Twitter object
 	var Twitter = require('twitter');
 	var client = new Twitter
-	({
-		consumer_key: nodecg.bundleConfig.twitter.APIKey,
-		consumer_secret: nodecg.bundleConfig.twitter.APISecret,
-		access_token_key: nodecg.bundleConfig.twitter.AccessToken,
-		access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
-	});
+		({
+			consumer_key: nodecg.bundleConfig.twitter.APIKey,
+			consumer_secret: nodecg.bundleConfig.twitter.APISecret,
+			access_token_key: nodecg.bundleConfig.twitter.AccessToken,
+			access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
+		});
 
-	// Replicant to store the last known good copy of Twitter collection data
-	var twitter_collection_data = nodecg.Replicant('twitter_collection_data');
+	/**
+	 * Node CG Replicant storing the formatted tweet currently showing on the front side UI
+	 * @var
+	 */
+	var activeTweet = nodecg.Replicant('activeTweet');
 
-	// Replicant to store current tweet in
-	var current_tweet = nodecg.Replicant('current_tweet');
+	// Variable to store JSON response from Twitter containing tweet data in
+	var twitterResponseData
 
 	/**
 	 * Get a tweets within a collection.
 	 * Downloads a JSON document with information about tweets which have been curated within a Twitter collection timeline.
 	 * @param {!number} collection_id=nodecg.bundleConfig.twitter.collection_id
 	 */
-	function update_collection_tweets(collection_id = nodecg.bundleConfig.twitter.collection_id)
-	{
-		var params = 
+	function updateTweetCollection(collection_id = nodecg.bundleConfig.twitter.collection_id) {
+		var params =
 		{
 			id: "custom-" + collection_id,
 			tweet_mode: 'extended'
 		};
 
-		client.get('collections/entries', params, function(error, collection_data, response)
-		{
-			if (!error) 
-			{
-				twitter_collection_data = collection_data;
+		nodecg.log.info('[twitter]: Obtaining a new list of tweets');
+		client.get('collections/entries', params, function (error, data, response) {
+			if (!error) {
+				twitterResponseData = data.objects
+				nodecg.log.info('[twitter]: New tweets obtained');
 			}
-		});
-
-		setTimeout(update_collection_tweets,nodecg.bundleConfig.twitter.poll_interval * 60 * 1000);
+		});	
+		setTimeout(updateTweetCollection, nodecg.bundleConfig.twitter.poll_interval * 60 * 1000);
 	}
 
 	/**
-	 * Cycles through array of tweets and sends it out for display.
-	 * Function cycles through all tweets obtained from the collection result.
+	 * Returns a formatted object containing data from a Twitter tweet object passed to it
+	 * @type {Object}
+	 * @param {*} tweetObj 
+	 * @param {*} userObj 
 	 */
-	function tweet_cycle()
-	{
-		// Create a shadow copy of the collection data objects
-		let twitter_collection_data = twitter_collection_data.splice();
+	function format_tweet(tweetObj) {
+		var user = twitterResponseData.users[tweetObj.user.id]
+		var tweet = {
+			id_str: tweetObj.id_str,
+			formatted_text: tweetObj.full_text,
+			created_at: new Date(Date.parse(tweetObj.created_at.replace(/( \+)/, ' UTC$1'))).toLocaleString("en-us", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit', "timeZone": timezone }),
+			name: user.name,
+			screen_name: "@" + user.screen_name,
+			avatar: user.profile_image_url
+}
+		// Add media if present
+		if (tweetObj.entities.media) {
+			tweet.image = {
+				media_url: tweetObj.entities.media[0].media_url,
+				sizes: tweetObj.entities.media[0].sizes
+			};		
+		}
+		// Replace emoji codes in full_text with emoji images
+		tweet.formatted_text = twemoji.parse(tweet.formatted_text);
 
-		// TODO: Add logic to determine if we have objects to iterate over
-		for (tweet in twitter_collection_data.objects.tweets)
-		{
-			let user = twitter_collection_data.objects.users[tweet.user.id_str];
-			let tweet_data = 
-			{
-				full_text: tweet.full_text,
-				created_at: new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))).toLocaleString("en-us", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit', "timeZone": timezone}),
-				name: user.name,
-				screen_name: "@" + user.screen_name,
-				avatar: user.profile_image_url,
-				image: 
-				{
-					media_url: tweet.entities.media[0].media_url,
-					sizes: tweet.entities.media[0].sizes
-				}
+		// Replace newlines with a space
+		tweet.formatted_text = tweet.formatted_text.replace(/\n/ig, ' ');
+
+		// Add HTML span tag around text matching the conference hashtag
+		tweet.formatted_text = tweet.formatted_text.replace(RegExp(confHashtag, "ig"), '<span class="hashtag">' + confHashtag + '</span>');
+
+		// Remove the link to the tweet
+		tweet.formatted_text = tweet.formatted_text.replace(/https:\/\/t.co\/\S+/, '');
+
+		// Remove '_normal' and '_bigger' from profile URL so we don't have nasty tiny resolution sizes
+		tweet.avatar = tweet.avatar.replace(/_bigger|_normal/g, '');
+
+		// Send data to the replicant
+		return tweet;
+	};
+
+
+	/**
+	 * Cycles to the next tweet available in the collection list
+	 */
+	function cycleTweet() {
+
+		// This function works by looking at the list of tweets returned by Twitter.
+		// It loops through each tweet by using the index of the array.
+		// When it reaches the end, it returns to the beginning of the array.
+		// If the array is tampered with it will automatically find the next tweet in order and display it.
+
+		// Verify we have data from Twitter first
+		if (twitterResponseData) {
+
+			// Generate a key list for the Twitter respone data
+			// This will be a key value pair of key # to twitter tweet ID
+			var tweetIDs = Object.keys(twitterResponseData.tweets);
+
+			// Determine if we have a tweet currently loaded up
+			if (activeTweet.value.id_str) {
+				// Determine the current position in the array
+				var index = tweetIDs.indexOf(activeTweet.value.id_str)
+				// Select the next valid position in the array
+				index = (index + 1) % (tweetIDs.length)
+			} else {
+				// We don't have a tweet up; use the first item in the array
+				index = 0
 			}
 
-			// Replace emoji codes in full_text with emoji images
-			tweet_data.full_text = twemoji.parse(tweet_data.full_text);
-
-			// Replace newlines with a space
-			tweet_data.full_text = tweet_data.full_text.replace(/\n/ig, ' ');
-
-			// Add HTML span tag around text matching the conference hashtag
-			tweet_data.full_text = tweet_data.full_text.replace(RegExp(confHashtag,"ig"), '<span class="hashtag">'+confHashtag+'</span>');
-
-			// Remove the link to the tweet
-			tweet_data.full_text = tweet_data.full_text.replace(/https:\/\/t.co\/\S+/,'');
-
-			// Remove '_normal' and '_bigger' from profile URL so we don't have nasty tiny resolution sizes
-			tweet_data.avatar = tweet_data.avatar.replace(/_bigger|_normal/g,'');
-
-			// Send data to the replicant
-			nodecg.log.info('[twitter]: Sending tweet ' + tweet.id + ' to display');
-			current_tweet.value = tweet_data;
+			// Using the index calculated above, determine the twitter ID using the key value pair.
+			// Then submit the object to the format_tweet function before sending to the replicant to display on the graphic pages.
+			nodecg.log.info('[twitter] Loading next tweet ' + tweetIDs[index]);
+			activeTweet.value = format_tweet(twitterResponseData.tweets[tweetIDs[index]]);
+		} else {
+			nodecg.log.info('[twitter] Unable to load new tweets as Twitter data is empty.  Will try again in ' + tweet_display_time + ' ms');
 		}
-
-		setTimeout(tweet_cycle,tweet_display_time);
+		setTimeout(cycleTweet, tweet_display_time);
 	}
 
 	// Start the loops
-	update_collection_tweets();
-	tweet_cycle();
+	updateTweetCollection();
+	cycleTweet();
 }

@@ -48,28 +48,29 @@ module.exports = function (nodecg)
 					{
 						current: 
 						{
-							temperature: Math.round(weather_data.currently.tempature) + String.fromCharCode(176) + "F",
+							temperature: Math.round(weather_data.currently.temperature) + String.fromCharCode(176) + " F",
 							icon: weather_data.currently.icon
 						},
 						today:
 						{
-							day_name: new Date(weather_data.daily.data[0].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low: Math.round(weather_data.daily.data[0].temperature_min) + String.fromCharCode(176) + "F",
-							temp_high: Math.round(weather_data.daily.data[0].temperature_max) + String.fromCharCode(176) + "F",
+							
+							day_name: new Date(weather_data.daily.data[0].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone }),
+							temp_low: Math.round(weather_data.daily.data[0].temperatureLow) + String.fromCharCode(176) + " F",
+							temp_high: Math.round(weather_data.daily.data[0].temperatureHigh) + String.fromCharCode(176) + " F",
 							icon: weather_data.daily.data[0].icon
 						},
 						tomorrow: 
 						{
 							day_name: new Date(weather_data.daily.data[1].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low: Math.round(weather_data.daily.data[1].temperature_min) + String.fromCharCode(176) + "F",
-							temp_high: Math.round(weather_data.daily.data[1].temperature_max) + String.fromCharCode(176) + "F",
+							temp_low: Math.round(weather_data.daily.data[1].temperatureLow) + String.fromCharCode(176) + "F",
+							temp_high: Math.round(weather_data.daily.data[1].temperatureHigh) + String.fromCharCode(176) + "F",
 							icon: weather_data.daily.data[1].icon
 						},
 						future:
 						{
 							day_name: new Date(weather_data.daily.data[2].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low: Math.round(weather_data.daily.data[2].temperature_min) + String.fromCharCode(176) + "F",
-							temp_high: Math.round(weather_data.daily.data[2].temperature_max) + String.fromCharCode(176) + "F",
+							temp_low: Math.round(weather_data.daily.data[2].temperatureLow) + String.fromCharCode(176) + "F",
+							temp_high: Math.round(weather_data.daily.data[2].temperatureHigh) + String.fromCharCode(176) + "F",
 							icon: weather_data.daily.data[2].icon
 						}
 					}

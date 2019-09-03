@@ -2,10 +2,12 @@ module.exports = function (nodecg)
 {
 	// Get some bundle config values
 	const darkskyAPI = nodecg.bundleConfig.weather.APIURL + nodecg.bundleConfig.weather.APIKey + '/' + nodecg.bundleConfig.weather.location + '/?exclude=flags,alerts,hourly,minutely';
-	const timezone = nodecg.bundleConfig.conference.timezone;
 
 	// Obtain the weather replicant
 	var weather = nodecg.Replicant('weather');
+
+	var conference = nodecg.Replicant("conference");
+	var timezone = conference.value.timezone;
 
 	// Load the request module
 	var request = require('request');
@@ -40,6 +42,7 @@ module.exports = function (nodecg)
 			if (!error && response.statusCode === 200)
 			{
 				let weather_data = JSON.parse(body);
+
 				try
 				{
 					nodecg.log.info('[weather] New weather data received.');

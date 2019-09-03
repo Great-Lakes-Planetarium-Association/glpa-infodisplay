@@ -6,10 +6,13 @@ module.exports = function (nodecg) {
 	 */
 	const twemoji = require('twemoji');
 
+	// Get Conference values
+	var conference = nodecg.Replicant("conference");
+	var timezone = conference.value.timezone;
+
 	// Load variables from bundle
 	const confHashtag = nodecg.bundleConfig.twitter.confHashtag;
 	const tweet_display_time = nodecg.bundleConfig.twitter.tweet_display_time * 1000;
-	const timezone = nodecg.bundleConfig.conference.timezone;
 
 	// Configure a Twitter object
 	var Twitter = require('twitter');

@@ -17,96 +17,94 @@ body {
     font-size: 12pt;
 }
 
-.container {
-    padding: 5px;
+hr {
+  border: 5px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-/* Specify configurations for different monitors */
-.container.hd1080 {
-    width: 1920px;
-    height: 1080px;
-}
-
-.container.xga {
+#wrapper {
+    padding: 0px;
     width: 1024px;
     height: 768px;
 }
 
+#header {
+  background: #336299 url(../img/MastBG.png) 0 0 repeat-x;
+  height: 100px;
 
-/* Set background image z-index to -1 */
-.background-images img {
-    z-index: -1;
-    position: absolute;
-    opacity: 0;
 }
 
-/* Blocking configuration */
-.header {
-    height: 165px;
-   <!-- border-bottom: thick white solid; -->
-}
-
-.main {
-    background: rgba(0, 0, 0, 0.5);
-   <!-- height: 100%; -->
-    padding-top: 10px;
-    height: 450px;
-}
-
-.twitter {
-    height: 130px;
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-}
-
-#header-title {
-    font-size: 32pt;
-    font-weight: bolder;
-    text-align: center;
-    color: #FFFFFF;
-    -webkit-text-stroke: 1px black;
-}
-
-/* Time/Date/Forecast Table */
-.time-date-forecast {
-    width: 100%;
-    text-align: center;
-    font-size: 14pt;
-    color: #000000;
-    text-shadow: 0px 0px 10px white; /* outer glow */
-}
-td {
-    padding: 10px;
-}
-
-canvas.weather-icon {
-    display: block;
+#logo {
+    margin: 10px;
     float: left;
 }
 
-div.mainbody {
-    position: absolute;
-    width: 750px;
-    padding: 10px;
-    font-size: 26pt;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
+#title {
+    margin: 10px;
+    float: left;
+    color: #fff;
+    padding-top: 0.7ex;
+      font-size: 25pt;
 }
 
-.twitter-logo {
-    margin-left: 10px;
-    width: 100px;
-    height: 130px;
+/* Sidebar content */
+
+#sidebar {
+    width: 205px;
+    background-color: #EEF4F9;
+    height: 538px;
+    padding: 2ex;
+    float: left;
+}
+
+#current-time {
+    font-size: 14pt;
     text-align: center;
+}
+
+.weather-title {
+    font-weight: bold;
+}
+
+.weather-icon {
+    float: right;
+}
+.weather-icon-canvas {
+    width: 85px;
+}
+
+.attribution {
+    padding-top: 25px;
+    font-size: 8pt;
+}
+
+/* Main Content Area */
+#block-main {
+    padding: 2ex;
+    float: left;
+}
+
+/* Social Media bar */
+#block-twitter {
+    height: 130px;
+    width: 100%;
+    display: flex;
+    color: #fff;
+    background-color: #EEF4F9;
+}
+
+#block-twitter-logo {
+    width: 205px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    float: left;
 }
 
 #twitter-logo {
     width: auto;
     height: 100px;
-    float: left;
 }
 
 #twitter-hashtag {
@@ -114,73 +112,39 @@ div.mainbody {
     font-size: 18px;
 }
 
-div.avatar {
-    width: 125px;
-    height: 130px;
-    float: left;
-    margin-left: 10px;
-}
-img#avatar {
-    width: auto;
-    height: 100px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-}
-
-#tweet-container {
+#block-twitter-tweet-wrapper {
+    width: 819px;
     transition-duration: 1s;
+    color: #000;
+    float: left;
 }
 
-.twitter-content{
-    width: 100%;
-    margin-left: 10px;
+#block-twitter-tweet-avatar {
     height: 130px;
+    width: 130px;
+    float: left;
+}
+#tweet-avatar {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+#block-twitter-content{
+    width: 689px;
     font-weight: bold;
-
-
+    float: left;
+    padding: 2ex;
 }
-.tweet {
-    width: 550px;
 
-}
-.tweet-text {
-    /*padding-top: 15px;*/
-    /*font-size: 22px;*/
+#block-twitter-tweet-text {
     height: 100px;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
-    text-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
-}
-
-.tweet-metadata {
-    height: 30px;
-    -webkit-text-stroke-width: .5px;
-    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 1);
-}
-div.tweet-media {
-    width: 200px;
-    height: 100%;
-    float: right;
-}
-img#tweet-media {
-    max-width:100%;
-    max-height:100%;
-    float: right;
-    display: block;
 }
 
 .hashtag {
     font-size: larger;
-    color: lightgoldenrodyellow;
-}
-
-img#tweet-img {
-    height: 100%;
-    width: auto;
-    display: block;
+    color: #336299;
 }
 
 .emoji {
@@ -188,6 +152,8 @@ img#tweet-img {
     height: 30%;
 }
 
-.attribution {
-    font-size: 6pt;
+#block-twitter-tweet-metadata {
+    padding-top: 1ex;
+    font-size: smaller;
+    font-style: italic
 }

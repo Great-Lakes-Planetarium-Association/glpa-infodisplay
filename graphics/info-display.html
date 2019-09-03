@@ -2,77 +2,110 @@
 <head>
     <title>GLPA-Infodisplay Slate</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
-    <link rel="import"  href="elements/room-announcement/room-announcement.html">
 </head>
 
 <body>
-    <div class="background-images">
-            <img id="bg-img1" src="img/bg_img1.jpg" style="opacity: 1" />
-            <img id="bg-img2" src="img/bg_img2.jpg" />
-            <img id="bg-img3" src="img/bg_img3.jpg" />
-            <img id="bg-img4" src="img/bg_img4.jpg" />
-            <img id="bg-img5" src="img/bg_img5.jpg" />
-    </div>
-    <div class="container xga">
-        <div class="header">
-            <div id="header-title"></div>
-            <table class="time-date-forecast">
-                <tr>
-                    <th></th>
-                    <th>Currently</th>
-                    <th><span id="weather-today-title"></span></th>
-                    <th><span id="weather-tomorrow-title"></span></th>
-                    <th><span id="weather-future-title"></span></th>
-                </tr>
-                <tr>
-                    <td><span id="current-time"></span></td>
-                    <td><canvas class="weather-icon" id="weather-current" width="64" height="64"></canvas><span class="weather-temps" id="current-temp"></span><br /><span id="current-time"></span></td>
-                    <td><canvas class="weather-icon" id="weather-today-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-today-temps"></span></td>
-                    <td><canvas class="weather-icon" id="weather-tomorrow-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-tomorrow-temps"></span></td>
-                    <td><canvas class="weather-icon" id="weather-future-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-future-temps"></span></td>
-                </tr>
-            </table>
+    <!-- Display screen wrapper -->
+    <div id="wrapper">
+        <!-- GLPA Conference Title bar -->
+        <div id="header">
+            <div id="logo"><img src="img/logo.png" /></div>
+            <div id="title"></div>
         </div>
-        <div class="main">
-            <div class="mainbody">
-                <room-announcement></room-announcement>
+        <!-- Sidebar with time and weather info -->
+        <div id="sidebar">
+            <div id="current-time"></div>
+            <hr />
+            <!-- Weather information -->
+            <div>
+                <!-- Currently weather box -->
+                <div id="weather-current">
+                    <div class="weather-icon">
+                        <canvas class="weather-icon-canvas" id="weather-current-icon"></canvas>
+                    </div>
+                    <div>
+                        <span class="weather-title">Currently</span><br /><br />
+                        <span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span>
+                    </div>
+                </div>
+                <hr />
+                <!-- Today weather box -->
+                <div>
+                    <div class="weather-icon">
+                        <canvas class="weather-icon-canvas" id="weather-today-icon"></canvas>
+                    </div>
+                    <div>
+                        <span class="weather-title">Today</span><br /><br />
+                        <span id="weather-today-conditions"></span><br /><br />
+                        H: <span id="weather-today-temp-high"></span>&deg; / L: <span id="weather-today-temp-low"></span>&deg;
+                        
+                    </div>
+                </div>
+                <hr />
+                <!-- Tomorrow weather box -->
+                <div>
+                    <div class="weather-icon">
+                        <canvas class="weather-icon-canvas" id="weather-tomorrow-icon"></canvas>
+                    </div>
+                    <div>
+                        <span class="weather-title" id="weather-tomorrow-title"></span><br />
+                        <br />
+                        <span id="weather-tomorrow-conditions"></span><br /><br />
+                        H: <span id="weather-tomorrow-temp-high"></span>&deg; / L: <span id="weather-tomorrow-temp-low"></span>&deg;
+                    </div>
+                </div>            
+                <div class="attribution">Weather data Powered by Dark Sky</div>
+                <!-- End Weather Information-->
             </div>
 
         </div>
-        <div class="twitter">
-            <div class="twitter-logo">
+        <!-- End sidebar -->
+        <!-- Start Main Content Block -->
+        <div id="block-main">Main content here</div>
+        <!-- End Main Content Block -->
+
+        <!-- Start Social Media bar -->
+        <div id="block-twitter">
+            <!-- Logo and Hashtag block -->
+            <div id="block-twitter-logo">
                 <img id="twitter-logo" src="img/twitter.png" /><br />
                 <span id="twitter-hashtag"></span>
             </div>
-            <div id="tweet-container">
-                <div class="avatar">
-                    <img id="avatar" />
+            <!-- Tweet block content-->
+            <div id="block-twitter-tweet-wrapper">
+                <!-- Tweet Avatar-->
+                <div id="block-twitter-tweet-avatar">
+                    <img id="tweet-avatar" />
                 </div>
-                <div class="twitter-content">
-                    <div class="tweet-media"><img id="tweet-media" /></div>
-                    <div class="tweet">
-                        <div class="tweet-text" id="tweet-text"></div>
-                        <div class="tweet-metadata" id="tweet-metadata">
-                            <span id="screenname"></span> <span id="tweettime"></em></span>
+                <!-- Tweet content -->
+                <div id="block-twitter-content">
+                    <!-- Tweet Text Content-->
+                    <div id="block-twitter-tweet-text">
+                        <span id="tweet-text"></span>
+                        <div id="block-twitter-tweet-metadata">
+                            <span id="tweet-screenname"></span> <span id="tweet-time"></em></span>
                         </div>
                     </div>
+                    <!-- Commented out til we figure out what to do with tweet media
+                    
+                    <div id="block-twitter-tweet-media">
+                        <img id="tweet-media" />
+                    </div>-->
                 </div>
             </div>
         </div>
-        <div class="attribution">Weather data Powered by Dark Sky</div>
     </div>
 
     <!-- Load JS stuff -->
     <!-- Need to load components before our modules since we'll be calling them! -->
     <script src="../node_modules/gsap/src/minified/TweenMax.min.js"></script>
     <script src="../node_modules/gsap/src/minified/TimelineMax.min.js"></script>
-    <script src="scripts/skycons/skycons.js"></script>
+    <script src="./scripts/skycons/skycons.js"></script>
     <script src="../node_modules/textfit/textFit.min.js"></script>
     <!-- Internal script packages -->
-    <script src="scripts/background.js"></script>
-    <script src="scripts/scripts.js"></script>
-    <script src="scripts/twitter.js"></script>
-    <script src="scripts/weather.js"></script>
+    <script src="./scripts/scripts.js"></script>
+    <script src="./scripts/twitter.js"></script>
+    <script src="./scripts/weather.js"></script>
    
 </body>
 </html>

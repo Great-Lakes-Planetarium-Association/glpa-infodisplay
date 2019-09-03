@@ -20,14 +20,15 @@ activeTweet.on('change', tweet => {
  */
 function set_tweet(tweet)
 {
-    document.getElementById('screenname').innerHTML = tweet.screen_name + ' &mdash; ';
-    document.getElementById('tweettime').innerText = tweet.created_at;
+    document.getElementById('tweet-screenname').innerHTML = tweet.screen_name + ' &mdash; ';
+    document.getElementById('tweet-time').innerText = tweet.created_at;
     document.getElementById('tweet-text').innerHTML = tweet.formatted_text;
-    document.getElementById('avatar').src = tweet.avatar;
+    document.getElementById('tweet-avatar').src = tweet.avatar;
 
     if (tweet.image)
     {
-        document.getElementById('tweet-media').src = tweet.image.media_url;
+        // Commented out til we figure out what to do with media.
+        //document.getElementById('tweet-media').src = tweet.image.media_url;
     }
     else
     {
@@ -47,10 +48,10 @@ function tweet_visibility(visible)
 {
     if (visible)
     {
-        document.getElementById('tweet-container').style.opacity = '1';
+        document.getElementById('block-twitter-tweet-wrapper').style.opacity = '1';
     }
     else
     {
-        document.getElementById('tweet-container').style.opacity = '0';
+        document.getElementById('block-twitter-tweet-wrapper').style.opacity = '0';
     }
 }

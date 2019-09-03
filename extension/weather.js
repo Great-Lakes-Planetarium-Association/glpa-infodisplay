@@ -48,31 +48,27 @@ module.exports = function (nodecg)
 					{
 						current: 
 						{
-							temperature: Math.round(weather_data.currently.temperature) + String.fromCharCode(176) + " F",
-							icon: weather_data.currently.icon
+							temperature: Math.round(weather_data.currently.temperature),
+							icon: weather_data.currently.icon,
+							summary: weather_data.currently.summary
 						},
 						today:
 						{
 							
 							day_name: new Date(weather_data.daily.data[0].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone }),
-							temp_low: Math.round(weather_data.daily.data[0].temperatureLow) + String.fromCharCode(176) + " F",
-							temp_high: Math.round(weather_data.daily.data[0].temperatureHigh) + String.fromCharCode(176) + " F",
-							icon: weather_data.daily.data[0].icon
+							temp_low: Math.round(weather_data.daily.data[0].temperatureLow),
+							temp_high: Math.round(weather_data.daily.data[0].temperatureHigh),
+							icon: weather_data.daily.data[0].icon,
+							summary: weather_data.daily.data[0].summary
 						},
 						tomorrow: 
 						{
 							day_name: new Date(weather_data.daily.data[1].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low: Math.round(weather_data.daily.data[1].temperatureLow) + String.fromCharCode(176) + "F",
-							temp_high: Math.round(weather_data.daily.data[1].temperatureHigh) + String.fromCharCode(176) + "F",
-							icon: weather_data.daily.data[1].icon
+							temp_low: Math.round(weather_data.daily.data[1].temperatureLow),
+							temp_high: Math.round(weather_data.daily.data[1].temperatureHigh),
+							icon: weather_data.daily.data[1].icon,
+							summary: weather_data.daily.data[1].summary
 						},
-						future:
-						{
-							day_name: new Date(weather_data.daily.data[2].time * 1000).toLocaleString("en-US", { "weekday": "long", "timeZone": timezone}),
-							temp_low: Math.round(weather_data.daily.data[2].temperatureLow) + String.fromCharCode(176) + "F",
-							temp_high: Math.round(weather_data.daily.data[2].temperatureHigh) + String.fromCharCode(176) + "F",
-							icon: weather_data.daily.data[2].icon
-						}
 					}
 
 					// Send updated weather data to replicant

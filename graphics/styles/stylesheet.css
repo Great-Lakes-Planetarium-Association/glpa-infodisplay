@@ -72,11 +72,11 @@ hr {
     float: right;
 }
 .weather-icon-canvas {
-    width: 85px;
+    width: 75px;
 }
 
 .attribution {
-    padding-top: 25px;
+    padding-top: 20px;
     font-size: 8pt;
 }
 
@@ -138,8 +138,12 @@ hr {
     padding: 2ex;
 }
 
-#block-twitter-tweet-text {
+#block-twitter-tweet-text-wrapper {
     height: 100px;
+}
+
+#block-twitter-tweet-text {
+    height: 75px;
 }
 
 .hashtag {

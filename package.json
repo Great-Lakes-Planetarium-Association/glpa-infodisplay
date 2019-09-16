@@ -11,13 +11,6 @@
   "nodecg": {
     "compatibleRange": "~1.1.3",
     "dashboardPanels": [
-      {
-        "name": "room-announcement",
-        "title": "Room Announcement",
-        "width": 4,
-        "file": "room-announcement.html",
-        "headerColor": "#9f9bbd"
-      }
     ],
     "graphics": [
       {

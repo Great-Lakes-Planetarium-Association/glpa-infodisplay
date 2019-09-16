@@ -43,8 +43,8 @@ function set_tweet(tweet) {
         else {
             document.getElementById('tweet-media').src = "";
         }
-        textFit(document.getElementsByClassName('tweet-text'), { minFontSize: 10, maxFontSize: 38, multiLine: true });
-        textFit(document.getElementsByClassName('tweet-metadata'), { maxFontSize: 18 })
+        textFit(document.getElementsByClassName('block-twitter-tweet-text'), { minFontSize: 10, maxFontSize: 38, multiLine: true });
+        textFit(document.getElementsByClassName('block-twitter-tweet-metadata'), { maxFontSize: 18 })
     },1000);
     setTimeout(showTweet, 1000);
 }

@@ -23,8 +23,6 @@ The installation guide only covers the NodeCG server portion of the setup, since
 NodeCG and this bundle make use of the following Node.JS modules:
 
 * pm2 - Run NodeCG as a background service task
-* bower - front-end package management tool.  
-  Note: it is recommended to still use bower despite it being deprecated.  Polymer still requires bower usage and therefore using yarn adds additional, unnecessary complexity.
 * nodecg-cli - NodeCG utility for installing bundles and creating a default bundle configuration.
 
 
@@ -52,7 +50,6 @@ mkdir C:\NodeCG\
 cd C:\NodeCG
 git clone https://github.com/nodecg/nodecg.git .
 npm install --production
-bower install
 ```
 
 ### Install the `glpa-infodisplay` bundle
@@ -60,7 +57,6 @@ bower install
 git clone https://bitbucket.org/glpa_av/glpa-infodisplay.git
 cd C:\NodeCG\bundles\glpa-infodisplay
 npm install
-bower install
 ```
 
 This completes the installation.  You will now need to configure the bundle.

@@ -1,6 +1,5 @@
 node_modules
 coverage
-bower_components
 .*.swp
 .vscode/
 glpa-infodisplay.json

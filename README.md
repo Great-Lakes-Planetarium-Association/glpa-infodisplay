@@ -45,7 +45,7 @@ choco install NodeJS git -y
 
 ### Install NodeCG
 ```
-npm install -g bower pm2 nodecg-cli
+npm install -g pm2 nodecg-cli
 mkdir C:\NodeCG\
 cd C:\NodeCG
 git clone https://github.com/nodecg/nodecg.git .

@@ -31,7 +31,8 @@ function showTweet() {
 function set_tweet(tweet) {
     hideTweet();
     setTimeout(function () {
-        document.getElementById('tweet-screenname').innerHTML = tweet.screen_name + ' &mdash; ';
+        document.getElementById('tweet-username').innerText = tweet.name;
+        document.getElementById('tweet-screenname').innerText = tweet.screen_name;
         document.getElementById('tweet-time').innerText = tweet.created_at;
         document.getElementById('tweet-text').innerHTML = tweet.formatted_text;
         document.getElementById('tweet-avatar').src = tweet.avatar;

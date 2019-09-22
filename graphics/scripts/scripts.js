@@ -12,25 +12,19 @@ conference.on("change", newval => {
 
 // Call the setClock functio after conference replicant is loaded
 NodeCG.waitForReplicants(conference).then(() => {
-  setClock();
+  updateClock();
 });
 
-// Set the clock on the page
+// Update the appropriate values on the page
 function setClock() {
-  let timezone = conference.value.timezone;
   let now = new Date();
-  document.getElementById("block-header-clock").innerHTML = `
-    <div class="clock-date">${now.toLocaleString("en-us", {
-      timeZone: timezone,
-      weekday: "long",
-      year: "numeric",
-      month: "numeric",
-      day: "numeric"
-    })}</div>
-    <div class="clock-time">${now.toLocaleString("en-us", {
-      timeZone: timezone,
-      hour: "numeric",
-      minute: "2-digit"
-    })}</div>`;
-  setTimeout(setClock, 500);
+  document.getElementById("clock-day").innerText = now.toLocaleString("en-us", { timeZone: conference.value.timezone, weekday: "long" });
+  document.getElementById("clock-date").innerText = now.toLocaleString("en-us", { timeZone: conference.value.timezone, year: "numeric", month: "numeric", day: "numeric" });
+  document.getElementById("clock-time").innerText = now.toLocaleString("en-us", { timeZone: conference.value.timezone, hour: "numeric", minute: "2-digit" });
+}
+
+// Loop to update the displayed clock every second
+function updateClock() {
+  setClock();
+  setTimeout(updateClock, 1000);
 }

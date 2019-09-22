@@ -11,7 +11,11 @@
         <div id="block-header">
             <div id="block-header-logo"><img src="img/logo.png" /></div>
             <div id="block-header-title"></div>
-            <div id="block-header-clock"></div>
+            <div id="block-header-clock">
+                <span id="clock-day"></span><br />
+                <span id="clock-date"></span><br />
+                <span id="clock-time"></span>
+            </div>
         </div>
         <div id="block-main">
             <div id="block-tweet">
@@ -23,7 +27,13 @@
                     </div>
                     <!-- Tweet block content-->
                     <div id="block-twitter-tweet-wrapper">
-                        <!-- Tweet Avatar-->
+                        <!-- Tweet User Block -->
+                        <div id="block-tweet-author">
+                            <img id="tweet-avatar" />
+                            <span class="textfit" id="tweet-username"></span><br />
+                            <span class="textfit" id="tweet-screenname"></span>
+
+                        </div>
                         <div id="block-twitter-tweet-avatar">
                             <img id="tweet-avatar" />
                         </div>
@@ -33,7 +43,7 @@
                             <div id="block-twitter-tweet-text-wrapper">
                                 <div class="block-twitter-tweet-text" id="tweet-text"></div>
                                 <div class="block-twitter-tweet-metadata">
-                                    <span class="textfit" id="tweet-screenname"></span> <span id="tweet-time"></em></span>
+                                     <span id="tweet-time"></em></span>
                                 </div>
                             </div> 
                         </div>                       

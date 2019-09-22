@@ -6,7 +6,7 @@ conference.on("change", newval => {
   console.log(
     `conference: Received new conference.json from live.glpa.org.  Updating content.`
   );
-  document.getElementById("title").innerText = newval.conference;
+  document.getElementById("block-header-title").innerText = newval.conference;
   document.getElementById("twitter-hashtag").innerText = newval.twitter.hashtag;
 });
 
@@ -19,7 +19,7 @@ NodeCG.waitForReplicants(conference).then(() => {
 function setClock() {
   let timezone = conference.value.timezone;
   let now = new Date();
-  document.getElementById("current-time").innerHTML = `
+  document.getElementById("block-header-clock").innerHTML = `
     <div class="clock-date">${now.toLocaleString("en-us", {
       timeZone: timezone,
       weekday: "long",

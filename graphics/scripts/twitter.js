@@ -11,7 +11,7 @@ activeTweet.on('change', tweet => {
  * Hides the tweet content from the screen.
  */
 function hideTweet() {
-    document.getElementById('block-twitter-tweet-wrapper').style.opacity = '0';
+    document.getElementById('block-tweet').style.opacity = '0';
     return;
 }
 
@@ -19,7 +19,7 @@ function hideTweet() {
  * Shows the tweet content on the screen.
  */
 function showTweet() {
-    document.getElementById('block-twitter-tweet-wrapper').style.opacity = '1';
+    document.getElementById('block-tweet').style.opacity = '1';
     return;
 }
 

@@ -14,8 +14,37 @@
             <div id="block-header-clock"></div>
         </div>
         <div id="block-main">
-            <div id="block-tweet"></div>
+            <div id="block-tweet">
+                <div id="block-twitter">
+                    <!-- Logo and Hashtag block -->
+                    <div id="block-twitter-logo">
+                        <img id="twitter-logo" src="img/twitter.png" /><br />
+                        <span id="twitter-hashtag"></span>
+                    </div>
+                    <!-- Tweet block content-->
+                    <div id="block-twitter-tweet-wrapper">
+                        <!-- Tweet Avatar-->
+                        <div id="block-twitter-tweet-avatar">
+                            <img id="tweet-avatar" />
+                        </div>
+                        <!-- Tweet content -->
+                        <div id="block-twitter-content">
+                            <!-- Tweet Text Content-->
+                            <div id="block-twitter-tweet-text-wrapper">
+                                <div class="block-twitter-tweet-text" id="tweet-text"></div>
+                                <div class="block-twitter-tweet-metadata">
+                                    <span class="textfit" id="tweet-screenname"></span> <span id="tweet-time"></em></span>
+                                </div>
+                            </div> 
+                        </div>                       
+                        <div id="block-twitter-tweet-media">
+                           <img id="tweet-media" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
 
         <div id="block-ticker">
             <div id="block-weather-current" class="block-weather">
@@ -45,42 +74,6 @@
                     H: <span id="weather-tomorrow-temp-high"></span>&deg; / L: <span id="weather-tomorrow-temp-low"></span>&deg;
                 </div>
 
-            </div>
-        </div>
-    </div>
-    <div>
-
-
-
-        <!-- Start Social Media bar -->
-        <div id="block-twitter">
-            <!-- Logo and Hashtag block -->
-            <div id="block-twitter-logo">
-                <img id="twitter-logo" src="img/twitter.png" /><br />
-                <span id="twitter-hashtag"></span>
-            </div>
-            <!-- Tweet block content-->
-            <div id="block-twitter-tweet-wrapper">
-                <!-- Tweet Avatar-->
-                <div id="block-twitter-tweet-avatar">
-                    <img id="tweet-avatar" />
-                </div>
-                <!-- Tweet content -->
-                <div id="block-twitter-content">
-                    <!-- Tweet Text Content-->
-                    <div id="block-twitter-tweet-text-wrapper">
-                        <div class="block-twitter-tweet-text" id="tweet-text">
-                        </div>
-                        <div class="block-twitter-tweet-metadata">
-                            <span class="textfit" id="tweet-screenname"></span> <span id="tweet-time"></em></span>
-                        </div>
-                    </div>
-                    <!-- Commented out til we figure out what to do with tweet media
-                    
-                    <div id="block-twitter-tweet-media">
-                        <img id="tweet-media" />
-                    </div>-->
-                </div>
             </div>
         </div>
     </div>

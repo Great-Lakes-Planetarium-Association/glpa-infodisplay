@@ -38,8 +38,7 @@ function set_tweet(tweet) {
         document.getElementById('tweet-avatar').src = tweet.avatar;
 
         if (tweet.image) {
-            // Commented out til we figure out what to do with media.
-            //document.getElementById('tweet-media').src = tweet.image.media_url;
+            document.getElementById('tweet-media').src = tweet.image.media_url;
         }
         else {
             document.getElementById('tweet-media').src = "";

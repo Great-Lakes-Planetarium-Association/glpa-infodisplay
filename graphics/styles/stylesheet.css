@@ -55,6 +55,11 @@ hr {
 
 #block-main {
     height: 60%;
+    padding: 2em;
+    background: url('../img/main-background.jpg');
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #block-ticker {
@@ -86,7 +91,12 @@ hr {
 }
 
 
-/* Social Media bar */
+/* Twitter Content */
+#block-tweet {
+    height: 100%;
+    width: 100%;
+    background-color: red;
+}
 #block-twitter {
     height: 130px;
     width: 100%;

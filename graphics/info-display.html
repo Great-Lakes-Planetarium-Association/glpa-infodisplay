@@ -82,16 +82,13 @@
         </div>
     </div>
 
-    <!-- Load JS stuff -->
-    <!-- Need to load components before our modules since we'll be calling them! -->
-    <script src="../node_modules/gsap/src/minified/TweenMax.min.js"></script>
-    <script src="../node_modules/gsap/src/minified/TimelineMax.min.js"></script>
     <script src="./scripts/skycons/skycons.js"></script>
     <script src="../node_modules/textfit/textFit.min.js"></script>
     <!-- Internal script packages -->
-    <script src="./scripts/scripts.js"></script>
-    <script src="./scripts/twitter.js"></script>
-    <script src="./scripts/weather.js"></script>
+    <script src="./scripts/scripts.js" type="module"></script>
+    <script src="./scripts/ticker.js" type="module"></script>
+    <script src="./scripts/twitter.js" type="module"></script>
+    <script src="./scripts/weather.js" type="module"></script>
    
 </body>
 </html>

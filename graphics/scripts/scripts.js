@@ -3,9 +3,7 @@ const conference = nodecg.Replicant("conference");
 
 // General things to trigger when conference data is updated
 conference.on("change", newval => {
-  console.log(
-    `conference: Received new conference.json from live.glpa.org.  Updating content.`
-  );
+  nodecg.log.info('Processing updated conference data.');
   document.getElementById("block-header-title").innerText = newval.conference;
   document.getElementById("twitter-hashtag").innerText = newval.twitter.hashtag;
 });
@@ -15,7 +13,9 @@ NodeCG.waitForReplicants(conference).then(() => {
   updateClock();
 });
 
-// Update the appropriate values on the page
+/** 
+ * Sets the displayed clock information on the graphics page
+ */
 function setClock() {
   let now = new Date();
   document.getElementById("clock-day").innerText = now.toLocaleString("en-us", { timeZone: conference.value.timezone, weekday: "long" });
@@ -23,7 +23,9 @@ function setClock() {
   document.getElementById("clock-time").innerText = now.toLocaleString("en-us", { timeZone: conference.value.timezone, hour: "numeric", minute: "2-digit" });
 }
 
-// Loop to update the displayed clock every second
+/** 
+ * Recurring function to set the clock every 1 second 
+ */
 function updateClock() {
   setClock();
   setTimeout(updateClock, 1000);

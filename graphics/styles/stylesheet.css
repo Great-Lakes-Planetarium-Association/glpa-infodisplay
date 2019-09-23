@@ -9,13 +9,6 @@ body {
     font-size: 12pt;
 }
 
-hr {
-  border: 5px solid rgb(206, 206, 206);
-  border-radius: 5px;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
 #wrapper {
     padding: 0px;
     width: 100%;
@@ -23,6 +16,7 @@ hr {
     position: relative;
 }
 
+/* Header Elements */
 #block-header {
     position: relative;
     width: 100%;
@@ -55,6 +49,7 @@ hr {
     text-align: center;
 }
 
+/* Main body elements */
 #block-main {
     height: 70%;
     padding: 1rem;
@@ -63,37 +58,6 @@ hr {
     background-repeat: no-repeat;
     background-position: center;
     clear:both;
-}
-
-#block-ticker {
-    position: absolute;
-    height: 15%;
-    width: 100%;
-    background: #e6e6e6;
-    color: #000;
-    bottom: 0;
-}
-
-.block-weather {
-    float: left;
-    width: 20%;
-    height: 100%;
-}
-
-.weather-title {
-    font-weight: bold;
-}
-
-.weather-icon {
-    float: right;
-}
-.weather-icon-canvas {
-    width: 75px;
-}
-
-.attribution {
-    padding-top: 20px;
-    font-size: 8pt;
 }
 
 /* Twitter Content */
@@ -140,7 +104,6 @@ hr {
     max-height:15%;
 }
 
-
 #block-twitter-content{
     
     font-weight: bold;
@@ -170,4 +133,38 @@ hr {
     padding-top: 1ex;
     font-size: smaller;
     font-style: italic
+}
+
+/* Ticker box content */
+
+#block-ticker {
+    position: absolute;
+    height: 15%;
+    width: 100%;
+    background: #e6e6e6;
+    color: #000;
+    bottom: 0;
+    transition-duration: 1s;
+}
+
+.block-weather {
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+
+.weather-title {
+    font-weight: bold;
+}
+
+.weather-icon {
+    float: right;
+}
+.weather-icon-canvas {
+    width: 75px;
+}
+
+.attribution {
+    padding-top: 20px;
+    font-size: 8pt;
 }

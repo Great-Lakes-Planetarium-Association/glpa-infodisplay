@@ -6,6 +6,7 @@ module.exports = function (nodecg)
 	// Obtain the weather replicant
 	var weather = nodecg.Replicant('weather');
 
+	/* Obtain the conference replicant */
 	var conference = nodecg.Replicant("conference");
 	var timezone = conference.value.timezone;
 
@@ -27,14 +28,13 @@ module.exports = function (nodecg)
 	nodecg.listenFor('update_weather', () =>
 	{
 		nodecg.log.info('[weather] Manual weather update request triggered.');
-		update_weather();
+		updateWeather();
 	});
 
 	/**
 	 * Updates weather data and pushes to replicant.
-	 * Obtains the latest weather data for the conference location, performs formatting tasks and then pushes data to replicant.
 	 */
-	function update_weather() {
+	function updateWeather() {
 		// Make a request to grab the current weather data
 		request(darkskyAPI, function (error, response, body)
 		{
@@ -93,7 +93,7 @@ module.exports = function (nodecg)
 	function loop_update_weather()
 	{
 		nodecg.log.info('[weather] Beginning weather update loop.');
-		update_weather();
+		updateWeather();
 		nodecg.log.info('[weather] Sleeping for ' + poll_interval + 'ms.  Nap time!');
 		setTimeout(loop_update_weather,poll_interval);
 	}

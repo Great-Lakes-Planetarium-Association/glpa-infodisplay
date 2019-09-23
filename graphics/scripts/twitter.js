@@ -3,7 +3,7 @@
 const activeTweet = nodecg.Replicant('activeTweet');
 
 activeTweet.on('change', tweet => {
-    console.log('[twitter]: Processing new tweet from backend.');
+    nodecg.log.info('Processing new tweet from backend.');
     set_tweet(tweet);
 });
 

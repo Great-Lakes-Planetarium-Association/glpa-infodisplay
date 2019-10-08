@@ -1,10 +1,10 @@
 // Require the weather replicant
 const weather = nodecg.Replicant("weather");
 
-import { TimelineLite } from 'gsap';
+import { Skycons } from 'skycons';
 
 // Load up Skycons
-var skycons = new Skycons({ color: "black" });
+const skycons = new Skycons({ 'color': 'black' });
 skycons.play();
 
 // Do a weather update when data is available
@@ -37,11 +37,3 @@ var current = document.getElementById("block-weather-current"),
     today = document.getElementById("block-weather-today"),
     tomorrow = document.getElementById("block-weather-tomorrow");
 
-var tl = new TimelineLite();
-tl.set(current, { visibility: "visible" })
-    .set(today, { visibility: "visible" })
-    .set(tomorrow, { visibility: "visible" })
-    .from(current, 1, { scale: 0 })
-    .from(today, 1, { scale: 0 })
-    .from(tomorrow, 1, { scale: 0})
-    .play();

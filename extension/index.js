@@ -17,7 +17,4 @@ module.exports = function (nodecg) {
     require('./weather');
     require('./twitter');
     require('./conference');
-    require('./ticker');
-
-
 };

@@ -9,7 +9,7 @@ skycons.play();
 
 // Do a weather update when data is available
 weather.on("change", weather_data => {
-    console.log("[weather]: Processing updated weather.");
+    nodecg.log.info("Processing updated weather.");
 
     // Handle current weather data stuff //
     // Set current temp
@@ -30,10 +30,5 @@ weather.on("change", weather_data => {
     document.getElementById("weather-tomorrow-conditions").textContent = weather_data.tomorrow.summary;
     skycons.set("weather-tomorrow-icon", weather_data.tomorrow.icon);
 
-    console.log("[weather]: Completed processing updated weather.");
+    nodecg.log.info("Completed processing updated weather.");
 });
-
-var current = document.getElementById("block-weather-current"),
-    today = document.getElementById("block-weather-today"),
-    tomorrow = document.getElementById("block-weather-tomorrow");
-

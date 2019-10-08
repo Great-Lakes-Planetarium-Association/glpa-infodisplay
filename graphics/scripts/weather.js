@@ -1,8 +1,6 @@
 // Require the weather replicant
 const weather = nodecg.Replicant("weather");
 
-import { Skycons } from 'skycons';
-
 // Load up Skycons
 const skycons = new Skycons({ 'color': 'black' });
 skycons.play();

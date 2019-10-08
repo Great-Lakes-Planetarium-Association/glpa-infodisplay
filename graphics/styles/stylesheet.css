@@ -161,7 +161,7 @@ body {
     float: right;
 }
 .weather-icon-canvas {
-    width: 75px;
+    height: 75px;
 }
 
 .attribution {

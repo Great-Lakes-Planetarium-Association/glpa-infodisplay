@@ -16,7 +16,9 @@ body {
     position: relative;
 }
 
-/* Header Elements */
+/* Set up three horizontal areas to display content within */
+
+/* Top:Header Elements */
 #block-header {
     position: relative;
     width: 100%;
@@ -24,6 +26,29 @@ body {
     background: #072346;
     color: #fff;
 }
+
+/* Middle: Main Content Body */
+#block-main {
+    height: 70%;
+    padding: 1rem;
+    background: url('../img/main-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Bottom: Omnibar */
+#block-omnibar {
+    height: 15%;
+    width: 100%;
+    background: #e6e6e6;
+    color: #000;
+    bottom: 0;
+    transition-duration: 1s;
+}
+
+
+/* Header contents */
 
 #block-header-logo {
     position: absolute;
@@ -50,16 +75,6 @@ body {
 }
 
 /* Main body elements */
-#block-main {
-    height: 70%;
-    padding: 1rem;
-    background: url('../img/main-background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    clear:both;
-}
-
 /* Twitter Content */
 #block-tweet {
     position: relative;
@@ -135,17 +150,9 @@ body {
     font-style: italic
 }
 
-/* Ticker box content */
+/* Omnibar Contents */
 
-#block-ticker {
-    position: absolute;
-    height: 15%;
-    width: 100%;
-    background: #e6e6e6;
-    color: #000;
-    bottom: 0;
-    transition-duration: 1s;
-}
+
 
 .block-weather {
     float: left;

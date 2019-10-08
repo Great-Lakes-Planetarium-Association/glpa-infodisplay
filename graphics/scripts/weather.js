@@ -2,7 +2,12 @@
 const weather = nodecg.Replicant("weather");
 
 // Load up Skycons
-const skycons = new Skycons({ 'color': 'black' });
+const skycons = new Skycons({
+    "monochrome": false,
+    "colors": {
+        "sun": "#eba834"
+    }
+});
 skycons.play();
 
 // Do a weather update when data is available

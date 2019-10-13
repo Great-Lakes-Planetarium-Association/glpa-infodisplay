@@ -265,21 +265,20 @@ body {
  * Tweet - Text Only
  * Tweet only has text; no images to share.
  **/
-.tweetTextOnly #block-tweet-content{
+.tweetLayoutTextOnly #block-tweet-content{
 
 }
 
-.tweetTextOnly #block-twitter-tweet-text {
+.tweetLayoutTextOnly #block-twitter-tweet-text {
     position: absolute;
-    bottom: 5;
     height: 20%;
 }
 
-.tweetTextOnly #block-twitter-tweet-media {
+.tweetLayoutTextOnly #block-twitter-tweet-media {
     visibility: hidden;
 }
 
-.tweetTextOnly #tweet-time {
+.tweetLayoutTextOnly #tweet-time {
     font-weight: bold;
 }
 
@@ -310,6 +309,7 @@ body {
 }
 
 .tweetLayout1Up #block-twitter-tweet-media {
+    max-width: 100%;
     height: 100%;
     position: absolute;
     top: 0;

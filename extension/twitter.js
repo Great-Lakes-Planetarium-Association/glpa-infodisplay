@@ -71,14 +71,28 @@ function updateTweetCollection(collection_id = nodecg.bundleConfig.twitter.colle
 function format_tweet(tweetObj) {
 	var user = twitterResponseData.users[tweetObj.user.id]
 	var tweet = {
-		layout: "tweetLayout1Up",
 		id_str: tweetObj.id_str,
 		formatted_text: tweetObj.full_text,
 		created_at: new Date(Date.parse(tweetObj.created_at.replace(/( \+)/, ' UTC$1'))).toLocaleString("en-us", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit', "timeZone": timezone }),
 		name: user.name,
 		screen_name: "@" + user.screen_name,
 		avatar: user.profile_image_url
-}
+	}
+	
+	// Determine the layout (0, 1, or 2+ media elements)
+	if (tweetObj.entities.media) {
+		switch (tweetObj.entities.media.length) {
+			case 1:
+				tweet.layout = "tweetLayout1Up";
+				break;
+			default:
+				tweet.layout = "tweetLayout2Up";
+				break;
+		};
+	} else {
+		tweet.layout = "tweetLayoutTextOnly";
+	};
+	
 	// Add media if present
 	if (tweetObj.entities.media) {
 		tweet.image = {

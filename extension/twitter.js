@@ -2,7 +2,6 @@
 // Load the NodeCG context
 const nodecg = require('./util/nodecg-api-context').get();
 
-
 /**
  * Twemoji object
  * @const
@@ -27,6 +26,11 @@ var client = new Twitter
 		access_token_secret: nodecg.bundleConfig.twitter.AccessSecret
 	});
 
+// Listen for requests to update twitter
+nodecg.listenFor('updateTwitter', message => {
+	updateTweetCollection();
+});
+
 /**
  * Node CG Replicant storing the formatted tweet currently showing on the front side UI
  * @var
@@ -34,7 +38,7 @@ var client = new Twitter
 var activeTweet = nodecg.Replicant('activeTweet');
 
 // Variable to store JSON response from Twitter containing tweet data in
-var twitterResponseData
+var twitterResponseData;
 
 /**
  * Get a tweets within a collection.
@@ -52,7 +56,7 @@ function updateTweetCollection(collection_id = nodecg.bundleConfig.twitter.colle
 	client.get('collections/entries', params, function (error, data, response) {
 		if (!error) {
 			twitterResponseData = data.objects
-			nodecg.log.info('[twitter]: New tweets obtained');
+			nodecg.log.info('[twitter] New tweets obtained');
 		}
 	});	
 	setTimeout(updateTweetCollection, nodecg.bundleConfig.twitter.poll_interval * 60 * 1000);

@@ -11,7 +11,14 @@
   "nodecg": {
     "compatibleRange": "^1.5",
     "transformBareModuleSpecifiers": true,
-    "dashboardPanels": [],
+    "dashboardPanels": [
+      {
+        "name": "twitter-control",
+        "title": "Twitter Control",
+        "width": 2,
+        "file": "twitter.html"
+      }
+    ],
     "graphics": [
       {
         "file": "info-display.html",

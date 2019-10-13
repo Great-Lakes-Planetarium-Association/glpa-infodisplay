@@ -5,81 +5,84 @@
 </head>
 
 <body>
-    <!-- Display screen wrapper -->
-    <div id="wrapper">
-        <!-- GLPA Conference Title bar -->
-        <div id="block-header">
-            <div id="block-header-logo"><img src="img/logo.png" /></div>
-            <div id="block-header-title"></div>
-            <div id="block-header-clock">
-                <span id="clock-day"></span><br />
-                <span id="clock-date"></span><br />
-                <span id="clock-time"></span>
-            </div>
+    <!-- GLPA Conference Title bar -->
+    <div id="block-header">
+        <div id="block-header-logo" class="header-block"><img src="./img/logo.png" /></div>
+        <div id="block-header-title" class="header-block"></div>
+        <div id="block-header-clock" class="header-block">
+            <span id="clock-day"></span><br />
+            <span id="clock-date"></span><br />
+            <span id="clock-time"></span>
         </div>
-        <div id="block-main">
-            <!-- Social Media block -->
-            <div id="block-tweet" class="tweetLayout1Up">
-                <!-- Logo and Hashtag block -->
-                <div id="block-twitter-logo">
-                    <img id="twitter-logo" src="./img/twitter.png" /><br />
-                    <span id="twitter-hashtag"></span>
-                </div>
+    </div>
+    <div id="block-main">
+        <div id="block-twitter">
+            <!-- Tweet header -- This does not change positions from layouts -->
+            <div id="block-tweet-header">
                 <!-- Tweet User Block -->
                 <div id="block-tweet-author">
                     <img id="tweet-author-avatar" />
                     <span class="tweet-author" id="tweet-username"></span><br />
-                    <span class="tweet-author" id="tweet-screenname"></span>
+                    <span class="tweet-author" id="tweet-screenname"></span><br />
+                    <span class="tweet-author" id="tweet-time"></span>
                 </div>
+                <!-- Logo and Hashtag block -->
+                <div id="block-twitter-logo">
+                    <div>
+                        <img id="twitter-logo" src="./img/twitter.png" />
+                    </div>
+                    <div>
+                        <span id="twitter-hashtag" class="hashtag"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Social Media block -->
+            <div id="block-tweet-content">
                 <!-- Tweet content -->
-                <div id="block-twitter-content">
-                    <!-- Tweet Text Content-->
-                    <div id="block-twitter-tweet-text">
-                        <span id="tweet-text"></span>
-                    </div>
-                    <div id="block-twitter-tweet-media">
-                        <img id="tweet-image-1" class="tweet-image" />
-                        <img id="tweet-image-2" class="tweet-image" />
-                    </div>
-                    <div id="block-twitter-tweet-metadata">
-                        <span id="tweet-time"></em></span>
-                    </div>
+                <div id="block-twitter-tweet-text" class="textFit tweet">
+                    <span id="tweet-text"></span>
+                </div>
+                <div id="block-twitter-tweet-media">
+                    <img id="tweet-image-1" class="tweet-image" />
+                    <img id="tweet-image-2" class="tweet-image" />
                 </div>
             </div>
         </div>
+    </div>
 
-
-        <div id="block-omnibar">
-            <div id="block-weather">
-                <div id="block-weather-current" class="block-weather">
+    <div id="block-omnibar">
+        <div id="block-weather">
+            <div id="block-weather-current" class="block-weather-tile">
+                <div class="weather-text">
                     <span class="weather-title">Currently</span><br /><br />
                     <span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span>
-                    <div class="weather-icon">
-                        <canvas class="weather-icon-canvas" id="weather-current-icon"></canvas>
-                    </div>
                 </div>
-                <div id="block-weather-today" class="block-weather">
-                    <div class="weather-icon">
-                        <canvas class="weather-icon-canvas" id="weather-today-icon"></canvas>
-                    </div>
-                    <div>
-                        <span class="weather-title">Today</span><br /><br />
-                        <span id="weather-today-conditions"></span><br /><br />
-                        H: <span id="weather-today-temp-high"></span>&deg; / L: <span id="weather-today-temp-low"></span>&deg;
-                    </div>
-                </div>
-                <div id="block-weather-tomorrow" class="block-weather">
-                    <div class="weather-icon">
-                        <canvas class="weather-icon-canvas" id="weather-tomorrow-icon"></canvas>
-                    </div>
-                    <div>
-                        <span class="weather-title" id="weather-tomorrow-title"></span><br /><br />
-                        <span id="weather-tomorrow-conditions"></span><br /><br />
-                        H: <span id="weather-tomorrow-temp-high"></span>&deg; / L: <span id="weather-tomorrow-temp-low"></span>&deg;
-                    </div>
+                <div class="weather-icon">
+                    <canvas class="weather-icon-canvas" id="weather-current-icon"></canvas>
                 </div>
             </div>
- 
+            <div class="vr"></div>
+            <div id="block-weather-today" class="block-weather-tile">
+                <div class="weather-text">
+                    <span class="weather-title">Today</span><br /><br />
+                    <span id="weather-today-conditions"></span><br /><br />
+                    H: <span id="weather-today-temp-high"></span>&deg; / L: <span id="weather-today-temp-low"></span>&deg;
+                </div>
+                <div class="weather-icon">
+                    <canvas class="weather-icon-canvas" id="weather-today-icon"></canvas>
+                </div>
+            </div>
+            <div class="vr"></div>
+            <div id="block-weather-tomorrow" class="block-weather-tile">
+                <div class="weather-text">
+                    <span class="weather-title" id="weather-tomorrow-title"></span><br /><br />
+                    <span id="weather-tomorrow-conditions"></span><br /><br />
+                    H: <span id="weather-tomorrow-temp-high"></span>&deg; / L: <span id="weather-tomorrow-temp-low"></span>&deg;
+                </div>
+                <div class="weather-icon">
+                    <canvas class="weather-icon-canvas" id="weather-tomorrow-icon"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 

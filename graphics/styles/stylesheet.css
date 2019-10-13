@@ -9,11 +9,9 @@ body {
     font-size: 12pt;
 }
 
-#wrapper {
-    padding: 0px;
-    width: 100%;
-    height: 100%;
-    position: relative;
+/* Keep inside your own box plz */
+* {
+    box-sizing: border-box;
 }
 
 /* Set up three horizontal areas to display content within */
@@ -74,69 +72,139 @@ body {
     text-align: center;
 }
 
-/* Main body elements */
-/* Twitter Content */
-#block-tweet {
-    position: relative;
-    height: 90%;
+/**
+ * Twitter Section
+ **/
+
+/**
+ * #block-twitter defines the container block for all Twitter content on the page
+ **/
+#block-twitter {
+    width: 100%;
+    height: 100%;
     background-color: #DDD;
     border-radius: 10px; 
     border: 3px solid rgb(175, 175, 175);
-    padding: 5px;
+    padding: 0.5rem;
     opacity: 0;
     transition-duration: 1s;
 }
 
+/**
+ * #block-tweet-header is the upper portion of the Twitter content area.
+ * This area contains the authorship information, the Twitter logo, and the conference hashtag.
+ **/
+ 
+ #block-tweet-header {
+
+    width: 100%;
+    height: 20%;
+    position: relative;
+}
+
+/** 
+ * #block-tweet-author contains the avatar, user's name and Twitter handle
+ **/
+
+#block-tweet-author {
+    background-color: rgb(0, 0, 0, 0.3);
+    width: 50%;
+    height: 100%;
+    padding: 1rem;
+}
+
+#tweet-author-avatar {
+    max-height: 100%;
+    width: auto;
+    float: left;
+}
+
+.tweet-author {
+    color: #FFF;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    font-weight: bold;
+    padding-left: 1rem;
+}
+
+#tweet-username {
+    font-size: xx-large;
+}
+#tweet-screenname {
+    font-size: large;
+}
+
+/**
+ * #block-twitter-logo contains the Twitter logo and the conference hashtag
+ **/
+
 #block-twitter-logo {
     position: absolute;
-    top: 2%;
-    right: 2%;
+    right: 0;
+    top: 0;
+    height: 100%;
 }
 
 #twitter-logo {
     width: auto;
-    height: 100px;
+    height: 75%;
+    margin: auto;
+    display: block;
 }
 
 #twitter-hashtag {
+    font-size: xx-large;
+    color: #1ca0f2;
+    letter-spacing: .1ex;
+    font-weight: bolder;
+    text-shadow:
+        -1px -1px 0 #FFF,
+        1px -1px 0 #FFF,
+        -1px 1px 0 #FFF,
+        1px 1px 0 #FFF;
+}
+
+/**
+ * #block-tweet-content contains the tweet text and images, if applicable.
+ **/
+#block-tweet-content {
+    height: 80%;
+    padding: 2rem;
+}
+
+/**
+ * Shared classes for Twitter stuff
+ **/
+
+/**
+ * This is the official conference hashtag; broken out to highlight it separately
+ **/
+.hashtag-official-highlight {
     font-weight: bold;
-    font-size: 18px;
+    color: #1ca0f2;
+    text-shadow:
+        -1px -1px 0 #FFF,
+        1px -1px 0 #FFF,
+        -1px 1px 0 #FFF,
+        1px 1px 0 #FFF;
 }
 
-#block-twitter-user {
-    position: absolute;
-    left: 1em;
+/**
+ * This is a general hashtag -- anything not the conference hashtag.
+ **/
+
+.hashtag-general-highlight {
+    font-weight: bolder;
 }
 
-#block-twitter-tweet-wrapper {
-    width: 75%;
-    color: #000;
-    float: left;
-}
-
-#tweet-avatar {
-    max-width:15%;
-    max-height:15%;
-}
-
-#block-twitter-content{
-    
-    font-weight: bold;
-    float: left;
-    padding: 2ex;
-}
-
-#block-twitter-tweet-text-wrapper {
-    height: 100px;
-}
-
-#block-twitter-tweet-text {
-    height: 75px;
-}
-
-.hashtag {
-    font-size: larger;
-    color: #336299;
+/**
+ * Handle highlight is to highlight screennames within a tweet text, not the page handle
+ **/
+.handle-highlight {
+    color: rgb(27, 149, 224);
 }
 
 .emoji {
@@ -144,19 +212,105 @@ body {
     height: 30%;
 }
 
-#block-twitter-tweet-metadata {
-    padding-top: 1ex;
-    font-size: smaller;
-    font-style: italic
+/**
+ * Twitter layouts
+ * The following are selectors to control the various ways we lay out tweets on the page.
+ **/
+
+/**
+ * Tweet - Text Only
+ * Tweet only has text; no images to share.
+ **/
+.tweetTextOnly #block-tweet-content{
+
 }
 
-/* Omnibar Contents */
+.tweetTextOnly #block-twitter-tweet-text {
+    position: absolute;
+    bottom: 5;
+    height: 20%;
+}
+
+.tweetTextOnly #block-twitter-tweet-media {
+    visibility: hidden;
+}
+
+.tweetTextOnly #tweet-time {
+    font-weight: bold;
+}
+
+/**
+ * Tweet - Single Picture
+ * Tweet has a single media element to display
+ **/
+
+.tweetLayout1Up #block-tweet-content{
+
+}
+
+.tweetLayout1Up #block-twitter-tweet-text {
+    height: 20%;
+    width: 100%;
+}
+
+.tweetLayout1Up #tweet-time {
+    font-weight: bold;
+}
+
+#block-twitter-tweet-media {
+    max-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+#block-twitter-tweet-media img {
+    display: block;
+}
 
 
 
-.block-weather {
+/**
+ * End of Twitter layout selectors
+ **/
+
+/** 
+ * Omnibar areas
+ **/
+
+.vr {
+    background: #000;
+    width: 1px;
+    height: 100%;
+    display: inline-block;
+}
+
+ #block-weather {
+     position: relative;
+     display: inline-block;
+     width: 100%;
+     height: 100%;
+ }
+
+.block-weather-tile {
+    width: 32%;
+    height: 100%;
+    display: inline-block;
+    padding: 1rem;
+    position: relative;
+    top: 0;
+    vertical-align: top;
+}
+
+.weather-text {
     float: left;
-    width: 20%;
+    width: 60%;
+    height: 100%;
+}
+.weather-icon {
+    width: 40%;
+    float: right;
     height: 100%;
 }
 
@@ -164,11 +318,9 @@ body {
     font-weight: bold;
 }
 
-.weather-icon {
-    float: right;
-}
 .weather-icon-canvas {
-    height: 75px;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .attribution {

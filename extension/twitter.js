@@ -67,6 +67,7 @@ function updateTweetCollection(collection_id = nodecg.bundleConfig.twitter.colle
 function format_tweet(tweetObj) {
 	var user = twitterResponseData.users[tweetObj.user.id]
 	var tweet = {
+		layout: "tweetLayout1Up",
 		id_str: tweetObj.id_str,
 		formatted_text: tweetObj.full_text,
 		created_at: new Date(Date.parse(tweetObj.created_at.replace(/( \+)/, ' UTC$1'))).toLocaleString("en-us", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit', "timeZone": timezone }),

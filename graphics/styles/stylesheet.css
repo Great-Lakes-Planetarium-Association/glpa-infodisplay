@@ -1,6 +1,11 @@
-/* Stylesheet for GLPA Info-Display graphic */
+/**
+ * GLPA Info Display Stylesheet
+ * Sheet controls the layout of the information display page bundle
+ **/
 
-/* Configure the body for use as a non-interactive display */
+/**
+ * Body Controls
+ **/
 body {
     overflow: hidden;
     margin: 0;
@@ -9,23 +14,53 @@ body {
     font-size: 12pt;
 }
 
-/* Keep inside your own box plz */
+/**
+ * Keep inside your own box plz
+ **/
 * {
     box-sizing: border-box;
 }
 
-/* Set up three horizontal areas to display content within */
+/**
+ * General Z-Index Classes
+ **/
 
-/* Top:Header Elements */
+ .z100 {
+     z-index: 100;
+ }
+
+ .z200 {
+     z-index: 200;
+ }
+
+ .z300 {
+     z-index: 300;
+ }
+
+ .z400 {
+     z-index: 400;
+ }
+
+/**
+ * Layout configuration
+ * Create three main horizontal areas on the screen to contain the elements we'll place
+ **/
+
+/**
+ * Header component
+ **/
 #block-header {
-    position: relative;
     width: 100%;
     height: 15%;
     background: #072346;
     color: #fff;
+    display: inline-block;
+    padding: 1rem;
 }
 
-/* Middle: Main Content Body */
+/**
+ * Middle: Main Content Body
+ **/
 #block-main {
     height: 70%;
     padding: 1rem;
@@ -35,7 +70,9 @@ body {
     background-position: center;
 }
 
-/* Bottom: Omnibar */
+/**
+ * Bottom: Omnibar
+ **/
 #block-omnibar {
     height: 15%;
     width: 100%;
@@ -45,32 +82,37 @@ body {
     transition-duration: 1s;
 }
 
+/**
+ * Elements for the header area
+ **/
 
-/* Header contents */
+ .header-block {
+     display: inline-block;
+     vertical-align: middle;
+ }
 
 #block-header-logo {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    width: 75px;
-    margin-top: -37.5px;
+    width: 25%;
+    height: 100%;
 }
 
 #block-header-title {
-    position: absolute;
-    left: 25%;
-    width: 50%;
+    width: 49%;
     font-size: 2em;
     text-align: center;
-    margin: auto;
 }
 
 #block-header-clock {
-    position: absolute;
-    right: 1rem;
+    width: 25%;
+    position: relative;
+    right: 0;
     font-size: 1.5em;
     text-align: center;
 }
+
+/** 
+ * Elements for the main section
+ **/
 
 /**
  * Twitter Section
@@ -88,6 +130,7 @@ body {
     padding: 0.5rem;
     opacity: 0;
     transition-duration: 1s;
+    position: relative;
 }
 
 /**
@@ -173,6 +216,7 @@ body {
 #block-tweet-content {
     height: 80%;
     padding: 2rem;
+    position: relative;
 }
 
 /**
@@ -251,25 +295,31 @@ body {
 .tweetLayout1Up #block-twitter-tweet-text {
     height: 20%;
     width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: #FFF;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 
 .tweetLayout1Up #tweet-time {
     font-weight: bold;
 }
 
-#block-twitter-tweet-media {
-    max-height: 100%;
+.tweetLayout1Up #block-twitter-tweet-media {
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    visibility: hidden;
+    padding: 1rem;
 }
 
-#block-twitter-tweet-media img {
-    display: block;
+.tweetLayout1Up #block-twitter-tweet-media img {
+    max-height: 100%;
 }
-
-
 
 /**
  * End of Twitter layout selectors

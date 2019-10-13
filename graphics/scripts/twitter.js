@@ -42,7 +42,7 @@ function set_tweet(tweet) {
             document.getElementById('tweet-image-1').src = tweet.image.media_url;
         }
         else {
-            document.getElementById('tweet-media-1').src = "";
+            document.getElementById('tweet-image-1').src = "";
         }
         textFit(document.getElementsByClassName('textFit tweet'), { minFontSize: 10, maxFontSize: 48, multiLine: true });
         textFit(document.getElementsByClassName('block-twitter-tweet-metadata'), { maxFontSize: 18 })

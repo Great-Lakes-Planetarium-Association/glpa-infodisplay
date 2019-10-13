@@ -88,7 +88,14 @@ function format_tweet(tweetObj) {
 	tweet.formatted_text = tweet.formatted_text.replace(/\n/ig, ' ');
 
 	// Add HTML span tag around text matching the conference hashtag
-	tweet.formatted_text = tweet.formatted_text.replace(RegExp(confHashtag, "ig"), '<span class="hashtag">' + confHashtag + '</span>');
+	tweet.formatted_text = tweet.formatted_text.replace(RegExp(confHashtag, "ig"), '<span class="hashtag-official-highlight">' + confHashtag + '</span>');
+
+	// Add HTML span tag around text matching a general hashtag for Twitter
+	let regex = new RegExp(`(?!${confHashtag})(#\\w*)`, "ig");
+	tweet.formatted_text = tweet.formatted_text.replace(regex, '<span class="hashtag-general-highlight">$&</span>');
+
+	// Add HTML span tag around text matching a twitter handle
+	tweet.formatted_text = tweet.formatted_text.replace(RegExp(/(@\w{1,15})/, "ig"), '<span class="handle-highlight">$&</span>');
 
 	// Remove the link to the tweet
 	tweet.formatted_text = tweet.formatted_text.replace(/https:\/\/t.co\/\S+/, '');

@@ -6,51 +6,51 @@
 
 <body>
     <!-- GLPA Conference Title bar -->
-    <div id="block-header">
-        <div id="block-header-logo" class="header-block"><img src="./img/logo.png" /></div>
-        <div id="block-header-title" class="header-block"></div>
-        <div id="block-header-clock" class="header-block">
+    <div id="block-header" class="flex jsb p1rem aic h15">
+        <div id="block-header-logo"><img src="./img/logo.png" /></div>
+        <div id="block-header-title" class="fg2 fs2em tac"></div>
+        <div id="block-header-clock" class="fs1-5em tac">
             <span id="clock-day"></span><br />
             <span id="clock-date"></span><br />
             <span id="clock-time"></span>
         </div>
     </div>
-    <div id="block-main">
+    <div id="block-main" class="p1rem h70">
         <div id="block-twitter">
             <!-- Tweet header -- This does not change positions from layouts -->
-            <div id="block-tweet-header" class="z400">
+            <div id="block-tweet-header" class="flex jsb h20">
                 <!-- Tweet User Block -->
-                <div id="block-tweet-author">
-                    <img id="tweet-author-avatar" />
-                    <span class="tweet-author" id="tweet-username"></span><br />
-                    <span class="tweet-author" id="tweet-screenname"></span><br />
-                    <span class="tweet-author" id="tweet-time"></span>
+                <div id="block-tweet-author" class="flex fg4 p1rem">
+                    <div id="block-tweet-author-avatar">
+                        <img id="tweet-author-avatar" class="h100"/>
+                    </div>
+                    <div id="block-tweet-author-text">
+                        <span class="tweet-author whiteshadow" id="tweet-username"></span><br />
+                        <span class="tweet-author whiteshadow" id="tweet-screenname"></span><br />
+                        <span class="tweet-author whiteshadow" id="tweet-time"></span>
+                    </div>
                 </div>
                 <!-- Logo and Hashtag block -->
-                <div id="block-twitter-logo">
-                    <div>
-                        <img id="twitter-logo" src="./img/twitter.png" />
-                    </div>
-                    <div>
-                        <span id="twitter-hashtag" class="hashtag"></span>
-                    </div>
+                <div id="block-twitter-logo" class="flex h100 aic">
+                        <img src="./img/twitter.png" class="h100" />
+                        <span id="twitter-hashtag" class="fs2em whiteshadow"></span>
                 </div>
             </div>
             <!-- Social Media block -->
-            <div id="block-tweet-content">
+            <div id="block-tweet-content" class="flex p1rem h80">
                 <!-- Tweet content -->
+                <div id="block-twitter-tweet-media" class="z200">
+                    <img id="tweet-image-1" class="tweet-image" />
+                    <img id="tweet-image-2" class="tweet-image" />
+                </div>
                 <div id="block-twitter-tweet-text" class="textFit tweet z300">
                     <span id="tweet-text"></span>
                 </div>
             </div>
-            <div id="block-twitter-tweet-media" class="z200">
-                <img id="tweet-image-1" class="tweet-image" />
-                <img id="tweet-image-2" class="tweet-image" />
-            </div>
         </div>
     </div>
 
-    <div id="block-omnibar">
+    <div id="block-omnibar" class="h15">
         <div id="block-weather">
             <div id="block-weather-current" class="block-weather-tile">
                 <div class="weather-text">

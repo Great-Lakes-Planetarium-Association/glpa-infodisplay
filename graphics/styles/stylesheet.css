@@ -41,6 +41,95 @@ body {
      z-index: 400;
  }
 
+ /**
+  * Layout Classes
+  **/
+
+/**
+ * Flex Stuff
+ **/
+.flex {
+    display: flex;
+}
+
+.fg1 {
+    flex-grow: 1;
+}
+
+.fg2 {
+    flex-grow: 2;
+}
+
+.fg3 {
+    flex-grow: 3;
+}
+
+.fg4 {
+    flex-grow: 4;
+}
+
+.jsb {
+    justify-content: space-between;
+}
+
+.aic {
+    align-items: center;
+}
+
+/**
+ * Spacing
+ **/
+.p1rem {
+    padding: 1rem;
+}
+
+.h15 {
+    height: 15%;
+}
+
+.h20 {
+    height: 20%;
+}
+
+.h70 {
+    height: 70%;
+}
+
+.h80 {
+    height: 80%;
+}
+
+.h100 {
+    height: 100%;
+}
+
+/**
+ * Text Stuff
+ **/
+.fs1em {
+    font-size: 1em;
+}
+
+.fs1-5em{
+    font-size: 1.5em;
+}
+
+.fs2em {
+    font-size: 2em;
+}
+
+.tac {
+    text-align: center;
+}
+
+.whiteshadow {
+    text-shadow:
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff;
+}
+
 /**
  * Layout configuration
  * Create three main horizontal areas on the screen to contain the elements we'll place
@@ -50,20 +139,14 @@ body {
  * Header component
  **/
 #block-header {
-    width: 100%;
-    height: 15%;
     background: #072346;
     color: #fff;
-    display: inline-block;
-    padding: 1rem;
 }
 
 /**
  * Middle: Main Content Body
  **/
 #block-main {
-    height: 70%;
-    padding: 1rem;
     background: url('../img/main-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -74,40 +157,16 @@ body {
  * Bottom: Omnibar
  **/
 #block-omnibar {
-    height: 15%;
-    width: 100%;
     background: #e6e6e6;
     color: #000;
-    bottom: 0;
-    transition-duration: 1s;
 }
 
 /**
  * Elements for the header area
  **/
 
- .header-block {
-     display: inline-block;
-     vertical-align: middle;
- }
-
-#block-header-logo {
-    width: 25%;
-    height: 100%;
-}
-
-#block-header-title {
-    width: 49%;
-    font-size: 2em;
-    text-align: center;
-}
-
-#block-header-clock {
-    width: 25%;
-    position: relative;
-    right: 0;
-    font-size: 1.5em;
-    text-align: center;
+#block-header-logo img {
+    display: block;
 }
 
 /** 
@@ -133,81 +192,39 @@ body {
     position: relative;
 }
 
-/**
- * #block-tweet-header is the upper portion of the Twitter content area.
- * This area contains the authorship information, the Twitter logo, and the conference hashtag.
- **/
- 
- #block-tweet-header {
-
-    width: 100%;
-    height: 20%;
-    position: relative;
-}
-
 /** 
  * #block-tweet-author contains the avatar, user's name and Twitter handle
  **/
 
-#block-tweet-author {
-    background-color: rgb(0, 0, 0, 0.3);
-    width: 50%;
-    height: 100%;
-    padding: 1rem;
-}
-
-#tweet-author-avatar {
+#tweet-author-avatar img {
     max-height: 100%;
-    width: auto;
-    float: left;
+    max-width: 100%;
 }
 
 .tweet-author {
-    color: #FFF;
-    text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
+    color: #000;
     font-weight: bold;
     padding-left: 1rem;
 }
 
 #tweet-username {
-    font-size: xx-large;
+    font-size: 2.5rem;
 }
 #tweet-screenname {
-    font-size: large;
+    font-size: 1.25rem;
+}
+
+#tweet-time {
+    font-size: 1.25rem;
 }
 
 /**
  * #block-twitter-logo contains the Twitter logo and the conference hashtag
  **/
 
-#block-twitter-logo {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-}
-
-#twitter-logo {
-    width: auto;
-    height: 75%;
-    margin: auto;
-    display: block;
-}
-
 #twitter-hashtag {
-    font-size: xx-large;
     color: #1ca0f2;
-    letter-spacing: .1ex;
     font-weight: bolder;
-    text-shadow:
-        -1px -1px 0 #FFF,
-        1px -1px 0 #FFF,
-        -1px 1px 0 #FFF,
-        1px 1px 0 #FFF;
 }
 
 /**
@@ -215,8 +232,7 @@ body {
  **/
 #block-tweet-content {
     height: 80%;
-    padding: 2rem;
-    position: relative;
+    padding: 1rem;
 }
 
 /**
@@ -253,7 +269,7 @@ body {
 
 .emoji {
     width: auto;
-    height: 30%;
+    height: 1em;
 }
 
 /**
@@ -265,21 +281,14 @@ body {
  * Tweet - Text Only
  * Tweet only has text; no images to share.
  **/
-.tweetLayoutTextOnly #block-tweet-content{
-
-}
 
 .tweetLayoutTextOnly #block-twitter-tweet-text {
-    position: absolute;
-    height: 20%;
+    height: 100%;
+    width: 100%;
 }
 
 .tweetLayoutTextOnly #block-twitter-tweet-media {
     visibility: hidden;
-}
-
-.tweetLayoutTextOnly #tweet-time {
-    font-weight: bold;
 }
 
 /**
@@ -287,38 +296,30 @@ body {
  * Tweet has a single media element to display
  **/
 
-.tweetLayout1Up #block-tweet-content{
-
+.tweetLayout1Up #block-tweet-content.after {
+    align-self: center;
 }
 
 .tweetLayout1Up #block-twitter-tweet-text {
-    height: 20%;
+    flex-grow: 1;
+    color: #000;
+    padding-left: 1rem;
+    align-self: stretch;
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    color: #FFF;
-    text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
-}
-
-.tweetLayout1Up #tweet-time {
-    font-weight: bold;
+    height: 100%;
 }
 
 .tweetLayout1Up #block-twitter-tweet-media {
-    max-width: 100%;
+    flex-basis: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 1rem;
+    margin: auto;
 }
 
 .tweetLayout1Up #block-twitter-tweet-media img {
     max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: auto;
 }
 
 /**

@@ -103,6 +103,10 @@ body {
     height: 100%;
 }
 
+.padleft1rem {
+    padding-left: 1rem;
+}
+
 /**
  * Text Stuff
  **/
@@ -128,6 +132,10 @@ body {
         1px -1px 0 #fff,
         -1px 1px 0 #fff,
         1px 1px 0 #fff;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 /**
@@ -199,23 +207,6 @@ body {
 #tweet-author-avatar img {
     max-height: 100%;
     max-width: 100%;
-}
-
-.tweet-author {
-    color: #000;
-    font-weight: bold;
-    padding-left: 1rem;
-}
-
-#tweet-username {
-    font-size: 2.5rem;
-}
-#tweet-screenname {
-    font-size: 1.25rem;
-}
-
-#tweet-time {
-    font-size: 1.25rem;
 }
 
 /**

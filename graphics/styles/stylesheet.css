@@ -46,6 +46,16 @@ body {
   **/
 
 /**
+ * Standard Positioning
+ **/
+
+.pos-bot-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+/**
  * Flex Stuff
  **/
 .flex {
@@ -103,6 +113,10 @@ body {
     height: 100%;
 }
 
+.w100 {
+    width: 100%;
+}
+
 .padleft1rem {
     padding-left: 1rem;
 }
@@ -110,6 +124,10 @@ body {
 /**
  * Text Stuff
  **/
+
+.fs07em {
+    font-size: 0.7em;
+}
 .fs1em {
     font-size: 1em;
 }
@@ -364,13 +382,14 @@ body {
 }
 
 .weather-text {
-    float: left;
-    width: 60%;
+    display: inline-block;
+    width: 50%;
     height: 100%;
+    vertical-align: top;
 }
 .weather-icon {
-    width: 40%;
-    float: right;
+    display: inline-block;
+    width: 39%;
     height: 100%;
 }
 

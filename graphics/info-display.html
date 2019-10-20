@@ -52,30 +52,34 @@
 
     <div id="block-omnibar" class="h15">
         <div id="block-weather">
-            <div id="block-weather-current" class="block-weather-tile">
-                <div class="weather-text">
-                    <span class="weather-title">Currently</span><br /><br />
-                    <span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span>
+            <div class="pos-bot-left fs07em">
+                Weather data provided by DarkSky
+            </div>
+            <div class="block-weather-tile">
+                <div class="weather-text fs1em">
+                    <div class="weather-title">Currently</div>
+                    <div class="weather-conditions"><span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span></div>
                 </div>
                 <div class="weather-icon">
                     <canvas class="weather-icon-canvas" id="weather-current-icon"></canvas>
                 </div>
             </div>
             <div class="vr"></div>
-            <div id="block-weather-today" class="block-weather-tile">
-                <div class="weather-text">
-                    <span class="weather-title">Today</span><br /><br />
-                    <span id="weather-today-conditions"></span> with a high of <span id="weather-today-temp-high"></span>&deg; and low of <span id="weather-today-temp-low"></span>&deg;.
+            <div class="block-weather-tile">
+                <div class="weather-text fs1em">
+                    <div class="weather-title"><span class="weather-title">Today</span></div>
+                    <div class="weather-conditions"><span id="weather-today-conditions"></span> with a high of <span id="weather-today-temp-high"></span>&deg; and low of
+                    <span id="weather-today-temp-low"></span>&deg;.</div>
                 </div>
                 <div class="weather-icon">
                     <canvas class="weather-icon-canvas" id="weather-today-icon"></canvas>
                 </div>
             </div>
             <div class="vr"></div>
-            <div id="block-weather-tomorrow" class="block-weather-tile">
-                <div class="weather-text">
-                    <span class="weather-title" id="weather-tomorrow-title"></span><br /><br />
-                    <span id="weather-tomorrow-conditions"></span> with a high of <span id="weather-tomorrow-temp-high"></span>&deg; and low of <span id="weather-tomorrow-temp-low"></span>&deg;.
+            <div class="block-weather-tile">
+                <div class="weather-text fs1em">
+                    <div class="weather-title"><span class="weather-title" id="weather-tomorrow-title"></span></div>
+                    <div class="weather-conditions"><span id="weather-tomorrow-conditions"></span> with a high of <span id="weather-tomorrow-temp-high"></span>&deg; and low of <span id="weather-tomorrow-temp-low"></span>&deg;.</div>
                 </div>
                 <div class="weather-icon">
                     <canvas class="weather-icon-canvas" id="weather-tomorrow-icon"></canvas>

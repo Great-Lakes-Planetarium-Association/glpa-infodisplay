@@ -63,7 +63,8 @@ function updateWeather() {
 						temp_low: Math.round(weather_data.daily.data[0].temperatureLow),
 						temp_high: Math.round(weather_data.daily.data[0].temperatureHigh),
 						icon: weather_data.daily.data[0].icon,
-						summary: weather_data.daily.data[0].summary
+						// Remove the period so we can tack on extra text on the display
+						summary: weather_data.daily.data[0].summary.replace(".", "")
 					},
 					tomorrow: 
 					{
@@ -71,7 +72,8 @@ function updateWeather() {
 						temp_low: Math.round(weather_data.daily.data[1].temperatureLow),
 						temp_high: Math.round(weather_data.daily.data[1].temperatureHigh),
 						icon: weather_data.daily.data[1].icon,
-						summary: weather_data.daily.data[1].summary
+						// Remove the period so we can tack on extra text on the display
+						summary: weather_data.daily.data[1].summary.replace(".", "")
 					},
 				}
 

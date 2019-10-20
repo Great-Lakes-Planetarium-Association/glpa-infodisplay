@@ -29,11 +29,6 @@
         "twitter": {
             "type": "object",
             "properties": {
-                "confHashtag": {
-                    "type": "string",
-                    "description": "The official conference Twitter hashtag.  Example: #glpa2018",
-                    "default": "#glpa2018"
-                },
                 "collection_id":
                 {
                     "type": "string",

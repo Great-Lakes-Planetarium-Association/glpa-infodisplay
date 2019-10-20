@@ -13,7 +13,7 @@ var conference = nodecg.Replicant("conference");
 var timezone = conference.value.timezone;
 
 // Load variables from bundle
-const confHashtag = nodecg.bundleConfig.twitter.confHashtag;
+const confHashtag = conference.value.twitter.hashtag;
 const tweet_display_time = nodecg.bundleConfig.twitter.tweet_display_time * 1000;
 
 // Configure a Twitter object

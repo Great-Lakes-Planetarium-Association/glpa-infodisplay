@@ -52,6 +52,7 @@ function updateWeather() {
 				{
 					current: 
 					{
+						time: weather_data.currently.time,
 						temperature: Math.round(weather_data.currently.temperature),
 						icon: weather_data.currently.icon,
 						summary: weather_data.currently.summary

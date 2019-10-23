@@ -140,8 +140,16 @@ body {
     font-size: 2em;
 }
 
+.fs2-5em {
+    font-size: 2.5em;
+}
+
 .fs3em {
     font-size: 3em;
+}
+
+.fs5em {
+    font-size: 5em;
 }
 
 .tac {
@@ -252,6 +260,10 @@ body {
  * #block-tweet-author contains the avatar, user's name and Twitter handle
  **/
 
+#block-tweet-author {
+	background-color: rgb(50, 50, 50, .7);
+}
+
 #tweet-author-avatar img {
     max-height: 100%;
     max-width: 100%;
@@ -260,6 +272,11 @@ body {
 /**
  * #block-twitter-logo contains the Twitter logo and the conference hashtag
  **/
+
+#block-twitter-logo {
+	background-color: rgb(50, 50, 50, .7);
+	padding-right: 2rem;
+}
 
 #twitter-hashtag {
     color: #1ca0f2;
@@ -369,16 +386,12 @@ body {
 }
 
  #block-weather {
-     position: relative;
-     display: inline-block;
      width: 100%;
      height: 100%;
  }
 
 .block-weather-tile {
-    width: 32%;
     height: 100%;
-    display: inline-block;
     padding: 1rem;
     position: relative;
     top: 0;
@@ -386,13 +399,10 @@ body {
 }
 
 .weather-text {
-    display: inline-block;
     height: 100%;
     vertical-align: top;
 }
 .weather-icon {
-    display: inline-block;
-    height: 100%;
 }
 
 .weather-title {
@@ -400,11 +410,12 @@ body {
 }
 
 .weather-icon-canvas {
-    max-height: 100%;
-    max-width: 100%;
+    height: 100%;
+    width: auto;
+    /*max-height: 100%;
+    max-width: 100%;*/
 }
 
 .attribution {
     padding-top: 20px;
-    font-size: 8pt;
 }

@@ -8,8 +8,8 @@
     <!-- GLPA Conference Title bar -->
     <div id="block-header" class="flex jsb p1rem aic h15">
         <div id="block-header-logo"><img src="./img/logo.png" style="height: 100%";/></div>
-        <div id="block-header-title" class="fg2 fs3em tac"></div>
-        <div id="block-header-clock" class="fs2em tac">
+        <div id="block-header-title" class="fg2 fs5em tac"></div>
+        <div id="block-header-clock" class="fs2-5em tac">
             <span id="clock-day"></span><br />
             <span id="clock-date"></span><br />
             <span id="clock-time"></span>
@@ -51,24 +51,24 @@
     </div>
 
     <div id="block-omnibar" class="h15">
-        <div id="block-weather">
-            <div class="pos-bot-left fs07em">
+        <div id="block-weather" class="flex jsb" style="flex-basis:0">
+            <div class="pos-bot-left fs1-5em">
                 Weather data provided by DarkSky
             </div>
-            <div class="block-weather-tile flex jsb">
-                <div class="weather-text fs2em">
-                    <div class="weather-title">Currently</div>
-                    <div class="weather-conditions"><span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span></div>
+            <div class="block-weather-tile flex jsb fg1" style="flex-basis:0">
+                <div class="weather-text">
+                    <div class="weather-title fs2em">Currently</div>
+                    <div class="weather-conditions fs2em"><span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span></div>
                 </div>
                 <div class="weather-icon">
                     <canvas class="weather-icon-canvas" id="weather-current-icon" width="128px" height="128px"></canvas>
                 </div>
             </div>
             <div class="vr"></div>
-            <div class="block-weather-tile flex jsb">
-                <div class="weather-text fs1-5em">
-                    <div class="weather-title"><span class="weather-title">Today</span></div>
-                    <div class="weather-conditions"><span id="weather-today-conditions"></span> with a high of <span id="weather-today-temp-high"></span>&deg; and low of
+            <div class="block-weather-tile flex jsb fg1" style="flex-basis: 0">
+                <div class="weather-text">
+                    <div class="weather-title fs2em"><span class="weather-title">Today</span></div>
+                    <div class="weather-conditions fs2em"><span id="weather-today-conditions"></span> with a high of <span id="weather-today-temp-high"></span>&deg; and low of
                     <span id="weather-today-temp-low"></span>&deg;.</div>
                 </div>
                 <div class="weather-icon">
@@ -76,10 +76,10 @@
                 </div>
             </div>
             <div class="vr"></div>
-            <div class="block-weather-tile flex jsb">
-                <div class="weather-text fs1-5em">
-                    <div class="weather-title"><span class="weather-title" id="weather-tomorrow-title"></span></div>
-                    <div class="weather-conditions"><span id="weather-tomorrow-conditions"></span> with a high of <span id="weather-tomorrow-temp-high"></span>&deg; and low of <span id="weather-tomorrow-temp-low"></span>&deg;.</div>
+            <div class="block-weather-tile flex jsb fg1" style="flex-basis: 0">
+                <div class="weather-text">
+                    <div class="weather-title fs2em"><span class="weather-title" id="weather-tomorrow-title"></span></div>
+                    <div class="weather-conditions fs2em"><span id="weather-tomorrow-conditions"></span> with a high of <span id="weather-tomorrow-temp-high"></span>&deg; and low of <span id="weather-tomorrow-temp-low"></span>&deg;.</div>
                 </div>
                 <div class="weather-icon">
                     <canvas class="weather-icon-canvas" id="weather-tomorrow-icon" width="128px" height="128px"></canvas>

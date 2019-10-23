@@ -4,5 +4,5 @@
 var weather = nodecg.Replicant('weather');
 
 weather.on("change", weather_data => {
-    console.log(weather.value.current.time);
+    document.getElementById('weather-update-time').innerText = weather_data.current.time;
 });

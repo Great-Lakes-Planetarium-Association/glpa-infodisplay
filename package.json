@@ -1,6 +1,6 @@
 {
   "name": "glpa-infodisplay",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GLPA Conference Information Display package",
   "homepage": "http://live.glpa.org",
   "author": {
@@ -17,6 +17,12 @@
         "title": "Twitter Control",
         "width": 2,
         "file": "twitter.html"
+      },
+      {
+        "name": "weather-control",
+        "title": "Weather Control",
+        "width": 2,
+        "file": "weather.html"
       }
     ],
     "graphics": [

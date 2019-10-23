@@ -7,9 +7,9 @@
 <body>
     <!-- GLPA Conference Title bar -->
     <div id="block-header" class="flex jsb p1rem aic h15">
-        <div id="block-header-logo"><img src="./img/logo.png" /></div>
-        <div id="block-header-title" class="fg2 fs2em tac"></div>
-        <div id="block-header-clock" class="fs1-5em tac">
+        <div id="block-header-logo"><img src="./img/logo.png" style="height: 100%";/></div>
+        <div id="block-header-title" class="fg2 fs3em tac"></div>
+        <div id="block-header-clock" class="fs2em tac">
             <span id="clock-day"></span><br />
             <span id="clock-date"></span><br />
             <span id="clock-time"></span>
@@ -17,23 +17,23 @@
     </div>
     <div id="block-main" class="p1rem h70">
         <div id="block-twitter">
-            <!-- Tweet header -- This does not change positions from layouts -->
-            <div id="block-tweet-header" class="flex jsb h20">
+            <!-- Tweet header  This does not change positions from layouts -->
+            <div id="block-tweet-header" class="flex jsb h20" style="">
                 <!-- Tweet User Block -->
                 <div id="block-tweet-author" class="flex p1rem">
                     <div id="block-tweet-author-avatar">
                         <img id="tweet-author-avatar" class="h100"/>
                     </div>
-                    <div id="block-tweet-author-text" class="padleft1rem">
-                        <span class="fs2em bold blackshadow color-white" id="tweet-username"></span><br />
-                        <span class="fs1em bold blackshadow color-white" id="tweet-screenname"></span><br />
-                        <span class="fs1em bold blackshadow color-white" id="tweet-time"></span>
+		    <div id="block-tweet-author-text" class="padleft1rem"> 
+			<span class="fs2em bold blackshadow color-white" style="font-size: 3em;"id="tweet-username"></span><br />
+                        <span class="fs1em bold blackshadow color-white" id="tweet-screenname" style="font-size: 2em"></span><br />
+                        <span class="fs1em bold blackshadow color-white" id="tweet-time" style="font-size: 2em;"></span>
                     </div>
                 </div>
                 <!-- Logo and Hashtag block -->
                 <div id="block-twitter-logo" class="flex h100 aic">
                         <img src="./img/twitter-white.png" class="h100" />
-                        <span id="twitter-hashtag" class="fs2em blackshadow padleft1rem"></span>
+                        <span id="twitter-hashtag" class="fs3em blackshadow padleft1rem"></span>
                 </div>
             </div>
             <!-- Social Media block -->
@@ -55,34 +55,34 @@
             <div class="pos-bot-left fs07em">
                 Weather data provided by DarkSky
             </div>
-            <div class="block-weather-tile">
-                <div class="weather-text fs1em">
+            <div class="block-weather-tile flex jsb">
+                <div class="weather-text fs2em">
                     <div class="weather-title">Currently</div>
                     <div class="weather-conditions"><span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span></div>
                 </div>
                 <div class="weather-icon">
-                    <canvas class="weather-icon-canvas" id="weather-current-icon"></canvas>
+                    <canvas class="weather-icon-canvas" id="weather-current-icon" width="128px" height="128px"></canvas>
                 </div>
             </div>
             <div class="vr"></div>
-            <div class="block-weather-tile">
-                <div class="weather-text fs1em">
+            <div class="block-weather-tile flex jsb">
+                <div class="weather-text fs1-5em">
                     <div class="weather-title"><span class="weather-title">Today</span></div>
                     <div class="weather-conditions"><span id="weather-today-conditions"></span> with a high of <span id="weather-today-temp-high"></span>&deg; and low of
                     <span id="weather-today-temp-low"></span>&deg;.</div>
                 </div>
                 <div class="weather-icon">
-                    <canvas class="weather-icon-canvas" id="weather-today-icon"></canvas>
+                    <canvas class="weather-icon-canvas" id="weather-today-icon" width="128px" height="128px"></canvas>
                 </div>
             </div>
             <div class="vr"></div>
-            <div class="block-weather-tile">
-                <div class="weather-text fs1em">
+            <div class="block-weather-tile flex jsb">
+                <div class="weather-text fs1-5em">
                     <div class="weather-title"><span class="weather-title" id="weather-tomorrow-title"></span></div>
                     <div class="weather-conditions"><span id="weather-tomorrow-conditions"></span> with a high of <span id="weather-tomorrow-temp-high"></span>&deg; and low of <span id="weather-tomorrow-temp-low"></span>&deg;.</div>
                 </div>
                 <div class="weather-icon">
-                    <canvas class="weather-icon-canvas" id="weather-tomorrow-icon"></canvas>
+                    <canvas class="weather-icon-canvas" id="weather-tomorrow-icon" width="128px" height="128px"></canvas>
                 </div>
             </div>
         </div>

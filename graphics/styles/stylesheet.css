@@ -140,6 +140,10 @@ body {
     font-size: 2em;
 }
 
+.fs3em {
+    font-size: 3em;
+}
+
 .tac {
     text-align: center;
 }
@@ -383,13 +387,11 @@ body {
 
 .weather-text {
     display: inline-block;
-    width: 50%;
     height: 100%;
     vertical-align: top;
 }
 .weather-icon {
     display: inline-block;
-    width: 39%;
     height: 100%;
 }
 

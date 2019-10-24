@@ -69,7 +69,7 @@ function updateTweetCollection(collection_id = nodecg.bundleConfig.twitter.colle
  * @param {*} userObj 
  */
 function format_tweet(tweetObj) {
-	var user = twitterResponseData.users[tweetObj.user.id]
+	var user = twitterResponseData.users[tweetObj.user.id_str];
 	var tweet = {
 		id_str: tweetObj.id_str,
 		formatted_text: tweetObj.full_text,

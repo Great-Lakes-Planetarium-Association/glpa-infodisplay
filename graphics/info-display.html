@@ -1,77 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GLPA-Infodisplay Slate</title>
+    <title>GLPA Infodisplay Slate</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
-    <link rel="import"  href="elements/room-announcement/room-announcement.html">
 </head>
 
 <body>
-    <div class="background-images">
-            <img id="bg-img1" src="img/bg_img1.jpg" style="opacity: 1" />
-            <img id="bg-img2" src="img/bg_img2.jpg" />
-            <img id="bg-img3" src="img/bg_img3.jpg" />
-            <img id="bg-img4" src="img/bg_img4.jpg" />
-            <img id="bg-img5" src="img/bg_img5.jpg" />
+    <!-- GLPA Conference Title bar -->
+    <div id="block-header" class="flex jsb p1rem aic h15">
+        <div id="block-header-logo"><img src="./img/logo.png" style="height: 100%";/></div>
+        <div id="block-header-title" class="fg2 fs5em tac"></div>
+        <div id="block-header-clock" class="fs2-5em tac">
+            <span id="clock-day"></span><br />
+            <span id="clock-date"></span><br />
+            <span id="clock-time"></span>
+        </div>
     </div>
-    <div class="container xga">
-        <div class="header">
-            <div id="header-title"></div>
-            <table class="time-date-forecast">
-                <tr>
-                    <th></th>
-                    <th>Currently</th>
-                    <th><span id="weather-today-title"></span></th>
-                    <th><span id="weather-tomorrow-title"></span></th>
-                    <th><span id="weather-future-title"></span></th>
-                </tr>
-                <tr>
-                    <td><span id="current-time"></span></td>
-                    <td><canvas class="weather-icon" id="weather-current" width="64" height="64"></canvas><span class="weather-temps" id="current-temp"></span><br /><span id="current-time"></span></td>
-                    <td><canvas class="weather-icon" id="weather-today-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-today-temps"></span></td>
-                    <td><canvas class="weather-icon" id="weather-tomorrow-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-tomorrow-temps"></span></td>
-                    <td><canvas class="weather-icon" id="weather-future-icon" width="64" height="64"></canvas><span class="weather-temps" id="weather-future-temps"></span></td>
-                </tr>
-            </table>
-        </div>
-        <div class="main">
-            <div class="mainbody">
-                <room-announcement></room-announcement>
-            </div>
-
-        </div>
-        <div class="twitter">
-            <div class="twitter-logo">
-                <img id="twitter-logo" src="img/twitter.png" /><br />
-                <span id="twitter-hashtag"></span>
-            </div>
-            <div class="avatar">
-                <img id="avatar" />
-            </div>
-            <div class="twitter-content">
-                <div class="tweet-media"><img id="tweet-media" /></div>
-                <div class="tweet">
-                    <div class="tweet-text" id="tweet-text"></div>
-                    <div class="tweet-metadata" id="tweet-metadata">
-                        <span id="screenname"></span> <span id="tweettime"></em></span>
+    <div id="block-main" class="p1rem h70">
+        <div id="block-twitter">
+            <!-- Tweet header  This does not change positions from layouts -->
+            <div id="block-tweet-header" class="flex jsb h20" style="">
+                <!-- Tweet User Block -->
+                <div id="block-tweet-author" class="flex p1rem">
+                    <div id="block-tweet-author-avatar">
+                        <img id="tweet-author-avatar" class="h100"/>
                     </div>
+		    <div id="block-tweet-author-text" class="padleft1rem"> 
+			<span class="fs2em bold blackshadow color-white" style="font-size: 3em;"id="tweet-username"></span><br />
+                        <span class="fs1em bold blackshadow color-white" id="tweet-screenname" style="font-size: 2em"></span><br />
+                        <span class="fs1em bold blackshadow color-white" id="tweet-time" style="font-size: 2em;"></span>
+                    </div>
+                </div>
+                <!-- Logo and Hashtag block -->
+                <div id="block-twitter-logo" class="flex h100 aic">
+                        <img src="./img/twitter-white.png" class="h100" />
+                        <span id="twitter-hashtag" class="fs3em blackshadow padleft1rem"></span>
+                </div>
+            </div>
+            <!-- Social Media block -->
+            <div id="block-tweet-content" class="flex p1rem h80 round-border bg-dark-gray">
+                <!-- Tweet content -->
+                <div id="block-twitter-tweet-media" class="z200">
+                    <img id="tweet-image-1" class="tweet-image" />
+                    <img id="tweet-image-2" class="tweet-image" />
+                </div>
+                <div id="block-twitter-tweet-text" class="textFit tweet z300">
+                    <span id="tweet-text"></span>
                 </div>
             </div>
         </div>
-        <div class="attribution">Weather data Powered by Dark Sky</div>
     </div>
 
-    <!-- Load JS stuff -->
-    <!-- Need to load components before our modules since we'll be calling them! -->
-    <script src="../bower_components/gsap/src/minified/TweenMax.min.js"></script>
-    <script src="../bower_components/gsap/src/minified/TimelineMax.min.js"></script>
-    <script src="../bower_components/skycons-html5/skycons.js"></script>
-    <script src="../bower_components/textfit/textFit.min.js"></script>
-    <!-- Internal script packages -->
-    <!--<script src="scripts/background.js"></script>-->
-    <script src="scripts/scripts.js"></script>
-    <script src="scripts/twitter.js"></script>
-    <script src="scripts/weather.js"></script>
+    <div id="block-omnibar" class="h15">
+        <div id="block-weather" class="flex jsb" style="flex-basis:0">
+            <div class="pos-bot-left fs1-5em">
+                Weather data provided by DarkSky
+            </div>
+            <div class="block-weather-tile flex jsb fg1" style="flex-basis:0">
+                <div class="weather-text">
+                    <div class="weather-title fs2em">Currently</div>
+                    <div class="weather-conditions fs2em"><span id="weather-current-temp"></span>&deg; and <span id="weather-current-conditions"></span></div>
+                </div>
+                <div class="weather-icon">
+                    <canvas class="weather-icon-canvas" id="weather-current-icon" width="128px" height="128px"></canvas>
+                </div>
+            </div>
+            <div class="vr"></div>
+            <div class="block-weather-tile flex jsb fg1" style="flex-basis: 0">
+                <div class="weather-text">
+                    <div class="weather-title fs2em"><span class="weather-title">Today</span></div>
+                    <div class="weather-conditions fs2em"><span id="weather-today-conditions"></span> with a high of <span id="weather-today-temp-high"></span>&deg; and low of
+                    <span id="weather-today-temp-low"></span>&deg;.</div>
+                </div>
+                <div class="weather-icon">
+                    <canvas class="weather-icon-canvas" id="weather-today-icon" width="128px" height="128px"></canvas>
+                </div>
+            </div>
+            <div class="vr"></div>
+            <div class="block-weather-tile flex jsb fg1" style="flex-basis: 0">
+                <div class="weather-text">
+                    <div class="weather-title fs2em"><span class="weather-title" id="weather-tomorrow-title"></span></div>
+                    <div class="weather-conditions fs2em"><span id="weather-tomorrow-conditions"></span> with a high of <span id="weather-tomorrow-temp-high"></span>&deg; and low of <span id="weather-tomorrow-temp-low"></span>&deg;.</div>
+                </div>
+                <div class="weather-icon">
+                    <canvas class="weather-icon-canvas" id="weather-tomorrow-icon" width="128px" height="128px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="../node_modules/textfit/textFit.min.js"></script>
+    <!-- Internal script packages -->
+    <script src="./scripts/skycons/skycons.js"></script>
+    <script src="./scripts/scripts.js" type="module"></script>
+    <script src="./scripts/twitter.js" type="module"></script>
+    <script src="./scripts/weather.js"></script>
+   
 </body>
 </html>

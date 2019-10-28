@@ -1,100 +1,52 @@
-// Script handles updating the appropriate twitter divs and shows tweets in the queue
+// Pull in the current_tweet replicant.  Whenever it changes run the appropriate
+// functions to set it up and display.
+const activeTweet = nodecg.Replicant('activeTweet');
 
-var tweetReplicant = nodecg.Replicant('tweets');
-// Tweet ID list is the list tweet IDs (object keys) we currently know of
-var tweetOrder;
-var currentTimelineID = 0;
-var tweetTimer = nodecg.bundleConfig.twitter.displayTime;
-
-// Wait for tweet object to load
-NodeCG.waitForReplicants(tweetReplicant).then(() =>
-{
-    // Build our tweet order
-    tweetOrder = [];
-    Object.entries(tweetReplicant.value.response.timeline).forEach(([key,val]) =>
-    {
-        tweetOrder.push(val.tweet.id);
-    });
-    
-    tweetLoop();
+activeTweet.on('change', tweet => {
+    nodecg.log.info('Processing new tweet from backend.');
+    set_tweet(tweet);
 });
 
-tweetReplicant.on('change', newval =>
-{
-    // When we get a replicant update, need to determine the nextTweetID incase of a change.
-    console.log('twitter: received an update to the tweet replicant');
-})
-
-function showTweet()
-{
-    let nextTimelineID = 0
-    // If we're at the end of the timeline, go to first element
-    if ((currentTimelineID+1) >= tweetOrder.length) {
-        nextTimelineID = 0;
-    }
-    else
-    {
-        nextTimelineID = currentTimelineID + 1;
-    }
-    // Using the index position, look in the tweet time line for the tweet id.
-    // Pass the tweet ID from the timeline into the tweets list to get the tweet
-    let tweetID = tweetOrder[nextTimelineID];
-    let tweet = tweetReplicant.value.objects.tweets[tweetID];
-    let user = tweetReplicant.value.objects.users[tweet.user.id_str];
-    let tweetTime = new Date(Date.parse(tweet.created_at.replace(/( \+)/, ' UTC$1'))); 
-
-    document.getElementById('screenname').innerHTML = "@" + user.screen_name + ' &mdash; ';
-    // Need to add a timezone parameter -- look at weather.
-    document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
-    document.getElementById('tweet-text').innerHTML = tweet.full_text.replace(/https:\/\/t.co\/\S+/,'');
-    document.getElementById('avatar').src = user.profile_image_url.replace('_normal',"_bigger");
-
-    if (tweet.entities.media) {
-        document.getElementById('tweet-media').src = tweet.entities.media[0].media_url;
-    } else {
-        document.getElementById('tweet-media').src = "";
-    }
-    textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
-    textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
-
-    // Set the nextTimeLineID to the currentTimelineID
-    currentTimelineID = nextTimelineID;
+/**
+ * Hides the tweet content from the screen.
+ */
+function hideTweet() {
+    document.getElementById('block-twitter').style.opacity = '0';
+    return;
 }
 
-function tweetLoop()
-{
-    showTweet();
-    setTimeout(tweetLoop,tweetTimer * 1000);
+/**
+ * Shows the tweet content on the screen.
+ */
+function showTweet() {
+    document.getElementById('block-twitter').style.opacity = '1';
+    return;
 }
 
-/*
-function tweetLoop() {
-    clearInterval(tweetTimer);
-    newvaluesength = tweets.value.length;
-    showTweet(tweetIndex);
-    textFit(document.getElementsByClassName('tweet-text'), {minFontSize: 10, maxFontSize: 38, multiLine: true});
-    textFit(document.getElementsByClassName('tweet-metadata'), {maxFontSize: 18});
-    tweetTimer = setInterval(function() {
-        showTweet(tweetIndex);
+/**
+ * Set tweet on page. 
+ * Sets the tweet HTML elements to the appropriate values
+ * according to the current tweet data.
+ */
+function set_tweet(tweet) {
+    hideTweet();
+    setTimeout(function () {
+        document.getElementById('block-twitter').className = tweet.layout;
+        document.getElementById('tweet-username').innerText = tweet.name;
+        document.getElementById('tweet-screenname').innerText = tweet.screen_name;
+        document.getElementById('tweet-time').innerText = tweet.created_at;
+        document.getElementById('tweet-text').innerHTML = tweet.formatted_text;
+        document.getElementById('tweet-author-avatar').src = tweet.avatar;
 
-        tweetIndex = (tweetIndex+1) % arrayLength;
-    }, 10000);
+        if (tweet.image) {
+            document.getElementById('tweet-image-1').src = tweet.image.media_url;
+            textFit(document.getElementsByClassName('textFit tweet'), { minFontSize: 10, multiLine: true });
+        }
+        else {
+            document.getElementById('tweet-image-1').src = ""; 
+            textFit(document.getElementsByClassName('textFit tweet'), { minFontSize: 10, multiLine: true });
+        }
+    },1000);
+    setTimeout(showTweet, 1000);
 }
 
-function showTweet(index) {
-  newvaluesal = tweets.value[index];
-    var tweetTime = new Date(Date.parse(newVal.created_at.replace(/( \+)/, ' UTC$1')));  
-    document.getElementById('screenname').innerHTML = "@" + newVal.user.screen_name + ' &mdash; ';
-    document.getElementById('tweettime').innerText = tweetTime.toLocaleDateString("en-us", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'});
-    document.getElementById('tweet').innerHTML = newVal.text.replace(/https:\/\/t.co\/\S+/,'');
-    document.getElementById('avatar').src = newVal.user.profile_image_url.replace('_normal',"_bigger");
-    if (newVal.entities.media) {
-        document.getElementsByClassName('twitter-content')[0].style.background = 'url(' + newVal.entities.media[0].media_url + ') no-repeat top left';
-        document.getElementsByClassName('twitter-content')[0].style.backgroundSize = 'auto 100%';
-        document.getElementsByClassName('twitter-content')[0].style.backgroundPosition = 'center';
-    } else {
-        document.getElementsByClassName('twitter-content')[0].style.background = "";
-    }
-    
-
-}*/

@@ -1,14 +1,11 @@
-/* Stylesheet for GLPA Info-Display graphic */
+/**
+ * GLPA Info Display Stylesheet
+ * Sheet controls the layout of the information display page bundle
+ **/
 
-/* Draw everything for the box within the box.  duh. */
-html {
-    box-sizing: border-box;
-}
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-/* Configure the body for use as a non-interactive display */
+/**
+ * Body Controls
+ **/
 body {
     overflow: hidden;
     margin: 0;
@@ -17,173 +14,408 @@ body {
     font-size: 12pt;
 }
 
-.container {
-    padding: 5px;
+/**
+ * Keep inside your own box plz
+ **/
+* {
+    box-sizing: border-box;
 }
 
-/* Specify configurations for different monitors */
-.container.hd1080 {
-    width: 1920px;
-    height: 1080px;
-}
+/**
+ * General Z-Index Classes
+ **/
 
-.container.xga {
-    width: 1024px;
-    height: 768px;
-}
+ .z100 {
+     z-index: 100;
+ }
 
+ .z200 {
+     z-index: 200;
+ }
 
-/* Set background image z-index to -1 */
-.background-images img {
-    z-index: -1;
+ .z300 {
+     z-index: 300;
+ }
+
+ .z400 {
+     z-index: 400;
+ }
+
+ /**
+  * Layout Classes
+  **/
+
+/**
+ * Standard Positioning
+ **/
+
+.pos-bot-left {
     position: absolute;
-    opacity: 0;
+    left: 0;
+    bottom: 0;
 }
 
-/* Blocking configuration */
-.header {
-    height: 165px;
-    border-bottom: thick white solid;
-}
-
-.main {
-    background: rgba(0, 0, 0, 0.5);
-    height: 100%;
-    padding-top: 10px;
-    height: 450px;
-}
-
-.twitter {
-    height: 130px;
-    width: 100%;
-    margin-top: 20px;
+/**
+ * Flex Stuff
+ **/
+.flex {
     display: flex;
-    background: rgba(0, 0, 0, 0.5);
+}
+
+.fg1 {
+    flex-grow: 1;
+}
+
+.fg2 {
+    flex-grow: 2;
+}
+
+.fg3 {
+    flex-grow: 3;
+}
+
+.fg4 {
+    flex-grow: 4;
+}
+
+.jsb {
+    justify-content: space-between;
+}
+
+.aic {
+    align-items: center;
+}
+
+/**
+ * Spacing
+ **/
+.p1rem {
+    padding: 1rem;
+}
+
+.h15 {
+    height: 15%;
+}
+
+.h20 {
+    height: 20%;
+}
+
+.h70 {
+    height: 70%;
+}
+
+.h80 {
+    height: 80%;
+}
+
+.h100 {
+    height: 100%;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.padleft1rem {
+    padding-left: 1rem;
+}
+
+/**
+ * Text Stuff
+ **/
+
+.fs07em {
+    font-size: 0.7em;
+}
+.fs1em {
+    font-size: 1em;
+}
+
+.fs1-5em{
+    font-size: 1.5em;
+}
+
+.fs2em {
+    font-size: 2em;
+}
+
+.fs2-5em {
+    font-size: 2.5em;
+}
+
+.fs3em {
+    font-size: 3em;
+}
+
+.fs5em {
+    font-size: 5em;
+}
+
+.tac {
+    text-align: center;
+}
+
+.whiteshadow {
+    text-shadow:
+        -1px -1px 0 #ffffff,
+        1px -1px 0 #ffffff,
+        -1px 1px 0 #ffffff,
+        1px 1px 0 #ffffff;
+}
+
+.blackshadow {
+    text-shadow:
+        -1px -1px 0 #000000,
+        1px -1px 0 #000000,
+        -1px 1px 0 #000000,
+        1px 1px 0 #000000;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.color-white {
+    color: white;
+}
+
+/**
+ * Misc. Styles
+ **/
+
+.round-border {
+    border-radius: 10px;
+    border: 3px solid rgb(175, 175, 175);
+}
+
+.bg-dark-gray {
+    background: #cecece;
+}
+
+.bg-light-gray {
+    background: #DDD;
+}
+
+/**
+ * Layout configuration
+ * Create three main horizontal areas on the screen to contain the elements we'll place
+ **/
+
+/**
+ * Header component
+ **/
+#block-header {
+    background: #072346;
     color: #fff;
 }
 
-#header-title {
-    font-size: 32pt;
-    font-weight: bolder;
-    text-align: center;
-    color: #FFFFFF;
-    -webkit-text-stroke: 1px black;
+/**
+ * Middle: Main Content Body
+ **/
+#block-main {
+    background: url('../img/main-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-/* Time/Date/Forecast Table */
-.time-date-forecast {
-    width: 100%;
-    text-align: center;
-    font-size: 14pt;
-    color: #000000;
-    text-shadow: 0px 0px 10px white; /* outer glow */
-}
-td {
-    padding: 10px;
+/**
+ * Bottom: Omnibar
+ **/
+#block-omnibar {
+    background: #e6e6e6;
+    color: #000;
 }
 
-canvas.weather-icon {
+/**
+ * Elements for the header area
+ **/
+
+#block-header-logo img {
     display: block;
-    float: left;
 }
 
-div.mainbody {
-    position: absolute;
-    width: 750px;
-    padding: 10px;
-    font-size: 26pt;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
+/** 
+ * Elements for the main section
+ **/
+
+/**
+ * Twitter Section
+ **/
+
+/**
+ * #block-twitter defines the container block for all Twitter content on the page
+ **/
+#block-twitter {
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+    opacity: 0;
+    transition-duration: 1s;
+    position: relative;
 }
 
-.twitter-logo {
-    margin-left: 10px;
-    width: 100px;
-    height: 130px;
-    text-align: center;
+/** 
+ * #block-tweet-author contains the avatar, user's name and Twitter handle
+ **/
+
+#block-tweet-author {
+	background-color: rgb(50, 50, 50, .7);
 }
 
-#twitter-logo {
-    width: auto;
-    height: 100px;
-    float: left;
+#tweet-author-avatar img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/**
+ * #block-twitter-logo contains the Twitter logo and the conference hashtag
+ **/
+
+#block-twitter-logo {
+	background-color: rgb(50, 50, 50, .7);
+	padding-right: 2rem;
 }
 
 #twitter-hashtag {
+    color: #1ca0f2;
+    font-weight: bolder;
+}
+
+/**
+ * Shared classes for Twitter stuff
+ **/
+
+/**
+ * This is the official conference hashtag; broken out to highlight it separately
+ **/
+.hashtag-official-highlight {
     font-weight: bold;
-    font-size: 18px;
+    color: #1ca0f2;
+    text-shadow:
+        -1px -1px 0 #FFF,
+        1px -1px 0 #FFF,
+        -1px 1px 0 #FFF,
+        1px 1px 0 #FFF;
 }
 
-div.avatar {
-    width: 125px;
-    height: 130px;
-    float: left;
-    margin-left: 10px;
-}
-img#avatar {
-    width: auto;
-    height: 100px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
+/**
+ * This is a general hashtag -- anything not the conference hashtag.
+ **/
+
+.hashtag-general-highlight {
+    font-weight: bolder;
 }
 
-.twitter-content{
-    width: 100%;
-    margin-left: 10px;
-    height: 130px;
-    font-weight: bold;
-
-
-}
-.tweet {
-    width: 550px;
-
-}
-.tweet-text {
-    /*padding-top: 15px;*/
-    /*font-size: 22px;*/
-    height: 100px;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 1);
-}
-
-.tweet-metadata {
-    height: 30px;
-    -webkit-text-stroke-width: .5px;
-    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 1);
-}
-div.tweet-media {
-    width: 200px;
-    height: 100%;
-    float: right;
-}
-img#tweet-media {
-    max-width:100%;
-    max-height:100%;
-    float: right;
-    display: block;
-}
-
-.hashtag {
-    font-size: larger;
-    color: lightgoldenrodyellow;
-}
-
-img#tweet-img {
-    height: 100%;
-    width: auto;
-    display: block;
+/**
+ * Handle highlight is to highlight screennames within a tweet text, not the page handle
+ **/
+.handle-highlight {
+    color: rgb(27, 149, 224);
 }
 
 .emoji {
     width: auto;
-    height: 30%;
+    height: 1em;
+}
+
+/**
+ * Twitter layouts
+ * The following are selectors to control the various ways we lay out tweets on the page.
+ **/
+
+/**
+ * Tweet - Text Only
+ * Tweet only has text; no images to share.
+ **/
+
+.tweetLayoutTextOnly #block-twitter-tweet-text {
+    height: 100%;
+    width: 100%;
+}
+
+.tweetLayoutTextOnly #block-twitter-tweet-media {
+    visibility: hidden;
+}
+
+/**
+ * Tweet - Single Picture
+ * Tweet has a single media element to display
+ **/
+
+.tweetLayout1Up #block-tweet-content.after {
+    align-self: center;
+}
+
+.tweetLayout1Up #block-twitter-tweet-text {
+    flex-grow: 1;
+    color: #000;
+    padding-left: 1rem;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+}
+
+.tweetLayout1Up #block-twitter-tweet-media {
+    flex-basis: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.tweetLayout1Up #block-twitter-tweet-media img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+}
+
+/**
+ * End of Twitter layout selectors
+ **/
+
+/** 
+ * Omnibar areas
+ **/
+
+.vr {
+    background: #000;
+    width: 1px;
+    height: 100%;
+    display: inline-block;
+}
+
+ #block-weather {
+     width: 100%;
+     height: 100%;
+ }
+
+.block-weather-tile {
+    height: 100%;
+    padding: 1rem;
+    position: relative;
+    top: 0;
+    vertical-align: top;
+}
+
+.weather-text {
+    height: 100%;
+    vertical-align: top;
+}
+.weather-icon {
+}
+
+.weather-title {
+    font-weight: bold;
+}
+
+.weather-icon-canvas {
+    height: 100%;
+    width: auto;
+    /*max-height: 100%;
+    max-width: 100%;*/
 }
 
 .attribution {
-    font-size: 6pt;
+    padding-top: 20px;
 }

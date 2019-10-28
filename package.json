@@ -1,7 +1,7 @@
 {
   "name": "glpa-infodisplay",
-  "version": "0.1.0",
-  "description": "GLPA Conference Information Display - 2018 East Lansing",
+  "version": "1.1.0",
+  "description": "GLPA Conference Information Display package",
   "homepage": "http://live.glpa.org",
   "author": {
     "name": "Steven Sumichrast",
@@ -9,27 +9,34 @@
     "url": "http://www.mcpstars.org"
   },
   "nodecg": {
-    "compatibleRange": "~1.1.3",
+    "compatibleRange": "^1.5",
+    "transformBareModuleSpecifiers": true,
     "dashboardPanels": [
       {
-        "name": "room-announcement",
-        "title": "Room Announcement",
-        "width": 4,
-        "file": "room-announcement.html",
-        "headerColor": "#9f9bbd"
+        "name": "twitter-control",
+        "title": "Twitter Control",
+        "width": 2,
+        "file": "twitter.html"
+      },
+      {
+        "name": "weather-control",
+        "title": "Weather Control",
+        "width": 2,
+        "file": "weather.html"
       }
     ],
     "graphics": [
       {
         "file": "info-display.html",
-        "width": 1024,
-        "height": 768
+        "width": 1920,
+        "height": 1080
       }
     ]
   },
   "repository": "https://bitbucket.org/glpa_av/glpa-infodisplay",
   "license": "Apache-2.0",
   "dependencies": {
+    "textfit": "^2.4.0",
     "twemoji": "^11.0.1",
     "twitter": "^1.7.1"
   }

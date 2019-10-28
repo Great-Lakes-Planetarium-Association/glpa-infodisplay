@@ -40,11 +40,11 @@ function set_tweet(tweet) {
 
         if (tweet.image) {
             document.getElementById('tweet-image-1').src = tweet.image.media_url;
-            textFit(document.getElementsByClassName('textFit tweet'), { minFontSize: 10, maxFontSize: 48, multiLine: true });
+            textFit(document.getElementsByClassName('textFit tweet'), { minFontSize: 10, multiLine: true });
         }
         else {
             document.getElementById('tweet-image-1').src = ""; 
-            textFit(document.getElementsByClassName('textFit tweet'), { minFontSize: 10, maxFontSize: 52, multiLine: true });
+            textFit(document.getElementsByClassName('textFit tweet'), { minFontSize: 10, multiLine: true });
         }
     },1000);
     setTimeout(showTweet, 1000);

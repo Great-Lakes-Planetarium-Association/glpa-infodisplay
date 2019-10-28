@@ -28,6 +28,7 @@ var client = new Twitter
 
 // Listen for requests to update twitter
 nodecg.listenFor('updateTwitter', message => {
+	nodecg.log.info("Manaul twitter update requested");
 	updateTweetCollection();
 });
 
@@ -49,7 +50,8 @@ function updateTweetCollection(collection_id = nodecg.bundleConfig.twitter.colle
 	var params =
 	{
 		id: "custom-" + collection_id,
-		tweet_mode: 'extended'
+		tweet_mode: 'extended',
+		count: 200
 	};
 
 	nodecg.log.info('[twitter]: Obtaining a new list of tweets');
@@ -58,8 +60,9 @@ function updateTweetCollection(collection_id = nodecg.bundleConfig.twitter.colle
 			twitterResponseData = data.objects
 			nodecg.log.info('[twitter] New tweets obtained');
 		}
-	});	
-	setTimeout(updateTweetCollection, nodecg.bundleConfig.twitter.poll_interval * 60 * 1000);
+	});
+	// Send a message for the total current count
+	nodecg.sendMessage('totalTweets', 255);
 }
 
 /**
@@ -165,6 +168,13 @@ function cycleTweet() {
 	setTimeout(cycleTweet, tweet_display_time);
 }
 
+function twitterUpdateLoop() {
+	updateTweetCollection();
+	setTimeout(twitterUpdateLoop, nodecg.bundleConfig.twitter.poll_interval * 60 * 1000);
+}
+
+
+
 // Start the loops
-updateTweetCollection();
+twitterUpdateLoop();
 cycleTweet();

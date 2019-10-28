@@ -1,7 +1,7 @@
 "use strict";
 
 function updateTwitter() {
-    nodecg.sendMessage('updateTwitter', (error, result) => {
+	nodecg.sendMessage('updateTwitter', (error, result) => {
         if (error) {
             console.error(error);
             return;
@@ -10,3 +10,7 @@ function updateTwitter() {
         }
     })
 };
+
+nodecg.listenFor('totalTweets', (value,ack) => {
+	document.getElementById('totalTweets').textContent = value;
+});
